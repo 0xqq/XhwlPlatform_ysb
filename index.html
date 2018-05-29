@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>兴海大数据平台管理系统</title>
+    <style media="screen">
+        /* 简单进行默认样式重置 */   
+        * {
+            margin: 0;
+            padding: 0
+        }
+        li {
+            list-style: none;
+        }  
+        a {
+            text-decoration: none;
+        }
+        img {
+            vertical-align: middle;
+        }
+        body {
+            background-color: #ffffff
+        }
+        html {
+            background-color: #ffffff
+        }
+        /**/
+        #tree ul {
+            margin-left: 0.15rem;
+        }
+        .control_unit_li {
+            background-image: url(./src/images/Control_area_exp.png);
+            background-repeat: no-repeat;
+        }
+        .control_unit_li a:hover {
+            color: #bbb;
+        }
+        .region_li {
+            background-image: url(./src/images/Control_area_exp.png);
+            background-repeat: no-repeat;
+        }
+        .region_li a:hover {
+            color: #bbb;
+        }
+        .camera_li {
+            background-image: url(./src/images/Control_area_exp.png);
+            background-repeat: no-repeat;
+        }
+        .camera_li a {
+            margin-left: 0.15rem;
+        }
+        .camera_li a:hover {
+            color: #83dbff;
+        }
+        .anchorBL{
+          display: none;
+        }
+    </style>
+</head>
+
+<body scoll=no>
+    <div id="app"></div>
+    <router-view></router-view>
+    <!-- built files will be auto injected -->
+
+
+    <!-- 决不允许其他js把此段rem的js顶下去 -->
+    <script type="text/javascript">
+            //rem布局
+        (function(win, doc) {
+            doc.documentElement.style.fontSize = 1366 * 100 / 1920 + 'px';      //以1366为第一屏
+            change();
+            function change(){
+                var ww = doc.documentElement.clientWidth;
+                var wh = doc.documentElement.clientHeight;
+                //如果全屏（F11），则禁用滚动条,否则启用滚动条
+                if (window.outerHeight == screen.height && window.outerWidth == screen.width) {
+                    document.body.style.overflow = "hidden";
+                } else {
+                    document.body.style.overflow = "auto";
+                }
+                if (ww>1366||wh>768) { //大于1366*768分辨率时才会去适配rem
+                    if (wh / ww < (1080 / 1920)) {
+                        doc.documentElement.style.fontSize = doc.documentElement.clientWidth * 100 / 1920 + 'px'; //确保宽不出现白边
+                    } else {
+                        doc.documentElement.style.fontSize = doc.documentElement.clientHeight * 100 / 1080 + 'px'; //确保高不出现白边
+                    }
+                }
+            };
+            win.addEventListener('resize', change, false);
+        })(window, document);
+    </script>
+    <!-- 百度地图要放body里避免加载异常 -->
+    <script src='http://api.map.baidu.com/api?v=2.0&ak=DGH5cdORAWcDSd5DcIZdWOI0FzC5qEkV'></script>
+</body>
+    <script type="text/javascript">
+        function hehehe(cameraId) {
+            console.log("进入播放函数");
+            var OCXobj = document.getElementById("PreviewOcx");
+            var ret = OCXobj.StartTask_Preview_FreeWnd(cameraId); 
+            switch (ret) {
+                case 0:
+                    break;
+                case -1:
+                    break;
+                default:
+                    break;
+            }
+        }
+    </script>
+</html>

@@ -1,0 +1,275 @@
+$blue: #3190e8;
+$fc:#fff;
+$btnred: #e7363f; //按钮红色
+$btngreen: #02ee66;
+$textblue: #83dbff; //淡蓝色字体
+$darkblue: #027abf; //暗蓝色字体 主要用于日期选择器
+$pickerbg: #394874;
+// 背景图片地址和大小
+@mixin bis($url) {
+    background-image: url($url);
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+}
+
+@mixin borderRadius($radius) {
+    -webkit-border-radius: $radius;
+    -moz-border-radius: $radius;
+    -ms-border-radius: $radius;
+    -o-border-radius: $radius;
+    border-radius: $radius;
+}
+
+//定位全屏
+@mixin allcover {
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+//定位上下左右居中
+@mixin center {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+//定位上下居中
+@mixin ct {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+//定位左右居中
+@mixin cl2 {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+//宽高
+@mixin wh($width, $height) {
+    width: $width;
+    height: $height;
+}
+
+//字体大小、行高、字体
+@mixin font($size, $line-height, $family: 'Microsoft YaHei') {
+    font: #{$size}/#{$line-height} $family;
+}
+
+//字体大小，颜色
+@mixin sc($size, $color) {
+    font-size: $size;
+    color: $color;
+}
+
+//flex 布局和 子元素 对其方式
+@mixin fj($type: space-between) {
+    display: flex;
+    justify-content: $type;
+}
+
+//按钮的样式
+@mixin btn($width, $height) {
+    display:inline-block;
+    width: $width;
+    height: $height;
+    color: #fff;
+    border-radius: 0.05rem;
+    background: linear-gradient(#43C0f6, #0283d2, #0265c7);
+    font-weight: bold;
+    outline: none;
+    &:hover {
+        cursor: pointer;
+    }
+    &:active {
+        cursor: default;
+        opacity: 0.9;
+    }
+}
+// 红色渐变按钮
+@mixin btnR($width, $height) {
+    display:inline-block;
+    width: $width;
+    height: $height;
+    line-height: $height;
+    text-align: center;
+    color: #fff;
+    border-radius: 0.05rem;
+    background: linear-gradient(#EF7577, #e62929, #cc1817);
+    font-weight: bold;
+    outline: none;
+    &:hover {
+        cursor: pointer;
+    }
+    &:active {
+        cursor: default;
+        opacity: 0.9;
+    }
+}
+// 绿色渐变按钮
+@mixin btnG($width, $height) {
+    display:inline-block;
+    width: $width;
+    height: $height;
+    line-height: $height;
+    text-align: center;
+    color: #fff;
+    border-radius: 0.05rem;
+    background: linear-gradient(#43C0f6, #0283d2, #0265c7);
+    font-weight: bold;
+    outline: none;
+    &:hover {
+        cursor: pointer;
+    }
+    &:active {
+        cursor: default;
+        opacity: 0.9;
+    }
+}
+// 灰色渐变按钮
+@mixin btnX($width, $height) {
+    display:inline-block;
+    width: $width;
+    height: $height;
+    color: #fff;
+    border-radius: 0.05rem;
+    background: linear-gradient(#999, #666,#333);
+    // font-weight: bold;
+    outline: none;
+    &:hover {
+        cursor: pointer;
+    }
+    &:active {
+        cursor: default;
+        opacity: 0.9;
+    }
+}
+//select样式——视频界面专用的
+@mixin myselect($width) {
+    height: 0.42rem;
+    color: #fff;
+    width: $width;
+    border: 0.02rem solid #83dbff;
+    border-radius: 0.05rem;
+    background-color: transparent;
+    padding-left: 0.04rem;
+    option {
+        background-color: #154777;
+    }
+    &:hover {
+        cursor: pointer;
+    }
+    &:active {
+        cursor: default;
+    }
+}
+
+//添加类a标签手型鼠标样式
+@mixin aa {
+    &:hover {
+        cursor: pointer!important;
+    }
+    &:active {
+        cursor: default!important;
+    }
+}
+
+@mixin ip($width) {
+    width: $width;
+    height: 0.38rem;
+    border: 0.02rem solid #83dbff;
+    background-color: transparent;
+    padding-left: 0.1rem;
+    border-radius: 0.05rem;
+}
+
+//绿蓝边框写字板
+@mixin tare($width, $height) {
+    color: #fff;
+    width: $width;
+    height: $height;
+    border: 0.02rem solid #83dbff;
+    border-radius: 0.05rem;
+    background-color: transparent;
+    padding: 0.05rem;
+}
+
+//让一个div产生底色遮罩，样式
+@mixin shade {
+    position: fixed;
+    z-index: 99;
+    top: 0;
+    left: 0;
+    background-color: rgba(128, 128, 128, 0.7);
+    width: 100%;
+    height: 100%;
+}
+
+//右上角关闭图标
+@mixin cl($size) {
+    font-size: $size;
+    padding: $size/3;
+    color: #999;
+    background-color: #ddd;
+    border-radius: $size/2;
+    &:hover {
+        cursor: pointer;
+        color: #ddd;
+        background-color: #e7363f;
+    }
+    &:active {
+        cursor: default;
+    }
+}
+
+//黑暗蓝色渐变系列的激活按钮
+@mixin actBt($width, $height) {
+    width: $width;
+    height: $height;
+    color: #70ccfc;
+    background: linear-gradient(rgba(36,119,194, 0.4), rgba(2,39,73, 0.4), rgba(7,47,85, 0.4));
+    border: 0.01rem solid rgba(61,148,207, 0.5);
+    outline: none;
+    display: inline-block;
+    text-align: center;
+    line-height: $height;
+    @include aa;
+}
+//黑暗蓝色渐变系列的未激活按钮
+@mixin unactBt($width, $height) {
+    width: $width;
+    height: $height;
+    color: #7a808a;
+    background: linear-gradient(#0d2753, #000a17, #041328);
+    background: linear-gradient(rgba(13,39,83, 0.4), rgba(0,10,23, 0.4), rgba(4,19,40, 0.4));
+    // background-color: transparent; 
+    border: 0.01rem solid rgba(61,148,207, 0.5);
+    outline: none;
+    display: inline-block;
+    text-align: center;
+    line-height: $height;
+    @include aa;
+    &:hover{
+        color: #5296b9;
+    }
+}
+
+//发光标题专区
+.nav_active {
+    color: #fff!important;
+    -webkit-animation: neon2 1s ease-in-out infinite alternate;
+    -moz-animation: neon2 1s ease-in-out infinite alternate;
+    animation: neon2 1s ease-in-out infinite alternate;
+}
+@keyframes neon2 {
+    from {
+        text-shadow: 0 0 0.1rem #c5e8f9,
+    }
+    to {
+        text-shadow: 0 0 0.2rem #c5e8f9,
+    }
+}
