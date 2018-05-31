@@ -1,192 +1,194 @@
 <template>
-	<div class="device">
-		<!--业务配置/设备监控阀值配置组件-->
-		<Bread :breadData="abc"></Bread>
-		<div class="device-nav">
-			<button class="btn" @click="modifu('')">
+<div class="device">
+  <!--业务配置/设备监控阀值配置组件-->
+  <Bread :breadData="abc"></Bread>
+  <div class="device-nav">
+    <button class="btn" @click="modifu('')">
 				<span>+</span>
 				新建设备监控</button>
-			<div class="img-time">
-				<div class="date_time">
-					<div class="block">
-						<span class="demonstration"></span>
-						<el-date-picker v-model="value6" type="daterange" placeholder="选择日期范围" class="el_picker">
-						</el-date-picker>
-					</div>
-				</div>
-				<div class="date-device">
-					<div>
-						<el-input placeholder="请输入搜索内容" v-model="input5" class="place">
-							<el-select v-model="select" slot="prepend" placeholder="请选择" class="place">
-								<el-option label="配置名称" value="1"></el-option>
-								<el-option label="设备类型" value="2"></el-option>
-								<el-option label="设备名称" value="3"></el-option>
-								<el-option label="接收人" value="3"></el-option>
-							</el-select>
-							<el-button slot="append" icon="search"></el-button>
-						</el-input>
-					</div>
-				</div>
-				<input type="button" value="搜索" class="bttn">
-				<img src="../../../images/inout.png" alt="" @click="derivedForm('tableExcel')">
-			</div>
-		</div>
-		<div class="table">
-			<table id="tableExcel" cellspacing="0" cellpadding="0">
-				<thead class="table_thead">
-					<tr class="nav_table">
-						<th class="left_none">序号</th>
-						<th> 配置名称</th>
-						<th> 配置日期</th>
-						<th> 监控对象类型</th>
-						<th> 监控对象名称</th>
-						<th> 报警阈值</th>
-						<th> 触发动作</th>
-						<th> 推送方式</th>
-						<th> 接收人</th>
-						<th> 推送内容</th>
-						<th> 操作</th>
-					</tr>
-				</thead>
-				<tbody class="table_body">
-					<tr v-for='(d, index) in  value' :key="index" class="center_table">
-						<td>{{d.序号}}</td>
-						<td>{{d.配置名称}} </td>
-						<td>{{d.配置日期}}</td>
-						<td>{{d.监控对象类型}}</td>
-						<td>{{d.监控对象名称 }}</td>
-						<td>{{d.报警阈值}}</td>
-						<td>{{d.触发动作}}&nbsp</td>
-						<td>{{d.推送方式}}&nbsp</td>
-						<td>{{d.接收人}}</td>
-						<td>{{d.推送内容}}</td>
-						<td class="btn_center">
-							<button class="btn1" @click="modifu(d)">修改</button>
-							<button class="btn2" @click="show_model(index)">删除</button>
-						</td>
-					</tr>
-				</tbody>
-			</table>
-		</div>
-		<div class="pager">
-			<div class="block">
-				<el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page.sync="currentPage2" :page-sizes="[30,60,90]" :page-size="100" layout="sizes, prev, pager, next" :total="100">
-				</el-pagination>
-			</div>
-		</div>
-		<!--点击删除出现的模态框-->
-		<div class="box_model" v-if="box_model">
-			<p>确 认 删 除</p>
-			<button @click="removeTode(keepIndex)">确认</button>
-			<button class="btn2" @click="cancal">取消</button>
-		</div>
-	</div>
+    <div class="img-time">
+      <div class="date_time">
+        <div class="block">
+          <span class="demonstration"></span>
+          <el-date-picker v-model="value6" type="daterange" placeholder="选择日期范围" class="el_picker">
+          </el-date-picker>
+        </div>
+      </div>
+      <div class="date-device">
+        <div>
+          <el-input placeholder="请输入搜索内容" v-model="input5" class="place">
+            <el-select v-model="select" slot="prepend" placeholder="请选择" class="place">
+              <el-option label="配置名称" value="1"></el-option>
+              <el-option label="设备类型" value="2"></el-option>
+              <el-option label="设备名称" value="3"></el-option>
+              <el-option label="接收人" value="3"></el-option>
+            </el-select>
+            <el-button slot="append" icon="search"></el-button>
+          </el-input>
+        </div>
+      </div>
+      <input type="button" value="搜索" class="bttn">
+      <img src="../../../images/inout.png" alt="" @click="derivedForm('tableExcel')">
+    </div>
+  </div>
+  <div class="table">
+    <table id="tableExcel" cellspacing="0" cellpadding="0">
+      <thead class="table_thead">
+        <tr class="nav_table">
+          <th class="left_none">序号</th>
+          <th> 配置名称</th>
+          <th> 配置日期</th>
+          <th> 监控对象类型</th>
+          <th> 监控对象名称</th>
+          <th> 报警阈值</th>
+          <th> 触发动作</th>
+          <th> 推送方式</th>
+          <th> 接收人</th>
+          <th> 推送内容</th>
+          <th> 操作</th>
+        </tr>
+      </thead>
+      <tbody class="table_body">
+        <tr v-for='(d, index) in  value' :key="index" class="center_table">
+          <td>{{d.序号}}</td>
+          <td>{{d.配置名称}} </td>
+          <td>{{d.配置日期}}</td>
+          <td>{{d.监控对象类型}}</td>
+          <td>{{d.监控对象名称 }}</td>
+          <td>{{d.报警阈值}}</td>
+          <td>{{d.触发动作}}&nbsp</td>
+          <td>{{d.推送方式}}&nbsp</td>
+          <td>{{d.接收人}}</td>
+          <td>{{d.推送内容}}</td>
+          <td class="btn_center">
+            <button class="btn1" @click="modifu(d)">修改</button>
+            <button class="btn2" @click="show_model(index)">删除</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="pager">
+    <div class="block">
+      <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page.sync="currentPage2" :page-sizes="[30,60,90]" :page-size="100" layout="sizes, prev, pager, next" :total="100">
+      </el-pagination>
+    </div>
+  </div>
+  <!--点击删除出现的模态框-->
+  <div class="box_model" v-if="box_model">
+    <p>确 认 删 除</p>
+    <button @click="removeTode(keepIndex)">确认</button>
+    <button class="btn2" @click="cancal">取消</button>
+  </div>
+</div>
 </template>
 <script>
 import Bread from '@/components/common/bread'
-import { mapState, mapMutations } from 'vuex'
+import {
+  mapState,
+  mapMutations
+} from 'vuex'
 export default {
 
-	data() {
-		return {
-			abc: ['业务配置', '工程业务配置', '设备监控阀值配置'],
-			pageIndex: '1',
-			modifyvue: null,
-			box_model: false,
-			keepIndex: null,
-			currentPage2: 5,
-			input5: '',
-			select: '',
-			pickerOptions2: {
-				shortcuts: [{
-					text: '最近一周',
-					onClick(picker) {
-						const end = new Date();
-						const start = new Date();
-						start.setTime(start.getTime() - 3600 * 1000 * 24 * 7);
-						picker.$emit('pick', [start, end]);
+  data() {
+    return {
+      abc: ['业务配置', '工程业务配置', '设备监控阀值配置'],
+      pageIndex: '1',
+      modifyvue: null,
+      box_model: false,
+      keepIndex: null,
+      currentPage2: 5,
+      input5: '',
+      select: '',
+      pickerOptions2: {
+        shortcuts: [{
+          text: '最近一周',
+          onClick(picker) {
+            const end = new Date();
+            const start = new Date();
+            start.setTime(start.getTime() - 3600 * 1000 * 24 * 7);
+            picker.$emit('pick', [start, end]);
 
-					}
+          }
 
-				}, {
+        }, {
 
-					text: '最近一个月',
+          text: '最近一个月',
 
-					onClick(picker) {
-						const end = new Date();
-						const start = new Date();
-						start.setTime(start.getTime() - 3600 * 1000 * 24 * 30);
-						picker.$emit('pick', [start, end]);
-					}
-				}, {
-					text: '最近三个月',
-					onClick(picker) {
-						const end = new Date();
-						const start = new Date();
-						start.setTime(start.getTime() - 3600 * 1000 * 24 * 90);
-						picker.$emit('pick', [start, end]);
-					}
-				}]
-			},
-			value6: '',
-			value: []
-		}
-	},
-	computed: {
-		...mapState([
-			'token', 'mnUrl'
-		])
-	},
-	components: {
-		Bread
-	},
-	mounted() { },
-	created() {
-
-		this.getDate();
-	},
-	methods: {
-		modifu(d) {
-			this.modifyvue = d;
-			this.$router.push({
-				path: '/config/projectcfg/device/new',
-				query: {
-					value: this.modifyvue
-				}
-			});
-		},
-		removeTode(keep) {
-			this.value.splice(keep, 1);
-			this.box_model = false;
-		},
-		show_model(index) {
-			this.keepIndex = index;
-			this.box_model = true;
-		},
-		cancal() {
-			this.box_model = false;
-		},
-		getDate() {
-			const url = this.mnUrl + "/tmp/config/iot/device"
-			this.$http.get(url).then(res => {
-				this.value = res.body.content;
-				console.log(res);
-			}, function(error) {
-				console.log(error)
-			})
-		},
-		loadMore() {
-		},
-		derivedForm(tableExcel) {
-			this.$func.method5(tableExcel)
-		},
-		handleSizeChange(val) {
-			// console.log(`每页 ${val} 条`);
-		},
-		handleCurrentChange(val) {
-			// console.log(`当前页: ${val}`);
-		}
-	}
+          onClick(picker) {
+            const end = new Date();
+            const start = new Date();
+            start.setTime(start.getTime() - 3600 * 1000 * 24 * 30);
+            picker.$emit('pick', [start, end]);
+          }
+        }, {
+          text: '最近三个月',
+          onClick(picker) {
+            const end = new Date();
+            const start = new Date();
+            start.setTime(start.getTime() - 3600 * 1000 * 24 * 90);
+            picker.$emit('pick', [start, end]);
+          }
+        }]
+      },
+      value6: '',
+      value: []
+    }
+  },
+  computed: {
+    ...mapState([
+      'token', 'mnUrl'
+    ])
+  },
+  components: {
+    Bread
+  },
+  mounted() {},
+  created() {
+    this.getDate();
+  },
+  methods: {
+    modifu(d) {
+      this.modifyvue = d;
+      this.$router.push({
+        path: '/config/projectcfg/device/new',
+        query: {
+          value: this.modifyvue
+        }
+      });
+    },
+    removeTode(keep) {
+      this.value.splice(keep, 1);
+      this.box_model = false;
+    },
+    show_model(index) {
+      this.keepIndex = index;
+      this.box_model = true;
+    },
+    cancal() {
+      this.box_model = false;
+    },
+    getDate() {
+      const url = this.mnUrl + "/tmp/config/iot/device"
+      console.log('url', url)
+      this.$http.get(url).then(res => {
+        this.value = res.body.content;
+        console.log(res);
+      }, function(error) {
+        console.log(error)
+      })
+    },
+    loadMore() {},
+    derivedForm(tableExcel) {
+      this.$func.method5(tableExcel)
+    },
+    handleSizeChange(val) {
+      // console.log(`每页 ${val} 条`);
+    },
+    handleCurrentChange(val) {
+      // console.log(`当前页: ${val}`);
+    }
+  }
 }
 </script>
 <style lang="scss" scoped>
@@ -220,7 +222,7 @@ export default {
 		.img-time {
 			display: inline-block;
 			height: 0.6rem;
-			width: auto; 
+			width: auto;
 			position: relative;
 			margin-bottom: 0.1rem;
 			float: right;
@@ -335,7 +337,7 @@ export default {
 						border-right:2px solid #698499;
 					}
 					.left_none {
-						
+
 					}
 				}
 			}

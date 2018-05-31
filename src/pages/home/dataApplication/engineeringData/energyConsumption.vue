@@ -5,7 +5,7 @@
 				<span class="title">能耗数据</span>
 				<div class="top_right">
 					<div class="boutton_div">
-						<span class="chart_model" :class="{active: model=='chart', unactive: model == 'table'}" @click="choiseModel(0)">图表模式</span><!--  
+						<span class="chart_model" :class="{active: model=='chart', unactive: model == 'table'}" @click="choiseModel(0)">图表模式</span><!--
 					 --><span class="table_model" :class="{active: model=='table', unactive: model == 'chart'}" @click="choiseModel(1)">表格模式</span>
 					</div>
 					<div class="date-time">
@@ -15,7 +15,7 @@
 						</div>
 					</div>
 					<a class="inout_a" :class="{Hide: showSelf==0}" href="javascript:void(0);" @click="method55('tableExcel')"></a>
-				</div>				
+				</div>
 			</div>
 		<div class="Chart_div">
 			<Echarts :class="{hide: showSelf==1,chart2: showSelf=='0'}" :Text='noeText'
@@ -45,7 +45,7 @@
 		                    	<th class="border-top">发放</th>
 								<th class="border-top">核销</th>
 								<th class="border-top">归还</th>
-								
+
 		                    </tr>
 		                </thead>
 					</table>
@@ -76,7 +76,7 @@
 		                    </tr>
 		                </tbody>
 		            </table>
-		        </div>			
+		        </div>
 				<div class="page">
 		            <span>每页显示</span>
 		            <select class="select">
@@ -91,7 +91,7 @@
 		            </div>
 		        </div>
 			</div>
-		</div>		
+		</div>
 	</div>
 
 </template>
@@ -134,7 +134,7 @@
             barWidth: '45%',
             itemStyle: {
 	            normal: {
-	                color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{offset: 0,color: 'rgba(239,107,51,1)'}, 
+	                color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{offset: 0,color: 'rgba(239,107,51,1)'},
 	                { offset: 1,color: 'rgba(239,107,51,0.5)'}])
 	            }
 	        },
@@ -146,7 +146,7 @@
             barWidth: '45%',
             itemStyle: {
 	            normal: {
-	                color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{offset: 0,color: 'rgba(46,168,80,1)'}, 
+	                color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{offset: 0,color: 'rgba(46,168,80,1)'},
 	                {offset: 1,color: 'rgba(46,168,80,0.5)'}])
 	            }
 	        },
@@ -158,7 +158,7 @@
             barWidth: '45%',
             itemStyle: {
 	            normal: {
-	                color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{offset: 0,color: 'rgba(51,152,219,1)'}, 
+	                color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{offset: 0,color: 'rgba(51,152,219,1)'},
 	                {offset: 1,color: 'rgba(51,152,219,0.5)'}])
 	            }
 	        },
@@ -174,7 +174,7 @@
 	            areaStyle: {normal: {}},
 	            itemStyle: {
 		            normal: {
-		                color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{offset: 0,color: 'rgba(220,67,39,0.9)' }, 
+		                color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{offset: 0,color: 'rgba(220,67,39,0.9)' },
 		                {offset: 0.8,color: 'rgba(255,143,61,0.5)'}])
 		            }
 		        },
@@ -186,7 +186,7 @@
 	            areaStyle: {normal: {}},
 	            itemStyle: {
 		            normal: {
-		                color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{offset: 0,color: 'rgba(33,212,54,0.9)'}, 
+		                color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{offset: 0,color: 'rgba(33,212,54,0.9)'},
 		                {offset: 0.8, color: 'rgba(61,255,157,0.5)'}])
 		            }
 		        },
@@ -198,7 +198,7 @@
 	            areaStyle: {normal: {}},
 	            itemStyle: {
 		            normal: {
-		                color: new echarts.graphic.LinearGradient( 0, 0, 0, 1, [{offset: 0,color: 'rgba(27,105,208,0.9)'}, 
+		                color: new echarts.graphic.LinearGradient( 0, 0, 0, 1, [{offset: 0,color: 'rgba(27,105,208,0.9)'},
 		                {offset: 0.8,color: 'rgba(46,166,226,0.5)'}])
 		            }
 		        },
@@ -210,7 +210,7 @@
 	            areaStyle: {normal: {}},
 	            itemStyle: {
 		            normal:{
-		                color: new echarts.graphic.LinearGradient( 0, 0, 0, 1, [{ offset: 0,color: 'rgba(211,201,39,0.9)'}, 
+		                color: new echarts.graphic.LinearGradient( 0, 0, 0, 1, [{ offset: 0,color: 'rgba(211,201,39,0.9)'},
 		                {offset: 0.8,color: 'rgba(236,255,25,0.5)'}])
 		            }
 		        },
@@ -232,13 +232,6 @@
                     "amount": "9",
                     "Paidin": "19%",
                     "treatment": "8",
-                    "entrance": "12%",         
-                },
-                {
-                    "plate": "深圳",
-                    "amount": "9",
-                    "Paidin": "19%",
-                    "treatment": "8",
                     "entrance": "12%",
                 },
                 {
@@ -253,7 +246,14 @@
                     "amount": "9",
                     "Paidin": "19%",
                     "treatment": "8",
-                    "entrance": "12%",         
+                    "entrance": "12%",
+                },
+                {
+                    "plate": "深圳",
+                    "amount": "9",
+                    "Paidin": "19%",
+                    "treatment": "8",
+                    "entrance": "12%",
                 },
                 {
                     "plate": "深圳",
@@ -319,7 +319,7 @@
        }
     },
     computed:{
-		...mapState(['contentSize','mnUrl']),       	
+		...mapState(['contentSize','mnUrl']),
 	},
     components: {
       Bread,
@@ -333,7 +333,7 @@
 		this.getData();
 	},
 	created() {
-      
+
     },
     methods: {
     method55(tableExcel) {
@@ -350,16 +350,6 @@
 		}
 	},
 	getData(){
-		this.$http({
-			url:this.mnUrl+"/tmp/finance/overview",
-			method:'get',
-		}).then(function(res){
-			
-		
-		},function(error){
-		//失败回调的函数								
-		console.log(error)
-		})
 	},
   	drawLine() {
     // 基于准备好的dom，初始化echarts实例
@@ -510,7 +500,7 @@
 	            data:[150, 52, 200, 334, 390, 330, 220,233,264,64,252,46,98,75,150, 52, 200, 334, 390, 330, 220,233,264,64,252,46,98,75,120, 52, 200, 334, 390, 330, 220,233,264,64,252,46,98,75,120, 52, 200, 334, 390, 330, 220,233,264,64,352,46]
 	        }]
         };
-    myChart1.setOption(option1);    
+    myChart1.setOption(option1);
    	var option2 = {
     	title:{
 			show:true,
@@ -537,7 +527,7 @@
 	        containLabel: true
 	    },
 	    itemStyle : {        //颜色渐变
-            normal: {           
+            normal: {
                 color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
                     offset: 0,
                     color: 'rgba(0,191,255,0.9)'
@@ -607,7 +597,7 @@
 	        }]
         };
     myChart2.setOption(option2);
-		function MapStatus() { //销毁函数或者重绘函数作为返回值返出去				
+		function MapStatus() { //销毁函数或者重绘函数作为返回值返出去
 			if(refThis.isDispose){
 				myChart1.dispose();
 				myChart2.dispose();
@@ -619,19 +609,19 @@
 			}
 		}
 		return MapStatus
-   	   }     
+   	   }
     }
 }
 </script>
 
 <style lang="scss" scoped>
 @import 'src/style/mixin';
-	/*可视区外框样式*/	
+	/*可视区外框样式*/
 .Chart_div{
 	width: 100%;
 	height: 7.55rem;
 	overflow-y: auto;
-	margin: 0 auto;	
+	margin: 0 auto;
 }
 /*图表外框*/
 .chart2{
@@ -642,7 +632,7 @@
 	margin-bottom: 0.05rem;
 }
 .attendanceData{
-		vertical-align: top;	
+		vertical-align: top;
 		width: 100%;
 		height: 8.96rem;
 		display: inline-block;
@@ -675,8 +665,8 @@
 			width: 2.58rem;
 			height: 0.6rem;
 			color: #67bce9;
-			outline: none;			
-			vertical-align: top; 
+			outline: none;
+			vertical-align: top;
 			.el_picker{
 				display: inline-block;
 				width: 2.58rem;
@@ -706,15 +696,15 @@
             position: relative;
             top: 0.05rem;
         }
-  	}	  	
-}	
+  	}
+}
 .hide{
 	display: none;
 }
 .table_big{
 	display: block;
 	width: 100%;
-	height: 7rem;	
+	height: 7rem;
     .table {
         width: 100%;
         height: 6.2rem;
@@ -738,9 +728,9 @@
                 .left_none {
                     border-left: none;
                 }
-                
+
             }
-            
+
 	        .center_table>tr{
             	width: 100%;
                 align-items: center;
@@ -773,16 +763,16 @@
 	            height: 0.4rem;
 	            line-height: 0.4rem;
 	            text-align: center;
-	            border-left: 2px solid #698499;   
+	            border-left: 2px solid #698499;
 	        }
 	        .left_none {
 	            border-left: none;
 	        }
 	        .border-top{
-	        	 border-top: 2px solid #698499; 
+	        	 border-top: 2px solid #698499;
 	        }
        	}
-    }	
+    }
 }
 .Hide{
 	display: none !important;
@@ -839,5 +829,5 @@ select {
 
 select::-ms-expand {
     display: none;
-}	
+}
 </style>

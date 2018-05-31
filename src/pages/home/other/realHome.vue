@@ -1,302 +1,321 @@
 <template>
-    <div class="back_img1">
-        <div class="top_logo">
-            <img class="img_logo" src="../../../images/logo.png" alt="logo" />
-            <img class="img_location" src="../../../images/position.png" @click.stop="choisePro" />
-            <span @click.stop="choisePro">{{nowProject}}</span>
-        </div>
-        <div class="user">
-			<img src="../../../images/user01.png"/>
-			<span>周健龙</span>
-			<div class="select" @click="select" :class="{tir:user_select==true}"></div>
-			<ul class="select_ul" v-if="user_select" @mouseleave="select">
-				<li @click="usre_out">切换用户</li>
-			    <li @click="usre_out">退出登录</li>
-			</ul>
-	</div>
-        <!-- 项目地址选择 -->
-        <transition name="el-zoom-in-top">
-            <!-- 这里空的点击事件不可删 -->
-            <div class="choise_position" @click.stop="" v-if="showLtd">
-                <ul class="all_menu1">
-                    <li v-for="a in positionMenu" @click.stop="choiseLtd(a)" :class="{nav_active: pMenu1==a.name}"   >{{a.name}}</li>
-                </ul>
-                <div class="all_ul">
-                    <ul class="all_menu2" v-for="b in clickLtd">
-                        <li class="all_name2">
-                            <span>{{b.name}}</span>
-                        </li>
-                        <li>
-                            <ul class="all_menu3" v-for="c in b.projects">
-                                <li class="all_name3" @click="goProject(c)">
-                                    <span>{{c.name}}</span>
-                                </li>
-                            </ul>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </transition>
-        <div class="back_img2">
-            <div class="data">
-                <div class="data_one"></div>
-                <div class="data_two"></div>
-                <div class="data_three"></div>
-                <div class="data_four"></div>
-                <div class="data_five"></div>
-                <div class="data_six"></div>
-                <div class="data_seven"></div>
-                <div class="data_eight"></div>
-                <div class="data_nine"></div>
-            </div>
-            <div class="setting">
-                <img src="../../../images/glass14.png" alt="">
-            </div>
-            <div class="link" @mouseenter="light(1)" @mouseleave="light(0)">
-                <div v-if="showItem!=1">
-                    <span class="img_one"></span>
-                    <span class="img_two"></span>
-                    <span class="img_three"></span>
-                    <span class="img_four"></span>
-                    <div class="link_text">
-                        <p>物联监控</p>
-                    </div>
-                </div>
-            </div>
-            <div class="link_gloss" v-if="showItem==1" @mouseenter="light(1)" @mouseleave="light(0)" @click="clickMenuLink">
-                <span class="img_one"></span>
-                <span class="img_two"></span>
-                <span class="img_three"></span>
-                <span class="img_four"></span>
-                <div class="link_text">
-                    <p>物联监控</p>
-                    <span class="img_five"></span>
-                    <img class="img_six" src="../../../images/glass28.png" alt="">
-                </div>
-            </div>
-
-            <div class="business" @mouseenter="light(2)" @mouseleave="light(0)">
-                <div v-if="showItem!=2">
-                    <span class="img_one"></span>
-                    <span class="img_two"></span>
-                    <span class="img_three"></span>
-                    <span class="img_four"></span>
-                    <div class="link_text">
-                        <p>管理应用</p>
-                    </div>
-                </div>
-            </div>
-            <div class="business_gloss" v-if="showItem==2" @mouseenter="light(2)" @mouseleave="light(0)" @click="clickMenugloss">
-                <span class="img_one"></span>
-                <span class="img_two"></span>
-                <span class="img_three"></span>
-                <span class="img_four"></span>
-                <div class="link_text">
-                    <p>管理应用</p>
-                    <span class="img_five"></span>
-                    <img class="img_six" src="../../../images/glass28.png" alt="">
-                </div>
-            </div>
-            <div class="apply">
-                <div class="apply_one">
-                    <img src="../../../images/glass30.png" alt="">
-                    <img src="../../../images/glass31.png" alt="">
-                </div>
-                <div class="apply_two">
-                    <img src="../../../images/glass30.png" alt="">
-                    <img src="../../../images/glass31.png" alt="">
-                </div>
-                <div class="apply_three">
-                    <img src="../../../images/glass30.png" alt="">
-                    <img src="../../../images/glass31.png" alt="">
-                </div>
-                <div class="apply_four">
-                    <img src="../../../images/glass30.png" alt="">
-                    <img src="../../../images/glass31.png" alt="">
-                </div>
-                <div class="apply_five">
-                    <img src="../../../images/glass30.png" alt="">
-                    <img src="../../../images/glass31.png" alt="">
-                </div>
-            </div>
-            <div class="systems" @mouseenter="light(3)" @mouseleave="light(0)">
-                <div v-if="showItem!=3">
-                    <span class="img_one"></span>
-                    <span class="img_two"></span>
-                    <span class="img_three"></span>
-                    <span class="img_four"></span>
-                    <div class="link_text">
-                        <p>业务配置</p>
-
-                    </div>
-                </div>
-            </div>
-            <div class="systems_box" v-if="showItem==3" @mouseenter="light(3)" @mouseleave="light(0)" @click="clickMenusys">
-                <span class="img_one"></span>
-                <span class="img_two"></span>
-                <span class="img_three"></span>
-                <span class="img_four"></span>
-                <div class="link_text">
-                    <p>业务配置</p>
-                    <span class="img_five"></span>
-                    <img class="img_six" src="../../../images/glass28.png" alt="">
-                </div>
-            </div>
-            <div class="place">
-                <div class="one" v-if="showItem==3">
-                    <img src="../../../images/glass9.png" alt="">
-                </div>
-                <div class="two" v-if="showItem==1">
-                    <img src="../../../images/glass10.png" alt="">
-                </div>
-                <div class="three" v-if="showItem==2">
-                    <img src="../../../images/glass11.png" alt="">
-                </div>
-                <div class="four" v-if="showItem==4">
-                    <img src="../../../images/glass12.png" alt="">
-                </div>
-            </div>
-            <div class="map" @mouseenter="light(4)" @mouseleave="light(0)">
-                <div v-if="showItem!=4">
-                    <span class="img_one"></span>
-                    <span class="img_two"></span>
-                    <span class="img_three"></span>
-                    <span class="img_four"></span>
-                    <div class="link_text">
-                        <p>数据分析</p>
-                    </div>
-                </div>
-            </div>
-            <div class="map_box" v-if="showItem==4" @mouseenter="light(4)" @mouseleave="light(0)" @click="clickMenumap">
-                <span class="img_one"></span>
-                    <span class="img_two"></span>
-                    <span class="img_three"></span>
-                    <span class="img_four"></span>
-                <div class="link_text">
-                    <p>数据分析</p>
-                    <span class="img_five"></span>
-                    <img class="img_six" src="../../../images/glass28.png" alt="">
-                </div>
-            </div>
-        </div>
-        <!-- <div class="control"></div> -->
+<div class="back_img1">
+  <div class="top_logo">
+    <img class="img_logo" src="../../../images/logo.png" alt="logo" />
+    <img class="img_location" src="../../../images/position.png" @click.stop="choisePro" />
+    <span @click.stop="choisePro">{{nowProject}}</span>
+  </div>
+  <div class="user">
+    <img src="../../../images/user01.png" />
+    <span>周健龙</span>
+    <div class="select" @click="select" :class="{tir:user_select==true}"></div>
+    <ul class="select_ul" v-if="user_select" @mouseleave="select">
+      <li @click="usre_out">切换用户</li>
+      <li @click="usre_out">退出登录</li>
+    </ul>
+  </div>
+  <!-- 项目地址选择 -->
+  <transition name="el-zoom-in-top">
+    <!-- 这里空的点击事件不可删 -->
+    <div class="choise_position" @click.stop="" v-if="showLtd">
+      <ul class="all_menu1">
+        <li v-for="a in positionMenu" @click.stop="choiseLtd(a)" :class="{nav_active: pMenu1==a.name}">{{a.name}}</li>
+      </ul>
+      <div class="all_ul">
+        <ul class="all_menu2" v-for="b in clickLtd">
+          <li class="all_name2">
+            <span>{{b.name}}</span>
+          </li>
+          <li>
+            <ul class="all_menu3" v-for="c in b.projects">
+              <li class="all_name3" @click="goProject(c)">
+                <span>{{c.name}}</span>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </div>
     </div>
+  </transition>
+  <div class="back_img2">
+    <div class="data">
+      <div class="data_one"></div>
+      <div class="data_two"></div>
+      <div class="data_three"></div>
+      <div class="data_four"></div>
+      <div class="data_five"></div>
+      <div class="data_six"></div>
+      <div class="data_seven"></div>
+      <div class="data_eight"></div>
+      <div class="data_nine"></div>
+    </div>
+    <div class="setting">
+      <img src="../../../images/glass14.png" alt="">
+    </div>
+    <div class="link" @mouseenter="light(1)" @mouseleave="light(0)">
+      <div v-if="showItem!=1">
+        <span class="img_one"></span>
+        <span class="img_two"></span>
+        <span class="img_three"></span>
+        <span class="img_four"></span>
+        <div class="link_text">
+          <p>物联监控</p>
+        </div>
+      </div>
+    </div>
+    <div class="link_gloss" v-if="showItem==1" @mouseenter="light(1)" @mouseleave="light(0)" @click="clickMenuLink">
+      <span class="img_one"></span>
+      <span class="img_two"></span>
+      <span class="img_three"></span>
+      <span class="img_four"></span>
+      <div class="link_text">
+        <p>物联监控</p>
+        <span class="img_five"></span>
+        <img class="img_six" src="../../../images/glass28.png" alt="">
+      </div>
+    </div>
+
+    <div class="business" @mouseenter="light(2)" @mouseleave="light(0)">
+      <div v-if="showItem!=2">
+        <span class="img_one"></span>
+        <span class="img_two"></span>
+        <span class="img_three"></span>
+        <span class="img_four"></span>
+        <div class="link_text">
+          <p>管理应用</p>
+        </div>
+      </div>
+    </div>
+    <div class="business_gloss" v-if="showItem==2" @mouseenter="light(2)" @mouseleave="light(0)" @click="clickMenugloss">
+      <span class="img_one"></span>
+      <span class="img_two"></span>
+      <span class="img_three"></span>
+      <span class="img_four"></span>
+      <div class="link_text">
+        <p>管理应用</p>
+        <span class="img_five"></span>
+        <img class="img_six" src="../../../images/glass28.png" alt="">
+      </div>
+    </div>
+    <div class="apply">
+      <div class="apply_one">
+        <img src="../../../images/glass30.png" alt="">
+        <img src="../../../images/glass31.png" alt="">
+      </div>
+      <div class="apply_two">
+        <img src="../../../images/glass30.png" alt="">
+        <img src="../../../images/glass31.png" alt="">
+      </div>
+      <div class="apply_three">
+        <img src="../../../images/glass30.png" alt="">
+        <img src="../../../images/glass31.png" alt="">
+      </div>
+      <div class="apply_four">
+        <img src="../../../images/glass30.png" alt="">
+        <img src="../../../images/glass31.png" alt="">
+      </div>
+      <div class="apply_five">
+        <img src="../../../images/glass30.png" alt="">
+        <img src="../../../images/glass31.png" alt="">
+      </div>
+    </div>
+    <div class="systems" @mouseenter="light(3)" @mouseleave="light(0)">
+      <div v-if="showItem!=3">
+        <span class="img_one"></span>
+        <span class="img_two"></span>
+        <span class="img_three"></span>
+        <span class="img_four"></span>
+        <div class="link_text">
+          <p>业务配置</p>
+
+        </div>
+      </div>
+    </div>
+    <div class="systems_box" v-if="showItem==3" @mouseenter="light(3)" @mouseleave="light(0)" @click="clickMenusys">
+      <span class="img_one"></span>
+      <span class="img_two"></span>
+      <span class="img_three"></span>
+      <span class="img_four"></span>
+      <div class="link_text">
+        <p>业务配置</p>
+        <span class="img_five"></span>
+        <img class="img_six" src="../../../images/glass28.png" alt="">
+      </div>
+    </div>
+    <div class="place">
+      <div class="one" v-if="showItem==3">
+        <img src="../../../images/glass9.png" alt="">
+      </div>
+      <div class="two" v-if="showItem==1">
+        <img src="../../../images/glass10.png" alt="">
+      </div>
+      <div class="three" v-if="showItem==2">
+        <img src="../../../images/glass11.png" alt="">
+      </div>
+      <div class="four" v-if="showItem==4">
+        <img src="../../../images/glass12.png" alt="">
+      </div>
+    </div>
+    <div class="map" @mouseenter="light(4)" @mouseleave="light(0)">
+      <div v-if="showItem!=4">
+        <span class="img_one"></span>
+        <span class="img_two"></span>
+        <span class="img_three"></span>
+        <span class="img_four"></span>
+        <div class="link_text">
+          <p>数据分析</p>
+        </div>
+      </div>
+    </div>
+    <div class="map_box" v-if="showItem==4" @mouseenter="light(4)" @mouseleave="light(0)" @click="clickMenumap">
+      <span class="img_one"></span>
+      <span class="img_two"></span>
+      <span class="img_three"></span>
+      <span class="img_four"></span>
+      <div class="link_text">
+        <p>数据分析</p>
+        <span class="img_five"></span>
+        <img class="img_six" src="../../../images/glass28.png" alt="">
+      </div>
+    </div>
+  </div>
+  <!-- <div class="control"></div> -->
+</div>
 </template>
 <script>
-import { mapState, mapMutations } from 'vuex'
+import {
+  mapState,
+  mapMutations
+} from 'vuex'
 export default {
-    data() {
-        return {
-            menuList: [{ "name": "物联监控", "url": "carGuide" }, { "name": "数据应用", "url": "" }, { "name": "业务应用", "url": "" }, { "name": "系统管理", "url": "" }],
-            showItem: 0,
-            dimLink: true,
-            showOld: true,
-            businessGloss: true,
-            systemsGloss: true,
-            mapGlass: true,
-            pMenu1: null,
-            clickLtd: null,
-            showLtd: false,
-            user_select: false,
-            nowProject: "中海华庭",
-            positionMenu: [
-                {
-                    "name": "上海分公司",
-                    "id": "1",
-                    "citys": [
-                        {
-                            "centreName": "上海城市管理中心",
-                            "projects": [
-                                {
-                                    "name": "上海中海国际东区",
-                                    "projectID": "1-1-1"
-                                },
-                                {
-                                    "name": "上海中海国际四期",
-                                    "projectID": "1-1-1"
-                                },
-                            ]
-                        },
-                        {
-                            "centreName": "上海长沙城市管理中心",
-                            "projects": [
-                                {
-                                    "name": "上海中海国际东区",
-                                    "projectID": "1-1-1"
-                                },
-                                {
-                                    "name": "上海中海国际四期",
-                                    "projectID": "1-1-1"
-                                },
-                            ]
-                        },
-                    ]
-                },
-            ],
-        }
+  data() {
+    return {
+      menuList: [{
+        "name": "物联监控",
+        "url": "carGuide"
+      }, {
+        "name": "数据应用",
+        "url": ""
+      }, {
+        "name": "业务应用",
+        "url": ""
+      }, {
+        "name": "系统管理",
+        "url": ""
+      }],
+      showItem: 0,
+      dimLink: true,
+      showOld: true,
+      businessGloss: true,
+      systemsGloss: true,
+      mapGlass: true,
+      pMenu1: null,
+      clickLtd: null,
+      showLtd: false,
+      user_select: false,
+      nowProject: "中海华庭",
+      positionMenu: [{
+        "name": "上海分公司",
+        "id": "1",
+        "citys": [{
+            "centreName": "上海城市管理中心",
+            "projects": [{
+                "name": "上海中海国际东区",
+                "projectID": "1-1-1"
+              },
+              {
+                "name": "上海中海国际四期",
+                "projectID": "1-1-1"
+              },
+            ]
+          },
+          {
+            "centreName": "上海长沙城市管理中心",
+            "projects": [{
+                "name": "上海中海国际东区",
+                "projectID": "1-1-1"
+              },
+              {
+                "name": "上海中海国际四期",
+                "projectID": "1-1-1"
+              },
+            ]
+          },
+        ]
+      }, ],
+    }
+  },
+  computed: {
+    ...mapState(['projectList', 'mnUrl'])
+  },
+  mounted() {
+    var _this = this;
+    //绑定点击事件到body让项目选择弹窗消失
+    document.getElementsByTagName("body")[0].addEventListener("click", function() {
+      _this.showLtd = false;
+    });
+    // var url = this.mnUrl + '/organizations';
+    // this.$http.get(url).then(res => {
+    //     var projectList = JSON.stringify(res.body.content[0].children);
+    //     window.localStorage.setItem('projectList', projectList);
+    //     projectList = window.localStorage.getItem('projectList');
+    //     _this.positionMenu = JSON.parse(projectList);
+    //     _this.clickLtd = _this.positionMenu[0].citys;
+    //     _this.pMenu1 = _this.positionMenu[0].citys;
+    // }, err => {
+    //     console.log("请求失败")
+    // })
+  },
+  methods: {
+    light(num) {
+      this.showItem = num;
+      this.dimLink = false;
+      // console.log("进来了")
     },
-    computed: {
-        ...mapState(['projectList', 'mnUrl'])
+    clickMenuLink() {
+      window.localStorage.setItem('navOne', "物联监控");
+      this.$router.push({
+        path: '/' + 'monit/garden/map'
+      });
     },
-    mounted() {
-        var _this = this;
-        //绑定点击事件到body让项目选择弹窗消失
-        document.getElementsByTagName("body")[0].addEventListener("click", function() {
-            _this.showLtd = false;
-        });
-        var url = this.mnUrl + '/organizations';
-        this.$http.get(url).then(res => {
-            var projectList = JSON.stringify(res.body.content[0].children);
-            window.localStorage.setItem('projectList', projectList);
-            projectList = window.localStorage.getItem('projectList');
-            _this.positionMenu = JSON.parse(projectList);
-            _this.clickLtd = _this.positionMenu[0].citys;
-            _this.pMenu1 = _this.positionMenu[0].citys;
-        }, err => {
-            console.log("请求失败")
-        })
+    clickMenugloss() {
+      window.localStorage.setItem('navOne', "管理应用");
+      this.$router.push({
+        path: '/' + 'P_projectTote'
+      });
     },
-    methods: {
-        light(num) {
-            this.showItem = num;
-            this.dimLink = false;
-            // console.log("进来了")
-        },
-        clickMenuLink() {
-            window.localStorage.setItem('navOne', "物联监控");
-            this.$router.push({ path: '/' + 'monit/garden/map' });
-        },
-        clickMenugloss() {
-            window.localStorage.setItem('navOne', "管理应用");
-            this.$router.push({ path: '/' + 'P_projectTote' });
-        },
-        clickMenusys() {
-            window.localStorage.setItem('navOne', "业务配置");
-            this.$router.push({ path: '/' + 'config/carcfg/carlink' });
-        },
-        clickMenumap() {
-            window.localStorage.setItem('navOne', "数据分析");
-            this.$router.push({ path: '/' + 'data/overview' });
-        },
-        choiseLtd(ltd) {
-            this.pMenu1 = ltd.name;
-            this.clickLtd = ltd.citys;
-        },
-        choisePro() {
-            this.showLtd = true;
-        },
-        goProject(project) {
-            this.nowProject = project.name;
-        },
-        select() {
-            this.user_select = !this.user_select;
-        },
-        usre_out() {
-            this.$router.push({ path: '/' + 'login' });
-        }
+    clickMenusys() {
+      window.localStorage.setItem('navOne', "业务配置");
+      this.$router.push({
+        path: '/' + 'config/carcfg/carlink'
+      });
     },
-    watch: {
+    clickMenumap() {
+      window.localStorage.setItem('navOne', "数据分析");
+      this.$router.push({
+        path: '/' + 'data/overview'
+      });
     },
+    choiseLtd(ltd) {
+      this.pMenu1 = ltd.name;
+      this.clickLtd = ltd.citys;
+    },
+    choisePro() {
+      this.showLtd = true;
+    },
+    goProject(project) {
+      this.nowProject = project.name;
+    },
+    select() {
+      this.user_select = !this.user_select;
+    },
+    usre_out() {
+      this.$router.push({
+        path: '/' + 'login'
+      });
+    }
+  },
+  watch: {},
 }
 </script>
 <style lang="scss" scoped>
@@ -369,7 +388,7 @@ export default {
         -webkit-animation: neon2 1s ease-in-out infinite alternate;
         -moz-animation: neon2 1s ease-in-out infinite alternate;
         animation: neon2 1s ease-in-out infinite alternate;
-    } 
+    }
     //用户头像
 	.user{
 		position: absolute;
@@ -392,7 +411,7 @@ export default {
 			border-radius: 50%;
 			position: absolute;
 			left: 2%;
-			top: 9%;		
+			top: 9%;
 		}
 		.select{
 			display: inline-block;
@@ -409,8 +428,8 @@ export default {
 	        transition:transform 0.2s ease-in;
         	transform-origin: center 50%;
 		}
-		.tir{      
-			transform:rotate(180deg);  
+		.tir{
+			transform:rotate(180deg);
 		}
 		.select_ul{
 			position: absolute;
@@ -423,7 +442,7 @@ export default {
 				width: 1rem;
 				height: 0.35rem;
 				cursor: pointer;
-				
+
 			}
 		}
 		.select_ul li:hover{
@@ -520,7 +539,7 @@ export default {
             .data_one {
                 height: 0.06rem;
                 width: 1.74rem;
-                
+
                 animation: dataAnima 1s infinite alternate linear;
             }
             .data_two {
@@ -577,7 +596,7 @@ export default {
 
         .link {
             width: 2.26rem;
-            height: 2.25rem; 
+            height: 2.25rem;
             position: absolute;
             left: 2.7rem;
             top: 2rem;
@@ -593,9 +612,9 @@ export default {
             .img_one {
                 width: 0.65rem;
                 height: 0.65rem;
-                background-image: url(../../../images/glass19.png);           
+                background-image: url(../../../images/glass19.png);
             }
-            .img_two {           
+            .img_two {
                 background-image: url(../../../images/glass3.png);
             }
             .img_three {
@@ -648,14 +667,14 @@ export default {
                 width: 0.65rem;
                 height: 0.65rem;
                 background-image: url(../../../images/glass18.png);
-                @include center;    
+                @include center;
             }
             .img_two {
                 background-image: url(../../../images/glass4.png);
                 animation: Turn 8s infinite linear;
             }
             .img_three {
-                background-image: url(../../../images/glass5.png);     
+                background-image: url(../../../images/glass5.png);
                 animation: TurnRun 8s infinite linear;
             }
             .img_four {
@@ -711,8 +730,8 @@ export default {
                 height: 0.65rem;
                 background-image: url(../../../images/glass15.png);
             }
-            .img_two {    
-                background-image: url(../../../images/glass3.png);  
+            .img_two {
+                background-image: url(../../../images/glass3.png);
             }
             .img_three {
                 background-image: url(../../../images/glass6.png);
@@ -765,10 +784,10 @@ export default {
                 background-image: url(../../../images/glass22.png);
                 @include center;
             }
-            .img_two {    
+            .img_two {
                 background-image: url(../../../images/glass4.png);
                 animation: Turn 8s infinite linear;
-               
+
             }
             .img_three {
                 background-image: url(../../../images/glass5.png);
@@ -836,20 +855,20 @@ export default {
             .div{
                  width: 0.43rem;
                 height: 0.43rem;
-                 
-            } 
+
+            }
             img {
                 opacity: 0.5;
                  width: 0.43rem;
                     height: 0.43rem;
                      @include center;
-            }  
-            .apply_one { 
+            }
+            .apply_one {
                 position: absolute;
                 left: 0.33rem;
                 top: 0.17rem; // bottom: 1.3rem;
-                img {         
-                    animation: Turn 2s infinite linear;          
+                img {
+                    animation: Turn 2s infinite linear;
                 }
             }
             .apply_two {
@@ -900,13 +919,13 @@ export default {
                 @include aa;
                 @include center;
             }
-            
+
             .img_one {
                 width: 0.65rem;
                 height: 0.65rem;
                 background-image: url(../../../images/glass20.png);
             }
-            .img_two {     
+            .img_two {
                 background-image: url(../../../images/glass3.png);
             }
             .img_three {
@@ -950,10 +969,10 @@ export default {
                 background-image: url(../../../images/glass21.png);
                 @include center;
             }
-            .img_two {    
-                background-image: url(../../../images/glass4.png);    
+            .img_two {
+                background-image: url(../../../images/glass4.png);
                 animation: Turn 8s infinite linear;
-              
+
             }
             .img_three {
                 background-image: url(../../../images/glass5.png);
@@ -1012,7 +1031,7 @@ export default {
                 height: 0.65rem;
                 background-image: url(../../../images/glass16.png);
             }
-            .img_two { 
+            .img_two {
                 background-image: url(../../../images/glass3.png);
             }
             .img_three {
@@ -1056,8 +1075,8 @@ export default {
                 background-image: url(../../../images/glass17.png);
                 @include center;
             }
-            .img_two {  
-                background-image: url(../../../images/glass4.png);    
+            .img_two {
+                background-image: url(../../../images/glass4.png);
                 animation: Turn 8s infinite linear;
             }
             .img_three {

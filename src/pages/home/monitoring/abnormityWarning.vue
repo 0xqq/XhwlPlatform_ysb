@@ -1,176 +1,178 @@
 <template>
-	<div class="main">
-		<!--面包导航组件-->
-		<Bread :breadData="ab"></Bread>
-		<!--搜索栏-->
-		<div class="device-nav">
-			<div class="img-time">
-				<div class="info">
-					<el-select v-model="value1" placeholder="上报时间">
-						<el-option v-for="item in options1" :key="item.value1" :label="item.label" :value="item.value1">
-						</el-option>
-					</el-select>
-				</div>
-				<div class="date_time">
-					<div class="block">
-						<span class="demonstration"></span>
-						<el-date-picker v-model="value6" type="daterange" placeholder="选择日期范围" class="el_picker">
-						</el-date-picker>
-					</div>
-				</div>
-				<div class="date-device">
-					<div>
-						<el-input placeholder="请输入搜索内容" v-model="input5" class="place">
-							<el-select v-model="select" slot="prepend" placeholder="请选择" class="place">
-								<el-option label="对接人" value="1"></el-option>
-								<el-option label="上报人" value="2"></el-option>
-								<el-option label="上报人" value="3"></el-option>
-							</el-select>
-							<el-button slot="append" icon="search"></el-button>
-						</el-input>
-					</div>
-				</div>
-				<input type="button" value="搜索" class="bttn">
-				<img src="../../../images/inout.png" alt="" @click="derivedForm('tableExcel')">
-			</div>
-		</div>
-		<el-table :data="tableData3" height="250" border style="width: 100%" id="tableExcel">
-			<el-table-column prop="上报时间" label="上报时间">
-			</el-table-column>
-			<el-table-column prop="上报人" label="上报人">
-			</el-table-column>
-			<el-table-column prop="状态" label="全部状态">
-			</el-table-column>
-			<el-table-column prop="对接人" label="对接人">
-			</el-table-column>
-			<el-table-column prop="对接时间" label="对接时间">
-			</el-table-column>
-			<el-table-column prop="处置简述" label="处置简述">
-			</el-table-column>
-			<el-table-column prop="name" label="操作">
-			</el-table-column>
-		</el-table>
-		<div class="pager">
-			<div class="block">
-				<el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page.sync="currentPage2" :page-sizes="[30,60,90]" :page-size="100" layout="sizes, prev, pager, next" :total="100">
-				</el-pagination>
-			</div>
-		</div>
-	</div>
+<div class="main">
+  <!--面包导航组件-->
+  <Bread :breadData="ab"></Bread>
+  <!--搜索栏-->
+  <div class="device-nav">
+    <div class="img-time">
+      <div class="info">
+        <el-select v-model="value1" placeholder="上报时间">
+          <el-option v-for="item in options1" :key="item.value1" :label="item.label" :value="item.value1">
+          </el-option>
+        </el-select>
+      </div>
+      <div class="date_time">
+        <div class="block">
+          <span class="demonstration"></span>
+          <el-date-picker v-model="value6" type="daterange" placeholder="选择日期范围" class="el_picker">
+          </el-date-picker>
+        </div>
+      </div>
+      <div class="date-device">
+        <div>
+          <el-input placeholder="请输入搜索内容" v-model="input5" class="place">
+            <el-select v-model="select" slot="prepend" placeholder="请选择" class="place">
+              <el-option label="对接人" value="1"></el-option>
+              <el-option label="上报人" value="2"></el-option>
+              <el-option label="上报人" value="3"></el-option>
+            </el-select>
+            <el-button slot="append" icon="search"></el-button>
+          </el-input>
+        </div>
+      </div>
+      <input type="button" value="搜索" class="bttn">
+      <img src="../../../images/inout.png" alt="" @click="derivedForm('tableExcel')">
+    </div>
+  </div>
+  <el-table :data="tableData3" height="250" border style="width: 100%" id="tableExcel">
+    <el-table-column prop="上报时间" label="上报时间">
+    </el-table-column>
+    <el-table-column prop="上报人" label="上报人">
+    </el-table-column>
+    <el-table-column prop="状态" label="全部状态">
+    </el-table-column>
+    <el-table-column prop="对接人" label="对接人">
+    </el-table-column>
+    <el-table-column prop="对接时间" label="对接时间">
+    </el-table-column>
+    <el-table-column prop="处置简述" label="处置简述">
+    </el-table-column>
+    <el-table-column prop="name" label="操作">
+    </el-table-column>
+  </el-table>
+  <div class="pager">
+    <div class="block">
+      <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page.sync="currentPage2" :page-sizes="[30,60,90]" :page-size="100" layout="sizes, prev, pager, next" :total="100">
+      </el-pagination>
+    </div>
+  </div>
+</div>
 </template>
 
 <script>
 import Bread from '@/components/common/bread'
-import { mapState } from 'vuex'
+import abnormWarnObj from '@/httpData/abnormityWarning.js'
+import { format, gapTime } from '@/script/timeFormat.js'
+import {
+  mapState
+} from 'vuex'
 export default {
-	data() {
-		return {
-			ab: ['物联监控', '云对讲呼叫台', '进度跟踪'],
-			pickerOptions2: {
-				shortcuts: [{
-					text: '最近一周',
-					onClick(picker) {
-						const end = new Date();
-						const start = new Date();
-						start.setTime(start.getTime() - 3600 * 1000 * 24 * 7);
-						picker.$emit('pick', [start, end]);
-					}
-				}, {
-					text: '最近一个月',
-					onClick(picker) {
-						const end = new Date();
-						const start = new Date();
-						start.setTime(start.getTime() - 3600 * 1000 * 24 * 30);
-						picker.$emit('pick', [start, end]);
-					}
-				}, {
-					text: '最近三个月',
-					onClick(picker) {
-						const end = new Date();
-						const start = new Date();
-						start.setTime(start.getTime() - 3600 * 1000 * 24 * 90);
-						picker.$emit('pick', [start, end]);
-					}
-				}]
-			},
-			value6: '',
-			currentPage2: 5,
-			tableData3: [{ name: '回访对讲' }
-			],
-			input5: '',
-			select: '',
-			options1: [
-				{
-					value1: 'zhinan1',
-					label: '上报时间'
-				},
-				{
-					value1: 'zhinan2',
-					label: '处理时间'
-				}
-			],
-			options2: [
-				{
-					value2: 'zhinan1',
-					label: '客服'
-				},
-				{
-					value2: 'zhinan2',
-					label: '安管'
-				},
-				{
-					value2: 'zhinan3',
-					label: '工程'
-				},
-				{
-					value2: 'zhinan4',
-					label: '环境'
-				}
-			],
-			value1: '',
-			value2: ''
-		}
-	},
-	hideImg() {
-		this.showImg = false;
-	},
-	computed: {
-		...mapState(['mnUrl'])
-	},
-	components: {
-		Bread
-	},
-	mounted() {
-		this.getData();
-	},
-	methods: {
-		toggle() {
-			console.log(1)
-		},
-		call() {
-			this.$router.push({ path: 'naswerNormal' });
-		},
-		getData() {
-			const url = this.mnUrl + "/tmp/watching/park/processes"
-			this.$http.get(url).then(res => {
-				console.log(res)
-				this.tableData3 = res.body.content;
-
-				// console.log(this.value)
-			}, function(error) {
-				console.log(error)
-			})
-		},
-		handleSizeChange(val) {
-			// console.log(`每页 ${val} 条`);
-		},
-		handleCurrentChange(val) {
-			// console.log(`当前页: ${val}`);
-		},
-		derivedForm(tableExcel) {
-			this.$func.method5(tableExcel)
-		},
-	}
+  data() {
+    return {
+      ab: ['物联监控', '云对讲呼叫台', '进度跟踪'],
+      pickerOptions2: {
+        shortcuts: [{
+          text: '最近一周',
+          onClick(picker) {
+            const end = new Date();
+            const start = new Date();
+            start.setTime(start.getTime() - 3600 * 1000 * 24 * 7);
+            picker.$emit('pick', [start, end]);
+          }
+        }, {
+          text: '最近一个月',
+          onClick(picker) {
+            const end = new Date();
+            const start = new Date();
+            start.setTime(start.getTime() - 3600 * 1000 * 24 * 30);
+            picker.$emit('pick', [start, end]);
+          }
+        }, {
+          text: '最近三个月',
+          onClick(picker) {
+            const end = new Date();
+            const start = new Date();
+            start.setTime(start.getTime() - 3600 * 1000 * 24 * 90);
+            picker.$emit('pick', [start, end]);
+          }
+        }]
+      },
+      value6: '',
+      currentPage2: 5,
+      tableData3: [{
+        name: '回访对讲'
+      }],
+      input5: '',
+      select: '',
+      options1: [{
+          value1: 'zhinan1',
+          label: '上报时间'
+        },
+        {
+          value1: 'zhinan2',
+          label: '处理时间'
+        }
+      ],
+      options2: [{
+          value2: 'zhinan1',
+          label: '客服'
+        },
+        {
+          value2: 'zhinan2',
+          label: '安管'
+        },
+        {
+          value2: 'zhinan3',
+          label: '工程'
+        },
+        {
+          value2: 'zhinan4',
+          label: '环境'
+        }
+      ],
+      value1: '',
+      value2: ''
+    }
+  },
+  hideImg() {
+    this.showImg = false;
+  },
+  computed: {
+    ...mapState(['mnUrl'])
+  },
+  components: {
+    Bread
+  },
+  mounted() {
+    this.getData();
+  },
+  methods: {
+    toggle() {
+      console.log(1)
+    },
+    call() {
+      this.$router.push({
+        path: 'naswerNormal'
+      });
+    },
+    getData() {
+			this.tableData3 = abnormWarnObj.content
+      this.tableData3.forEach((item, index) => {
+        var time1 = new Date().getTime() - (Math.random() + index + 1) * 86400000 // 上报时间
+        item.上报时间 = format(time1, 'yyyy-MM-dd') + ' ' + item.上报时间.substr(-8) //日期随机+时间取定值
+        item.对接时间 = format(time1, 'yyyy-MM-dd') + ' ' + item.对接时间.substr(-8) //日期随机+时间取定值
+      })
+    },
+    handleSizeChange(val) {
+      // console.log(`每页 ${val} 条`);
+    },
+    handleCurrentChange(val) {
+      // console.log(`当前页: ${val}`);
+    },
+    derivedForm(tableExcel) {
+      this.$func.method5(tableExcel)
+    },
+  }
 }
 </script>
 

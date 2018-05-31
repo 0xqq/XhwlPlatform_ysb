@@ -7,6 +7,7 @@
 	import echarts from 'echarts';
 	import 'echarts/map/js/china.js';
 	import {mapState} from 'vuex';
+	import homepage from '@/httpData/homepage.js'
 	export default {
 		data() {
 			return {
@@ -34,57 +35,47 @@
 				var _resizeMap = this.mapStatus;
 				setTimeout(function(){
 					_resizeMap();
-				},500)				
+				},500)
 			}
 		},
 		methods: {
 			getData(){
-		 	this.$http({
-				url:"../../../static/homepage.json",
-				method:'get',
-			}).then(function(res){
-				//this.Text=res.body.finance.carData.costType;
-			    
-			    if(this.isFirst){
-			    	//第一次获取数据进行实列化
-			    	this.mapStatus = this.showProvince();
-			    	this.isFirst = false;
-			    }else{
-			    	// 否则进行重绘
-			    	var _resizeMap = this.mapStatus;
-						_resizeMap();
-			    }
-				},function(error){
-				//失败回调的函数								
-				console.log(error);
-					});						
+        if(this.isFirst){
+          //第一次获取数据进行实列化
+          this.mapStatus = this.showProvince();
+          this.isFirst = false;
+        }else{
+          // 否则进行重绘
+          var _resizeMap = this.mapStatus;
+          _resizeMap();
+        }
 			},
 			showProvince() {
 				var return_value;
 				var refThis = this;
 				var name = this.cityName;
-			    var myChart = echarts.init(document.getElementById('myChart'));	
+			    var myChart = echarts.init(document.getElementById('myChart'));
 				if(this.cityName=='深圳'){
 					 var uploadedDataURL = "../../../static/china-main-city/440300.json";
 					 var geoCoordMap = this.shenzhen;
 					  var data1 =this.shenzhenData1;
-					  var data2 =this.shenzhenData2; 
-					  var data3 =this.shenzhenData3; 
+					  var data2 =this.shenzhenData2;
+					  var data3 =this.shenzhenData3;
 				}
 //				else if(this.cityName=='广州'){
 //					 var uploadedDataURL = "../../../static/china-main-city/440100.json";
 //					 var geoCoordMap = this.guangzhou;
 //					  var data1 =this.guangzhouData1;
-//					  var data2 =this.guangzhouData2; 
+//					  var data2 =this.guangzhouData2;
 //					  var data3 =this.guangzhouData3;
 //				}
 				else{
 					 var uploadedDataURL = "../../../static/china-main-city/440300.json";
 					 var geoCoordMap = this.shenzhen;
 					  var data1 =this.shenzhenData1;
-					  var data2 =this.shenzhenData2; 
+					  var data2 =this.shenzhenData2;
 					  var data3 =this.shenzhenData3;
-				};			
+				};
 				var convertData = function(data) {
 					var res = [];
 					for(var i = 0; i < data.length; i++) {
@@ -98,20 +89,20 @@
 					}
 					return res;
 				};
-			    		
+
 			    $.ajax({
 			        url: uploadedDataURL,
 			        async: false,//改为同步方式
 			        type: "get",
-			    	success: function(geoJson1) {			
-			        echarts.registerMap(name, geoJson1);			
+			    	success: function(geoJson1) {
+			        echarts.registerMap(name, geoJson1);
 			         var option1 = {
 			         	backgroundColor: '',
 			         	color: ['#00BFFF','#FF4500','#00FF00','#90EE90'],
 					    legend: {          //标题组件参数配置（左边，大小，颜色等）
 					    	type: 'scroll',
 					    	orient: 'vertical',   //垂直
-					        bottom: '80',      
+					        bottom: '80',
 					        x:'80',
 					        icon: 'rect',
 					        data:['停车场月卡缴费率','报事销项率','投诉统计','投诉销项率'],
@@ -159,14 +150,14 @@
 					            symbolSize: 10,
 					            label: {
 					                normal: {
-					                    formatter: '{b}',      
+					                    formatter: '{b}',
 					                    position: 'right',
 					                    show: true
 					                },
 					                emphasis: {
 					                    show: false
 					                }
-					            },				            
+					            },
 					            itemStyle: {
 					                emphasis: {
 					                    borderColor: '#fff',
@@ -182,14 +173,14 @@
 					            symbolSize: 10,
 					            label: {
 					                normal: {
-					                    formatter: '{b}',      
+					                    formatter: '{b}',
 					                    position: 'right',
 					                    show: true
 					                },
 					                emphasis: {
 					                    show: false
 					                }
-					            },				            
+					            },
 					            itemStyle: {
 					                emphasis: {
 					                    borderColor: '#fff',
@@ -205,14 +196,14 @@
 					            symbolSize: 10,
 					            label: {
 					                normal: {
-					                    formatter: '{b}',      
+					                    formatter: '{b}',
 					                    position: 'right',
 					                    show: true
 					                },
 					                emphasis: {
 					                    show: false
 					                }
-					            },				            
+					            },
 					            itemStyle: {
 					                emphasis: {
 					                    borderColor: '#fff',
@@ -228,21 +219,21 @@
 					            symbolSize: 10,
 					            label: {
 					                normal: {
-					                    formatter: '{b}',      
+					                    formatter: '{b}',
 					                    position: 'right',
 					                    show: true
 					                },
 					                emphasis: {
 					                    show: false
 					                }
-					            },				            
+					            },
 					            itemStyle: {
 					                emphasis: {
 					                    borderColor: '#fff',
 					                    borderWidth: 1
 					                }
 					            }
-					        },					        
+					        },
 					    	{                  //前十带闪的------------------------------------------------------------
 					        name: '停车场月卡缴费率',
 					        type: 'effectScatter',
@@ -307,19 +298,19 @@
 				                return b.value - a.value;
 				            }).slice(0, 10)),
 					    }]
-			        }			        
+			        }
 			      myChart.setOption(option1);
 			      function disposeMap() { //销毁函数作为返回值返出去
 						if(refThis.isDispose){
-							myChart.dispose();	
+							myChart.dispose();
 						}else{
 							myChart.resize();
 						}
-					}			        
+					}
 			        return_value= disposeMap;
-			    }			    
-			});    
-			return return_value; 
+			    }
+			});
+			return return_value;
 			}
 		},
 	}

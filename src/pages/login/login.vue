@@ -56,12 +56,7 @@ export default {
   methods: {
     toLogin() {
       if (this.login && this.password) {
-        this.$http.post('http://202.105.104.105:5051/api/v1/login', { "account": this.login, "password": this.password }).then(res => {
-          // console.log(res);
-          //           alert(' ' + this.login+ ' ' +this.password);
-          this.$store.commit('GET_TOKEN', res.body.content);
-          this.$router.push({ path: '/realHome' })
-        })
+        this.$router.push({ path: '/realHome' })
       } else {
         alert("请输入账号或密码！");
       }
@@ -154,7 +149,7 @@ export default {
       input::-webkit-input-placeholder {
         color: #fff;
         text-align: center;
-      } // 用户名   
+      } // 用户名
       .bttn {
         width: 3.04rem;
         height: 0.36rem;

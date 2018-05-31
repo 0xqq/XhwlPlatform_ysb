@@ -1,11 +1,11 @@
-export default 
+export default
 	[
 		{
 			"word": "monit",
 			"name": "物联监控",
-			"imgUrl": "http://xhmind.com:5050/img/navCamera.png",
+			"imgUrl": "",
 			"submenu": [
-				{	
+				{
 					"word": "garden",
 					"name": "园区电子地图",
 					"submenu": [
@@ -19,10 +19,10 @@ export default
 							"name": "报警管理",
 							"url": "monit/garden/police",
 						}
-						
+
 					]
 				},
-				{	
+				{
 					"word": "call",
 					"name": "云对讲呼叫台",
 					"submenu": [
@@ -36,10 +36,10 @@ export default
 							"name": "进度跟踪",
 							"url": "monit/call/process",
 						}
-						
+
 					]
 				},
-				{	
+				{
 					"word": "msg",
 					"name": "信息发布中心",
 					"submenu": [
@@ -53,10 +53,10 @@ export default
 							"name": "信息发布",
 							"url": "monit/msg/release",
 						}
-						
+
 					]
 				},
-				{	
+				{
 					"word": "inout",
 					"name": "出入物联监控",
 					"submenu": [
@@ -92,7 +92,7 @@ export default
 								},
 							]
 						},
-						
+
 					]
 				},
 				{
@@ -103,7 +103,7 @@ export default
 							"name": "巡检记录",
 							"word": "patrolrecord",
 							"url": "monit/video/patrolrecord",
-						},				
+						},
 						{
 							"name": "实时预览",
 							"word": "prevideo",
@@ -304,7 +304,7 @@ export default
 						},
 						{
 							"name": "环境人员",
-							"url": "", 
+							"url": "",
 							"submenu": [
 								{
 									"name": "实时位置监控",
@@ -353,7 +353,7 @@ export default
 		{
 			"name": "管理应用",
 			"word": "manage",
-			"imgUrl": "http://xhmind.com:5050/img/navBusi.png",
+			"imgUrl": "",
 			"submenu": [
 				{
 					"name": "项目仪表盘",
@@ -516,7 +516,7 @@ export default
 						{
 							"name": "绿化管理",
 							"url": "",
-						}	
+						}
 					]
 				},
 				{
@@ -618,13 +618,13 @@ export default
 						},
 					]
 				},
-			
+
 			]
 		},
 		{
 			"name": "业务配置",
 			"word": "config",
-			"imgUrl": "http://xhmind.com:5050/img/navPei.png",
+			"imgUrl": "",
 			"submenu": [
 				{
 					"name": "安防业务配置",
@@ -799,7 +799,7 @@ export default
 		{
 			"name": "数据分析",
 			"word": "data",
-			"imgUrl": "http://xhmind.com:5050/img/navData.png",
+			"imgUrl": "",
 			"submenu": [
 				{
 					"name": "数据概览",
@@ -1036,13 +1036,13 @@ export default
 							"name": "能耗数据分析",
 							"word": "energy",
 							"url": "data/projdata/energy",
-							
+
 						},
 						{
 							"name": "设备设施台账查询",
 							"word": "equipment",
 							"url": "data/projdata/equipment",
-							
+
 						},
 					]
 				},
@@ -1125,7 +1125,7 @@ export default
 		{
 			"name": "系统管理",
 			"url": "",
-			"imgUrl": "http://xhmind.com:5050/img/navSet.png",
+			"imgUrl": "",
 			"submenu": [
 				{
 					"name": "组织管理",

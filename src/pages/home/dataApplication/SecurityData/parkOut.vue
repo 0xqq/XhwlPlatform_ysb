@@ -5,7 +5,7 @@
 				<span class="title">停车场出入行为数据</span>
 				<div class="top_right">
 					<div class="boutton_div">
-						<span class="chart_model" :class="{active: model=='chart', unactive: model == 'table'}" @click="choiseModel(0)">图表模式</span><!--  
+						<span class="chart_model" :class="{active: model=='chart', unactive: model == 'table'}" @click="choiseModel(0)">图表模式</span><!--
 					 --><span class="table_model" :class="{active: model=='table', unactive: model == 'chart'}" @click="choiseModel(1)">表格模式</span>
 					</div>
 					<div class="date_time">
@@ -15,13 +15,13 @@
 						</div>
 					</div>
 					<a class="inout_a" :class="{Hide: showSelf==0}" href="javascript:void(0);" @click="method55('tableExcel')"></a>
-				</div>				
+				</div>
 			</div>
 		<!-- 图表-->
 		<div :class="{hide: showSelf==1,chart2: showSelf=='0'}" class="big_echarts">
 			<echarts-two1 :class="{hide: showSelf==1,chart2: showSelf=='0'}" :Text='noeText'
 				 :Xvalue="Xvalue" :Legend="noeLegend" :Series="Series1" :Unit="unit1" :PropsWith="width">
-			</echarts-two1>														
+			</echarts-two1>
 			<echarts-two2 :class="{hide: showSelf==1,chart2: showSelf=='0'}" :Text='twoText'
 				 :Xvalue="Xvalue" :Legend="twoLegend" :Series="Series2" :Unit="unit2" :PropsWith="width">
 			</echarts-two2>
@@ -71,7 +71,7 @@
 						<td>1</td>
 					</tr>
 				</tbody>
-			</table>	
+			</table>
 		</div>
 		<div class="page">
 				<span>每页显示</span>
@@ -116,7 +116,7 @@ export default {
 				stack: 'one',
 				barWidth: '45%',
 				itemStyle: {
-		            normal: {color: new echarts.graphic.LinearGradient( 0, 0, 0, 1, [{offset: 0,color: 'rgba(0,191,255,1)'}, 
+		            normal: {color: new echarts.graphic.LinearGradient( 0, 0, 0, 1, [{offset: 0,color: 'rgba(0,191,255,1)'},
 		                {offset: 1,color: 'rgba(0,191,255,0.2)'}])}
 		        },
 				data: [150, 52, 200, 334, 390, 330, 220, 233, 150, 52, 200, 334, 390, 330, 220, 233, 150, 52, 200, 334, 390, 330, 220, 233, 150, 52, 200, 334, 390, 330, 220, 233, 150, 52, 200, 334, 390, 330, 220, 233, 150, 52, 200, 334, 390, 330, 220, 233, 200, 334, 390, 330, 220, 233]
@@ -126,7 +126,7 @@ export default {
 				stack: 'one',
 				barWidth: '45%',
 				itemStyle: {
-		            normal: {color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{offset: 0,color: 'rgba(211,201,39,0.9)'}, 
+		            normal: {color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{offset: 0,color: 'rgba(211,201,39,0.9)'},
 		                {offset: 0.8,color: 'rgba(236,255,25,0.5)'}])}
 		        },
 				data: [-56, -45, -43, -32, -76, -34, -67, -56, -56, -45, -43, -32, -76, -34, -67, -56, -56, -45, -43, -32, -76, -34, -67, -56, -56, -45, -43, -32, -76, -34, -67, -56, -56, -45, -43, -32, -76, -34, -67, -56, -56, -45, -43, -32, -76, -34, -67, -56, -43, -32, -76, -34, -67, -56]
@@ -151,7 +151,7 @@ export default {
 		            barWidth: '45%',
 		            itemStyle: {
 			            normal: {
-			                color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{offset: 0,color: 'rgba(239,107,51,1)'}, 
+			                color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{offset: 0,color: 'rgba(239,107,51,1)'},
 			                { offset: 1,color: 'rgba(239,107,51,0.5)'}])
 			            }
 			        },
@@ -164,7 +164,7 @@ export default {
 		            barWidth: '45%',
 		            itemStyle: {
 			            normal: {
-			                color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{offset: 0,color: 'rgba(46,168,80,1)'}, 
+			                color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{offset: 0,color: 'rgba(46,168,80,1)'},
 			                {offset: 1,color: 'rgba(46,168,80,0.5)'}])
 			            }
 			        },
@@ -177,7 +177,7 @@ export default {
 		            barWidth: '45%',
 		            itemStyle: {
 			            normal: {
-			                color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{offset: 0,color: 'rgba(51,152,219,1)'}, 
+			                color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{offset: 0,color: 'rgba(51,152,219,1)'},
 			                {offset: 1,color: 'rgba(51,152,219,0.5)'}])
 			            }
 			        },
@@ -193,7 +193,7 @@ export default {
 	            areaStyle: {normal: {}},
 	            itemStyle: {
 		            normal: {
-		                color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{offset: 0,color: 'rgba(220,67,39,0.9)' }, 
+		                color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{offset: 0,color: 'rgba(220,67,39,0.9)' },
 		                {offset: 0.8,color: 'rgba(255,143,61,0.5)'}])
 		            }
 		        },
@@ -205,7 +205,7 @@ export default {
 	            areaStyle: {normal: {}},
 	            itemStyle: {
 		            normal: {
-		                color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{offset: 0,color: 'rgba(33,212,54,0.9)'}, 
+		                color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{offset: 0,color: 'rgba(33,212,54,0.9)'},
 		                {offset: 0.8, color: 'rgba(61,255,157,0.5)'}])
 		            }
 		        },
@@ -217,7 +217,7 @@ export default {
 	            areaStyle: {normal: {}},
 	            itemStyle: {
 		            normal: {
-		                color: new echarts.graphic.LinearGradient( 0, 0, 0, 1, [{offset: 0,color: 'rgba(27,105,208,0.9)'}, 
+		                color: new echarts.graphic.LinearGradient( 0, 0, 0, 1, [{offset: 0,color: 'rgba(27,105,208,0.9)'},
 		                {offset: 0.8,color: 'rgba(46,166,226,0.5)'}])
 		            }
 		        },
@@ -229,7 +229,7 @@ export default {
 	            areaStyle: {normal: {}},
 	            itemStyle: {
 		            normal:{
-		                color: new echarts.graphic.LinearGradient( 0, 0, 0, 1, [{ offset: 0,color: 'rgba(211,201,39,0.9)'}, 
+		                color: new echarts.graphic.LinearGradient( 0, 0, 0, 1, [{ offset: 0,color: 'rgba(211,201,39,0.9)'},
 		                {offset: 0.8,color: 'rgba(236,255,25,0.5)'}])
 		            }
 		        },
@@ -241,12 +241,12 @@ export default {
 	            areaStyle: {normal: {}},
 	            itemStyle: {
 		            normal: {
-		                color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{offset: 0,color: 'rgba(96,0,255,0.9)'}, 
+		                color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{offset: 0,color: 'rgba(96,0,255,0.9)'},
 		                { offset: 0.8, color: 'rgba(163,107,252,0.5)'}])
 		            }
 		        },
 	            data:[30, 20, 20, 40, 20, 40, 30,30, 20, 20, 40, 20, 40, 30,30, 20, 20, 40, 20, 40, 30,30, 20, 20, 40, 20, 40, 30,30, 20, 20, 40, 20, 40, 30,30, 20, 20, 40, 20, 40, 30,30, 20, 20, 40, 20, 40, 30,30, 20, 20, 40, 20]
-	        }],    
+	        }],
 		}
 	},
 	computed: {
@@ -282,16 +282,6 @@ export default {
 			this.inputValue = value;
 		},
 		getData() {
-			this.$http({
-				url: this.mnUrl + "/tmp/finance/overview",
-				method: 'get',
-			}).then(function(res) {
-
-				
-			}, function(error) {
-				//失败回调的函数								
-				console.log(error)
-			})
 		}
 	}
 }
@@ -368,7 +358,7 @@ export default {
 			width: 2.58rem;
 			height: 0.6rem;
 			color: #67bce9;
-			outline: none;			
+			outline: none;
 			vertical-align: top; // margin-top:0.05rem;
 			.picker{
 				display: inline-block;
@@ -399,8 +389,8 @@ export default {
             position: relative;
             top: 0.05rem;
         }
-  	}	  	
-}	
+  	}
+}
 .hide{
 	display: none;
 }

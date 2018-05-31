@@ -458,15 +458,6 @@ export default {
 			this.$func.method5(tableExcel)
 		},
 		getData() {
-			this.$http({
-				url: this.mnUrl + "/tmp/finance/overview",
-				method: 'get',
-			}).then(function(res) {
-
-			}, function(error) {
-				//失败回调的函数								
-				console.log(error)
-			})
 		},
 		handleSizeChange(val) {
 			console.log(`每页 ${val} 条`);
@@ -602,7 +593,7 @@ export default {
 				border-left: 2px solid #698499;
 			}
 			.left_none {
-				
+
 			}
 		}
 

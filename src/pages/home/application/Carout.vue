@@ -52,11 +52,11 @@
 					<tr v-for='(d,index1) in val' :key="index1" class="center_table">
 						<td>{{d.车牌号}}</td>
 						<td>{{d.全部车辆}}</td>
-						<td v-for="(n, index2) in all" v-if="index1 == index2" class="left_1">{{n}}</td>
+            <td>{{d.入场时间}}</td>
 						<td>{{d.入场地点}}</td>
-						<td v-for="(n, index2) in alL" v-if="index1 == index2" class="left_1">{{n}}</td>
+            <td>{{d.出场时间}}</td>
 						<td>{{d.出场地点}}</td>
-						<td v-for="(n, index2) in all2" v-if="index1 == index2">{{n}}</td>
+            <td>{{d.停车时间}}</td>
 						<td>{{d["应收金额（元）"]}}</td>
 						<td>{{d["实收金额（元）"]}}</td>
 						<td>{{d.备注}}</td>
@@ -75,6 +75,8 @@
 </template>
 <script>
 import Bread from '@/components/common/bread'
+import carout from '@/httpData/carout.js'
+import { format, gapTime } from '@/script/timeFormat.js'
 import { mapState } from 'vuex'
 export default {
 	data() {
@@ -111,24 +113,8 @@ export default {
 					}
 				}]
 			},
-			// value3: [new Date(2000, 10, 10, 10, 10), new Date(2000, 10, 11, 10, 10)],
 			value4: '',
-			options: [{
-				//   value: '选项1',
-				//   label: ''
-				// }, {
-				//   value: '选项2',
-				//   label: ''
-				// }, {
-				//   value: '选项3',
-				//   label: ''
-				// }, {
-				//   value: '选项4',
-				//   label: ''
-				// }, {
-				//   value: '选项5',
-				//   label: ''
-			}],
+			options: [{}],
 			value: '',
 			val: [],
 			sum1: [],
@@ -139,7 +125,8 @@ export default {
 			sum6: [],
 			all: [],
 			alL: [],
-			all2: []
+			all2: [],
+      currentPage2: 1
 		}
 	},
 	computed: {
@@ -162,28 +149,16 @@ export default {
 
 		},
 		getData() {
-			const url = this.mnUrl + "/tmp/watching/car/record"
-			this.$http.get(url).then(res => {			
-				for (var i = 0; i < res.body.content.length; i++) {
-					this.sum1.push(res.body.content[i].入场时间.substring(0, 10))
-					this.sum2.push(res.body.content[i].入场时间.substring(11, 19))
-					this.sum3.push(res.body.content[i].出场时间.substring(0, 10))
-					this.sum4.push(res.body.content[i].出场时间.substring(11, 19))
-					this.sum5.push(res.body.content[i].停车时间.substring(11, 19))
-					var aa = this.sum1[i];
-					var bb = this.sum2[i];
-					var cc = this.sum3[i];
-					var dd = this.sum4[i];
-					var ee = this.sum5[i];
-					this.all.push(aa + "-" + bb)
-					this.alL.push(cc + "-" + dd)
-					this.all.push(aa + "-" + bb)
-					this.all2.push(ee)
-				}
-				this.val = res.body.content
-			}, function(error) {
-				console.log(error)
-			})
+      var content = carout.content
+      for (var i = 0; i < content.length; i++) {
+        var time1 = new Date().getTime() - (Math.random() + i + 2) * 86400000 // 入场时间
+        var time2 = (Math.random() * 2 + 0) * 86400000  // 停车时间为0-2天
+        var time3 = time1 + time2 // 出场时间
+        content[i].入场时间 = format(time1, 'yyyy-MM-dd HH:mm:ss')
+        content[i].出场时间 = format(time3, 'yyyy-MM-dd HH:mm:ss')
+        content[i].停车时间 = gapTime(time2)
+      }
+      this.val = content
 		},
 		derivedForm(tableExcel) {
 			this.$func.method5(tableExcel)
@@ -282,7 +257,7 @@ export default {
 				margin-left: 0.1rem;
 				margin-top: 0.14rem;
 				margin-right: 0.15rem; // margin-bottom: 1.5rem;
-				@include btn(0.91rem, 0.35rem);		
+				@include btn(0.91rem, 0.35rem);
 			}
 			img {
 					width: 0.21rem;
@@ -305,7 +280,7 @@ export default {
 	// scrollbar-highlight-color: #333;
 	// 滚动条阴影
 	// scrollbar-shadow-color: #ccc;
-	// 滚动条轨道颜色·································································	··································································	
+	// 滚动条轨道颜色·································································	··································································
 	scrollbar-track-color: #12253d;
 	scrollbar-arrow-color: #12253d;
 	table {

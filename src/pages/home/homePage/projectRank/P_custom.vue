@@ -99,6 +99,7 @@
 import { mapState } from 'vuex';
 import echarts from 'echarts'
 import Homenav from '@/components/common/projectHomeNav'
+import customerObj from '@/httpData/P_custom.js'
 export default {
 	data() {
 		return {
@@ -171,35 +172,25 @@ export default {
 			}
 		},
 		getData() {
-			this.$http({
-				url:"http://xhmind.com:5051/tmp/customer/project",
-				method: 'get',
-			}).then(function(res) {
-				if(res.body.status){
-					var value_Data =res.body.content;
-					this.data1 = value_Data['停车场月卡欠费人数'];
-					this.data2 = value_Data['停车场月卡欠费总金额（元）'];
-					this.data3 = (value_Data['停车场月卡催缴率']*100);
-					this.data4 = value_Data['客户满意度-网上填报(起）'];
-					this.data5 = value_Data['客户满意度-线下抽样调研（起）'];
-					this.data6 = value_Data['投诉次数（次）'];
-					this.data7 = value_Data['投诉未销项数'];
-					this.data8 = (value_Data['投诉销项率']*100);
-					this.data9 = (value_Data['投诉销项率']*100);
-				}
-				if (this.isFirst) {
-					//第一次获取数据进行实列化
-					this.mapStatus = this.drawLine();
-					this.isFirst = false;
-				} else {
-					// 否则进行重绘
-					var _resizeMap = this.mapStatus;
-					_resizeMap();
-				}
-			}, function(error) {
-				//失败回调的函数								
-				console.log(error);
-			});
+      var value = customerObj.content
+      this.data1 = value['停车场月卡欠费人数'];
+      this.data2 = value['停车场月卡欠费总金额（元）'];
+      this.data3 = (value['停车场月卡催缴率']*100);
+      this.data4 = value['客户满意度-网上填报(起）'];
+      this.data5 = value['客户满意度-线下抽样调研（起）'];
+      this.data6 = value['投诉次数（次）'];
+      this.data7 = value['投诉未销项数'];
+      this.data8 = (value['投诉销项率']*100);
+      this.data9 = (value['投诉销项率']*100);
+      if (this.isFirst) {
+        //第一次获取数据进行实列化
+        this.mapStatus = this.drawLine();
+        this.isFirst = false;
+      } else {
+        // 否则进行重绘
+        var _resizeMap = this.mapStatus;
+        _resizeMap();
+      }
 		},
 		drawLine() {
 			var refThis = this;
@@ -231,9 +222,9 @@ export default {
 				//					top: '15%',
 				//					right: '32%',
 				//					bottom: 'auto',
-				//	        		textStyle:{ 
+				//	        		textStyle:{
 				//			        	color: '#fff',
-				//			        	fontSize: 14,        	
+				//			        	fontSize: 14,
 				//			       		},
 				//		    		},
 				xAxis: {

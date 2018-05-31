@@ -5,7 +5,7 @@
 				<span class="title">车行故障数据</span>
 				<div class="top_right">
 					<div class="boutton_div">
-						<span class="chart_model" :class="{active: model=='chart', unactive: model == 'table'}" @click="choiseModel(0)">图表模式</span><!--  
+						<span class="chart_model" :class="{active: model=='chart', unactive: model == 'table'}" @click="choiseModel(0)">图表模式</span><!--
 					 --><span class="table_model" :class="{active: model=='table', unactive: model == 'chart'}" @click="choiseModel(1)">表格模式</span>
 					</div>
 					<div class="date-time">
@@ -15,7 +15,7 @@
 						</div>
 					</div>
 					<a class="inout_a" :class="{Hide: showSelf==0}" href="javascript:void(0);" @click="method55('tableExcel')"></a>
-				</div>				
+				</div>
 			</div>
 		<div class="Chart_div">
 			<echarts-three1 :class="{hide: showSelf==1,chart2: showSelf=='0'}" :Text='noeText'
@@ -32,7 +32,7 @@
 			</echarts-two2>
 			<echarts-two3 :class="{hide: showSelf==1,chart2: showSelf=='0'}" :Text='fiveText'
 				 :Xvalue="Xvalue" :Legend="threeLegend" :Series="Series5" :Unit="unit3" :PropsWith="width">
-			</echarts-two3>																			
+			</echarts-two3>
 			<div class="hide" :class="{table_big: showSelf=='1'}">
 				<div class="table">
 		            <table id="tableExcel" cellspacing="0" cellpadding="0">
@@ -67,7 +67,7 @@
 		                    </tr>
 		                </tbody>
 		            </table>
-		       </div>			
+		       </div>
 				<div class="page">
 		            <span>每页显示</span>
 		            <select class="select">
@@ -82,294 +82,402 @@
 		            </div>
 		        </div>
 			</div>
-		</div>		
+		</div>
 	</div>
 
 </template>
 
 <script>
-	import { mapState, mapMutations } from 'vuex'
-	import echarts from 'echarts'
-	import Bread from '@/components/common/bread'
-	import echartsTwo1 from '@/components/common/echarts1/2echarts_five'
-	import echartsTwo2 from '@/components/common/echarts1/2echarts_eight'
-	import echartsTwo3 from '@/components/common/echarts1/2echarts_seven'
-	import echartsThree1 from '@/components/common/echarts1/3echarts_six'
-	import echartsThree2 from '@/components/common/echarts1/3echarts_nine'
-	export default {
-  data () {
+import {
+  mapState,
+  mapMutations
+} from 'vuex'
+import echarts from 'echarts'
+import Bread from '@/components/common/bread'
+import echartsTwo1 from '@/components/common/echarts1/2echarts_five'
+import echartsTwo2 from '@/components/common/echarts1/2echarts_eight'
+import echartsTwo3 from '@/components/common/echarts1/2echarts_seven'
+import echartsThree1 from '@/components/common/echarts1/3echarts_six'
+import echartsThree2 from '@/components/common/echarts1/3echarts_nine'
+export default {
+  data() {
     return {
-		abc:['数据应用','财务数据','出纳收支分析',"车行故障数据"],
-		showSelf: 0,
-		width:'99.8%',
-		model: 'chart',
-		Xvalue:['深圳', '北京', '上海', '广州', '佛山', '长春', '天津','长沙', '南京', '杭州', '厦门', '南宁', '武汉', '郑州','深圳', '北京', '上海', '广州', '佛山', '长春', '天津','长沙', '南京', '杭州', '厦门', '南宁', '武汉', '郑州','深圳', '北京', '上海', '广州', '佛山', '长春', '天津','长沙', '南京', '杭州', '厦门', '南宁', '武汉', '郑州','深圳', '北京', '上海', '广州', '佛山', '长春', '天津','长沙', '南京', '杭州', '厦门', '南宁'],
-		//图表1数据-------------------------------------------------------------------------------------------------------
-			noeText:"停车场服务器故障分析",
-			noeLegend:['在线率','离线率'],
-			Series1:[{
-	            name:'离线率',
-	            type:'line',
-	            stack: '总量',
-	            areaStyle: {normal: {}},
-	            itemStyle: {
-		            normal: {
-		                color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{offset: 0,color: 'rgba(220,67,39,0.9)' }, 
-		                {offset: 0.8,color: 'rgba(255,143,61,0.5)'}])
-		            }
-		        },
-	            data:[20, 10, 30, 10, 20, 10, 20,20, 10, 30, 10, 20, 10, 20,20, 10, 30, 10, 20, 30, 20,20, 30, 30, 20, 20, 10, 20,20, 10, 30, 10, 20, 10, 20,20, 10, 30, 10, 20, 30, 20,20, 30, 30, 20, 30, 30, 20,20, 30, 30, 20, 20]
-	        },
-	        {   name:'在线率',
-	            type:'line',
-	            stack: '总量',
-	            areaStyle: {normal: {}},
-	            itemStyle: {
-		            normal: {
-		                color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{offset: 0,color: 'rgba(27,105,208,0.9)'}, 
-		                {offset: 0.8, color: 'rgba(27,105,208,0.5)'}])
-		            }
-		        },
-	            data:[20, 30, 10, 30, 20, 30, 20,20, 30, 10, 30, 20, 30, 20,20, 30, 10, 30, 20, 10, 20,20, 10, 10, 20, 20, 30, 20,20, 30, 10, 30, 20, 30, 20,20, 30, 10, 30, 20, 10, 20,20, 10, 10, 20, 10, 10, 20,20, 10, 10, 20, 20]
-	        }],
-	        //图表2数据-------------------------------------------------------------------------------------------------------
-			twoText:"工作站故障分析",
-			twoLegend:['在线率','离线率'],
-			Series2:[{
-	            name:'离线率',
-	            type:'line',
-	            stack: '总量',
-	            areaStyle: {normal: {}},
-	            itemStyle: {
-		            normal: {
-		                color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{offset: 0,color: 'rgba(220,67,39,0.9)' }, 
-		                {offset: 0.8,color: 'rgba(255,143,61,0.5)'}])
-		            }
-		        },
-	            data:[20, 10, 30, 10, 20, 10, 20,20, 10, 30, 10, 20, 10, 20,20, 10, 30, 10, 20, 30, 20,20, 30, 30, 20, 20, 10, 20,20, 10, 30, 10, 20, 10, 20,20, 10, 30, 10, 20, 30, 20,20, 30, 30, 20, 30, 30, 20,20, 30, 30, 20, 20]
-	        },
-	        {   name:'在线率',
-	            type:'line',
-	            stack: '总量',
-	            areaStyle: {normal: {}},
-	            itemStyle: {
-		            normal: {
-		                color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{offset: 0,color: 'rgba(27,105,208,0.9)'}, 
-		                {offset: 0.8, color: 'rgba(27,105,208,0.5)'}])
-		            }
-		        },
-	            data:[20, 30, 10, 30, 20, 30, 20,20, 30, 10, 30, 20, 30, 20,20, 30, 10, 30, 20, 10, 20,20, 10, 10, 20, 20, 30, 20,20, 30, 10, 30, 20, 30, 20,20, 30, 10, 30, 20, 10, 20,20, 10, 10, 20, 10, 10, 20,20, 10, 10, 20, 20]
-	        }],
-	        //图表3数据--------------------------------------------------------------------------------------------
-			threeText:"控制机故障分析",
-			threeLegend:["在线数","离线数"],
-			unit1:"人数",
-			Series3:[{name: '在线数',
-				type: 'bar',
-				stack: 'one',
-				barWidth: '45%',
-				itemStyle: {
-		            normal: {color: new echarts.graphic.LinearGradient( 0, 0, 0, 1, [{offset: 0,color: 'rgba(0,191,255,1)'}, 
-		                {offset: 1,color: 'rgba(0,191,255,0.2)'}])}
-		        },
-				data: [150, 52, 200, 334, 390, 330, 220, 233, 150, 52, 200, 334, 390, 330, 220, 233, 150, 52, 200, 334, 390, 330, 220, 233, 150, 52, 200, 334, 390, 330, 220, 233, 150, 52, 200, 334, 390, 330, 220, 233, 150, 52, 200, 334, 390, 330, 220, 233, 200, 334, 390, 330, 220, 233]
-			},
-			{   name: '离线数',
-				type: 'bar',
-				stack: 'one',
-				barWidth: '45%',
-				itemStyle: {
-		            normal: {color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{offset: 0,color: 'rgba(211,201,39,0.9)'}, 
-		                {offset: 0.8,color: 'rgba(236,255,25,0.5)'}])}
-		        },
-				data: [-56, -45, -43, -32, -76, -34, -67, -56, -56, -45, -43, -32, -76, -34, -67, -56, -56, -45, -43, -32, -76, -34, -67, -56, -56, -45, -43, -32, -76, -34, -67, -56, -56, -45, -43, -32, -76, -34, -67, -56, -56, -45, -43, -32, -76, -34, -67, -56, -43, -32, -76, -34, -67, -56]
-			}],
-			//图表4数据--------------------------------------------------------------------------------------------
-			fourText:"道闸故障分析",
-			fourLegend:["在线数","离线数"],
-			unit2:"人数",
-			Series4:[{name: '在线数',
-				type: 'bar',
-				stack: 'one',
-				barWidth: '45%',
-				itemStyle: {
-		            normal: {color: new echarts.graphic.LinearGradient( 0, 0, 0, 1, [{offset: 0,color: 'rgba(0,191,255,1)'}, 
-		                {offset: 1,color: 'rgba(0,191,255,0.2)'}])}
-		        },
-				data: [150, 52, 200, 334, 390, 330, 220, 233, 150, 52, 200, 334, 390, 330, 220, 233, 150, 52, 200, 334, 390, 330, 220, 233, 150, 52, 200, 334, 390, 330, 220, 233, 150, 52, 200, 334, 390, 330, 220, 233, 150, 52, 200, 334, 390, 330, 220, 233, 200, 334, 390, 330, 220, 233]
-			},
-			{   name: '离线数',
-				type: 'bar',
-				stack: 'one',
-				barWidth: '45%',
-				itemStyle: {
-		            normal: {color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{offset: 0,color: 'rgba(211,201,39,0.9)'}, 
-		                {offset: 0.8,color: 'rgba(236,255,25,0.5)'}])}
-		        },
-				data: [-56, -45, -43, -32, -76, -34, -67, -56, -56, -45, -43, -32, -76, -34, -67, -56, -56, -45, -43, -32, -76, -34, -67, -56, -56, -45, -43, -32, -76, -34, -67, -56, -56, -45, -43, -32, -76, -34, -67, -56, -56, -45, -43, -32, -76, -34, -67, -56, -43, -32, -76, -34, -67, -56]
-			}],
-			//图表5数据--------------------------------------------------------------------------------------------
-			fiveText:"摄像机故障分析",
-			fiveLegend:["在线数","离线数"],
-			unit3:"人数",
-			Series5:[{name: '在线数',
-				type: 'bar',
-				stack: 'one',
-				barWidth: '45%',
-				itemStyle: {
-		            normal: {color: new echarts.graphic.LinearGradient( 0, 0, 0, 1, [{offset: 0,color: 'rgba(0,191,255,1)'}, 
-		                {offset: 1,color: 'rgba(0,191,255,0.2)'}])}
-		        },
-				data: [150, 52, 200, 334, 390, 330, 220, 233, 150, 52, 200, 334, 390, 330, 220, 233, 150, 52, 200, 334, 390, 330, 220, 233, 150, 52, 200, 334, 390, 330, 220, 233, 150, 52, 200, 334, 390, 330, 220, 233, 150, 52, 200, 334, 390, 330, 220, 233, 200, 334, 390, 330, 220, 233]
-			},
-			{   name: '离线数',
-				type: 'bar',
-				stack: 'one',
-				barWidth: '45%',
-				itemStyle: {
-		            normal: {color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{offset: 0,color: 'rgba(211,201,39,0.9)'}, 
-		                {offset: 0.8,color: 'rgba(236,255,25,0.5)'}])}
-		        },
-				data: [-56, -45, -43, -32, -76, -34, -67, -56, -56, -45, -43, -32, -76, -34, -67, -56, -56, -45, -43, -32, -76, -34, -67, -56, -56, -45, -43, -32, -76, -34, -67, -56, -56, -45, -43, -32, -76, -34, -67, -56, -56, -45, -43, -32, -76, -34, -67, -56, -43, -32, -76, -34, -67, -56]
-			}],
-		conTents: [
-                {
-                    "plate": "2017-8-01",
-                    "amount": "9",
-                    "Paidin": "19%",
-                    "treatment": "8",
-                    "entrance": "12%",
-                    "appearance": "14",
-                    "parking": "12%"
+      abc: ['数据应用', '财务数据', '出纳收支分析', "车行故障数据"],
+      showSelf: 0,
+      width: '99.8%',
+      model: 'chart',
+      Xvalue: ['深圳', '北京', '上海', '广州', '佛山', '长春', '天津', '长沙', '南京', '杭州', '厦门', '南宁', '武汉', '郑州', '深圳', '北京', '上海', '广州', '佛山', '长春', '天津', '长沙', '南京', '杭州', '厦门', '南宁', '武汉', '郑州', '深圳', '北京', '上海', '广州', '佛山', '长春', '天津', '长沙', '南京', '杭州', '厦门',
+        '南宁', '武汉', '郑州', '深圳', '北京', '上海', '广州', '佛山', '长春', '天津', '长沙', '南京', '杭州', '厦门', '南宁'
+      ],
+      //图表1数据-------------------------------------------------------------------------------------------------------
+      noeText: "停车场服务器故障分析",
+      noeLegend: ['在线率', '离线率'],
+      Series1: [{
+          name: '离线率',
+          type: 'line',
+          stack: '总量',
+          areaStyle: {
+            normal: {}
+          },
+          itemStyle: {
+            normal: {
+              color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+                  offset: 0,
+                  color: 'rgba(220,67,39,0.9)'
                 },
                 {
-                    "plate": "2017-8-01",
-                    "amount": "9",
-                    "Paidin": "19%",
-                    "treatment": "8",
-                    "entrance": "12%",
-                    "appearance": "14",
-                    "parking": "12%"
-                },
-                {
-                    "plate": "2017-8-01",
-                    "amount": "9",
-                    "Paidin": "19%",
-                    "treatment": "8",
-                    "entrance": "12%",
-                    "appearance": "14",
-                    "parking": "12%"
-                }, {
-                    "plate": "2017-8-01",
-                    "amount": "9",
-                    "Paidin": "19%",
-                    "treatment": "8",
-                    "entrance": "12%",
-                    "appearance": "14",
-                    "parking": "12%"
-                }, {
-                    "plate": "2017-8-01",
-                    "amount": "9",
-                    "Paidin": "19%",
-                    "treatment": "8",
-                    "entrance": "12%",
-                    "appearance": "14",
-                    "parking": "12%"
-                }, {
-                    "plate": "2017-8-01",
-                    "amount": "9",
-                    "Paidin": "19%",
-                    "treatment": "8",
-                    "entrance": "12%",
-                    "appearance": "14",
-                    "parking": "12%"
-                },
-                {
-                    "plate": "2017-8-01",
-                    "amount": "9",
-                    "Paidin": "19%",
-                    "treatment": "8",
-                    "entrance": "12%",
-                    "appearance": "14",
-                    "parking": "12%"
-                },
-                {
-                    "plate": "2017-8-01",
-                    "amount": "9",
-                    "Paidin": "19%",
-                    "treatment": "8",
-                    "entrance": "12%",
-                    "appearance": "14",
-                    "parking": "12%"
-                },
-                {
-                    "plate": "2017-8-01",
-                    "amount": "9",
-                    "Paidin": "19%",
-                    "treatment": "8",
-                    "entrance": "12%",
-                    "appearance": "14",
-                    "parking": "12%"
-                },
-                {
-                    "plate": "2017-8-01",
-                    "amount": "9",
-                    "Paidin": "19%",
-                    "treatment": "8",
-                    "entrance": "12%",
-                    "appearance": "14",
-                    "parking": "12%"
+                  offset: 0.8,
+                  color: 'rgba(255,143,61,0.5)'
                 }
-            ],
-       }
-    },
-    computed:{
-		...mapState(['contentSize','mnUrl']),       	
-	},
-    components: {
-        Bread,
-        echartsTwo1,
-        echartsTwo2,
-        echartsTwo3,
-        echartsThree1,
-        echartsThree2
-    },
-	mounted(){
-		//初始化时获取数据
-		this.getData();
-	},
-    methods: {
-		method55(tableExcel) {
-	        this.$func.method5(tableExcel)
-	    },
-	  	choiseModel(num){
-			if(num==0){
-				this.showSelf=0;
-				this.model = 'chart';
-				this.$store.commit('CHANGE_SIZE');
-			}else if(num==1){
-				this.showSelf=1;
-				this.model = 'table';
-			}
-		},
-		getData(){
-			this.$http({
-				url:this.mnUrl+"/tmp/finance/overview",
-				method:'get',
-			}).then(function(res){
-				
-	
-			},function(error){
-			//失败回调的函数								
-			console.log(error)
-			})
-		}     
+              ])
+            }
+          },
+          data: [20, 10, 30, 10, 20, 10, 20, 20, 10, 30, 10, 20, 10, 20, 20, 10, 30, 10, 20, 30, 20, 20, 30, 30, 20, 20, 10, 20, 20, 10, 30, 10, 20, 10, 20, 20, 10, 30, 10, 20, 30, 20, 20, 30, 30, 20, 30, 30, 20, 20, 30, 30, 20, 20]
+        },
+        {
+          name: '在线率',
+          type: 'line',
+          stack: '总量',
+          areaStyle: {
+            normal: {}
+          },
+          itemStyle: {
+            normal: {
+              color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+                  offset: 0,
+                  color: 'rgba(27,105,208,0.9)'
+                },
+                {
+                  offset: 0.8,
+                  color: 'rgba(27,105,208,0.5)'
+                }
+              ])
+            }
+          },
+          data: [20, 30, 10, 30, 20, 30, 20, 20, 30, 10, 30, 20, 30, 20, 20, 30, 10, 30, 20, 10, 20, 20, 10, 10, 20, 20, 30, 20, 20, 30, 10, 30, 20, 30, 20, 20, 30, 10, 30, 20, 10, 20, 20, 10, 10, 20, 10, 10, 20, 20, 10, 10, 20, 20]
+        }
+      ],
+      //图表2数据-------------------------------------------------------------------------------------------------------
+      twoText: "工作站故障分析",
+      twoLegend: ['在线率', '离线率'],
+      Series2: [{
+          name: '离线率',
+          type: 'line',
+          stack: '总量',
+          areaStyle: {
+            normal: {}
+          },
+          itemStyle: {
+            normal: {
+              color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+                  offset: 0,
+                  color: 'rgba(220,67,39,0.9)'
+                },
+                {
+                  offset: 0.8,
+                  color: 'rgba(255,143,61,0.5)'
+                }
+              ])
+            }
+          },
+          data: [20, 10, 30, 10, 20, 10, 20, 20, 10, 30, 10, 20, 10, 20, 20, 10, 30, 10, 20, 30, 20, 20, 30, 30, 20, 20, 10, 20, 20, 10, 30, 10, 20, 10, 20, 20, 10, 30, 10, 20, 30, 20, 20, 30, 30, 20, 30, 30, 20, 20, 30, 30, 20, 20]
+        },
+        {
+          name: '在线率',
+          type: 'line',
+          stack: '总量',
+          areaStyle: {
+            normal: {}
+          },
+          itemStyle: {
+            normal: {
+              color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+                  offset: 0,
+                  color: 'rgba(27,105,208,0.9)'
+                },
+                {
+                  offset: 0.8,
+                  color: 'rgba(27,105,208,0.5)'
+                }
+              ])
+            }
+          },
+          data: [20, 30, 10, 30, 20, 30, 20, 20, 30, 10, 30, 20, 30, 20, 20, 30, 10, 30, 20, 10, 20, 20, 10, 10, 20, 20, 30, 20, 20, 30, 10, 30, 20, 30, 20, 20, 30, 10, 30, 20, 10, 20, 20, 10, 10, 20, 10, 10, 20, 20, 10, 10, 20, 20]
+        }
+      ],
+      //图表3数据--------------------------------------------------------------------------------------------
+      threeText: "控制机故障分析",
+      threeLegend: ["在线数", "离线数"],
+      unit1: "人数",
+      Series3: [{
+          name: '在线数',
+          type: 'bar',
+          stack: 'one',
+          barWidth: '45%',
+          itemStyle: {
+            normal: {
+              color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+                  offset: 0,
+                  color: 'rgba(0,191,255,1)'
+                },
+                {
+                  offset: 1,
+                  color: 'rgba(0,191,255,0.2)'
+                }
+              ])
+            }
+          },
+          data: [150, 52, 200, 334, 390, 330, 220, 233, 150, 52, 200, 334, 390, 330, 220, 233, 150, 52, 200, 334, 390, 330, 220, 233, 150, 52, 200, 334, 390, 330, 220, 233, 150, 52, 200, 334, 390, 330, 220, 233, 150, 52, 200, 334, 390, 330, 220,
+            233, 200, 334, 390, 330, 220, 233
+          ]
+        },
+        {
+          name: '离线数',
+          type: 'bar',
+          stack: 'one',
+          barWidth: '45%',
+          itemStyle: {
+            normal: {
+              color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+                  offset: 0,
+                  color: 'rgba(211,201,39,0.9)'
+                },
+                {
+                  offset: 0.8,
+                  color: 'rgba(236,255,25,0.5)'
+                }
+              ])
+            }
+          },
+          data: [-56, -45, -43, -32, -76, -34, -67, -56, -56, -45, -43, -32, -76, -34, -67, -56, -56, -45, -43, -32, -76, -34, -67, -56, -56, -45, -43, -32, -76, -34, -67, -56, -56, -45, -43, -32, -76, -34, -67, -56, -56, -45, -43, -32, -76, -34, -
+            67, -56, -43, -32, -76, -34, -67, -56
+          ]
+        }
+      ],
+      //图表4数据--------------------------------------------------------------------------------------------
+      fourText: "道闸故障分析",
+      fourLegend: ["在线数", "离线数"],
+      unit2: "人数",
+      Series4: [{
+          name: '在线数',
+          type: 'bar',
+          stack: 'one',
+          barWidth: '45%',
+          itemStyle: {
+            normal: {
+              color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+                  offset: 0,
+                  color: 'rgba(0,191,255,1)'
+                },
+                {
+                  offset: 1,
+                  color: 'rgba(0,191,255,0.2)'
+                }
+              ])
+            }
+          },
+          data: [150, 52, 200, 334, 390, 330, 220, 233, 150, 52, 200, 334, 390, 330, 220, 233, 150, 52, 200, 334, 390, 330, 220, 233, 150, 52, 200, 334, 390, 330, 220, 233, 150, 52, 200, 334, 390, 330, 220, 233, 150, 52, 200, 334, 390, 330, 220,
+            233, 200, 334, 390, 330, 220, 233
+          ]
+        },
+        {
+          name: '离线数',
+          type: 'bar',
+          stack: 'one',
+          barWidth: '45%',
+          itemStyle: {
+            normal: {
+              color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+                  offset: 0,
+                  color: 'rgba(211,201,39,0.9)'
+                },
+                {
+                  offset: 0.8,
+                  color: 'rgba(236,255,25,0.5)'
+                }
+              ])
+            }
+          },
+          data: [-56, -45, -43, -32, -76, -34, -67, -56, -56, -45, -43, -32, -76, -34, -67, -56, -56, -45, -43, -32, -76, -34, -67, -56, -56, -45, -43, -32, -76, -34, -67, -56, -56, -45, -43, -32, -76, -34, -67, -56, -56, -45, -43, -32, -76, -34, -
+            67, -56, -43, -32, -76, -34, -67, -56
+          ]
+        }
+      ],
+      //图表5数据--------------------------------------------------------------------------------------------
+      fiveText: "摄像机故障分析",
+      fiveLegend: ["在线数", "离线数"],
+      unit3: "人数",
+      Series5: [{
+          name: '在线数',
+          type: 'bar',
+          stack: 'one',
+          barWidth: '45%',
+          itemStyle: {
+            normal: {
+              color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+                  offset: 0,
+                  color: 'rgba(0,191,255,1)'
+                },
+                {
+                  offset: 1,
+                  color: 'rgba(0,191,255,0.2)'
+                }
+              ])
+            }
+          },
+          data: [150, 52, 200, 334, 390, 330, 220, 233, 150, 52, 200, 334, 390, 330, 220, 233, 150, 52, 200, 334, 390, 330, 220, 233, 150, 52, 200, 334, 390, 330, 220, 233, 150, 52, 200, 334, 390, 330, 220, 233, 150, 52, 200, 334, 390, 330, 220,
+            233, 200, 334, 390, 330, 220, 233
+          ]
+        },
+        {
+          name: '离线数',
+          type: 'bar',
+          stack: 'one',
+          barWidth: '45%',
+          itemStyle: {
+            normal: {
+              color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+                  offset: 0,
+                  color: 'rgba(211,201,39,0.9)'
+                },
+                {
+                  offset: 0.8,
+                  color: 'rgba(236,255,25,0.5)'
+                }
+              ])
+            }
+          },
+          data: [-56, -45, -43, -32, -76, -34, -67, -56, -56, -45, -43, -32, -76, -34, -67, -56, -56, -45, -43, -32, -76, -34, -67, -56, -56, -45, -43, -32, -76, -34, -67, -56, -56, -45, -43, -32, -76, -34, -67, -56, -56, -45, -43, -32, -76, -34, -
+            67, -56, -43, -32, -76, -34, -67, -56
+          ]
+        }
+      ],
+      conTents: [{
+          "plate": "2017-8-01",
+          "amount": "9",
+          "Paidin": "19%",
+          "treatment": "8",
+          "entrance": "12%",
+          "appearance": "14",
+          "parking": "12%"
+        },
+        {
+          "plate": "2017-8-01",
+          "amount": "9",
+          "Paidin": "19%",
+          "treatment": "8",
+          "entrance": "12%",
+          "appearance": "14",
+          "parking": "12%"
+        },
+        {
+          "plate": "2017-8-01",
+          "amount": "9",
+          "Paidin": "19%",
+          "treatment": "8",
+          "entrance": "12%",
+          "appearance": "14",
+          "parking": "12%"
+        }, {
+          "plate": "2017-8-01",
+          "amount": "9",
+          "Paidin": "19%",
+          "treatment": "8",
+          "entrance": "12%",
+          "appearance": "14",
+          "parking": "12%"
+        }, {
+          "plate": "2017-8-01",
+          "amount": "9",
+          "Paidin": "19%",
+          "treatment": "8",
+          "entrance": "12%",
+          "appearance": "14",
+          "parking": "12%"
+        }, {
+          "plate": "2017-8-01",
+          "amount": "9",
+          "Paidin": "19%",
+          "treatment": "8",
+          "entrance": "12%",
+          "appearance": "14",
+          "parking": "12%"
+        },
+        {
+          "plate": "2017-8-01",
+          "amount": "9",
+          "Paidin": "19%",
+          "treatment": "8",
+          "entrance": "12%",
+          "appearance": "14",
+          "parking": "12%"
+        },
+        {
+          "plate": "2017-8-01",
+          "amount": "9",
+          "Paidin": "19%",
+          "treatment": "8",
+          "entrance": "12%",
+          "appearance": "14",
+          "parking": "12%"
+        },
+        {
+          "plate": "2017-8-01",
+          "amount": "9",
+          "Paidin": "19%",
+          "treatment": "8",
+          "entrance": "12%",
+          "appearance": "14",
+          "parking": "12%"
+        },
+        {
+          "plate": "2017-8-01",
+          "amount": "9",
+          "Paidin": "19%",
+          "treatment": "8",
+          "entrance": "12%",
+          "appearance": "14",
+          "parking": "12%"
+        }
+      ],
     }
+  },
+  computed: {
+    ...mapState(['contentSize', 'mnUrl']),
+  },
+  components: {
+    Bread,
+    echartsTwo1,
+    echartsTwo2,
+    echartsTwo3,
+    echartsThree1,
+    echartsThree2
+  },
+  mounted() {
+    //初始化时获取数据
+    this.getData();
+  },
+  methods: {
+    method55(tableExcel) {
+      this.$func.method5(tableExcel)
+    },
+    choiseModel(num) {
+      if (num == 0) {
+        this.showSelf = 0;
+        this.model = 'chart';
+        this.$store.commit('CHANGE_SIZE');
+      } else if (num == 1) {
+        this.showSelf = 1;
+        this.model = 'table';
+      }
+    },
+    getData() {}
+  }
 }
 </script>
 <style lang="scss" scoped>
 @import 'src/style/mixin';
-	/*可视区外框样式*/	
+	/*可视区外框样式*/
 .Chart_div{
 	width: 100%;
 	height: 7.55rem;
@@ -378,7 +486,7 @@
 	scrollbar-base-color: #12253d; // 滚动条滑块按钮的颜色
     scrollbar-face-color: #184e7a; // 滚动条整体颜色
     scrollbar-track-color: #12253d;
-    scrollbar-arrow-color: #12253d;	
+    scrollbar-arrow-color: #12253d;
 }
 /*图表外框*/
 .chart2{
@@ -416,7 +524,7 @@
 			height: 0.6rem;
 			color: #67bce9;
 			outline: none;
-			
+
 			vertical-align: top; // margin-top:0.05rem;
 			.el_picker{
 				display: inline-block;
@@ -447,8 +555,8 @@
             position: relative;
             top: 0.05rem;
         }
-  	}	  	
-}	
+  	}
+}
 .hide{
 	display: none;
 }
@@ -456,7 +564,7 @@
 .table_big{
 	display: block;
 	width: 100%;
-	height: 7.25rem;	
+	height: 7.25rem;
     .table {
         width: 100%;
         height: 6.7rem;
@@ -508,7 +616,7 @@
                 overflow-y: scroll;
                 .center_table {
                     display: flex;
-                    align-items: center; 
+                    align-items: center;
                     justify-content: space-around;
                     border-bottom: 2px solid #698499;
                     td {
@@ -517,12 +625,12 @@
                         padding: 0.2rem 0;
                         line-height: 0.4rem;
                         text-align: center;
-                        display: inline-block;                     
+                        display: inline-block;
                     }
                 }
             }
         }
-    }	
+    }
 }
 .Hide{
 	display: none !important;
@@ -579,5 +687,5 @@ select {
 
 select::-ms-expand {
     display: none;
-}	
+}
 </style>

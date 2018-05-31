@@ -5,7 +5,7 @@
 				<span class="title">停车场收费</span>
 				<div class="top_right">
 					<div class="boutton_div">
-						<span class="chart_model" :class="{active: model=='chart', unactive: model == 'table'}" @click="choiseModel(0)">图表模式</span><!--  
+						<span class="chart_model" :class="{active: model=='chart', unactive: model == 'table'}" @click="choiseModel(0)">图表模式</span><!--
 					 --><span class="table_model" :class="{active: model=='table', unactive: model == 'chart'}" @click="choiseModel(1)">表格模式</span>
 					</div>
 					<div class="date-time">
@@ -15,7 +15,7 @@
 						</div>
 					</div>
 					<img src="../../../../images/inout.png" class="inout_a" :class="{Hide: showSelf==0}" @click="method55('tableExcel')"/>
-				</div>				
+				</div>
 			</div>
 		<div class="Chart_div">
 			<Echarts :class="{hide: showSelf==1,chart2: showSelf=='0'}" :Text='noeText'
@@ -24,7 +24,7 @@
 			</Echarts>
 			<echarts-two1 :class="{hide: showSelf==1,chart2: showSelf=='0'}" :Text='twoText'
 				 :Xvalue="Xvalue" :Legend="twoLegend" :Series="Series1" :Unit="unit1" :PropsWith="width">
-			</echarts-two1>														
+			</echarts-two1>
 			<echarts-two2 :class="{hide: showSelf==1,chart2: showSelf=='0'}" :Text='threeText'
 				 :Xvalue="Xvalue" :Legend="threeLegend" :Series="Series2" :Unit="unit2" :PropsWith="width">
 			</echarts-two2>
@@ -65,7 +65,7 @@
 		                    </tr>
 		                </tbody>
 		            </table>
-		       </div>			
+		       </div>
 				<div class="page">
 		            <span>每页显示</span>
 		            <select class="select">
@@ -80,204 +80,206 @@
 		            </div>
 		        </div>
 			</div>
-		</div>		
+		</div>
 	</div>
 
 </template>
 
 <script>
-	import { mapState, mapMutations } from 'vuex'
-	import echarts from 'echarts'
-	import Bread from '@/components/common/bread'
-	import Echarts from '@/components/common/echarts1/1echarts_noe'	
-	import echartsTwo1 from '@/components/common/echarts1/2echarts_five'
-	import echartsTwo2 from '@/components/common/echarts1/2echarts_eight'
-	import echartsTwo3 from '@/components/common/echarts1/2echarts_seven'
-	export default {
-  data () {
+import {
+  mapState,
+  mapMutations
+} from 'vuex'
+import echarts from 'echarts'
+import Bread from '@/components/common/bread'
+import Echarts from '@/components/common/echarts1/1echarts_noe'
+import echartsTwo1 from '@/components/common/echarts1/2echarts_five'
+import echartsTwo2 from '@/components/common/echarts1/2echarts_eight'
+import echartsTwo3 from '@/components/common/echarts1/2echarts_seven'
+export default {
+  data() {
     return {
-		abc:['数据应用','财务数据','出纳收支分析',"停车场收费"],
-		showSelf: 0,
-		width:'99.8%',
-		model: 'chart',
-		//图表1数据
-		noeText:'停车场收费分析',
-		noeLegend: ['月卡收费占比','储值卡收费占比','临停收费占比'],
-		noeName:'停车场收费',
-		twoName:'月卡收费占比',
-		threeName:'储值卡收费占比',
-		fourName:'临停收费占比',
-		oneData:[150, 52, 200, 334, 390, 330, 220,233,364,64,352,46,98,75,150, 52, 200, 334, 390, 330, 220,233,364,64,352,46,98,75,150, 52, 200, 334, 390, 330, 220,233,364,64,352,46,98,75,150, 52, 200, 334, 390, 330, 220,233,364,64,352,46],
-		twoData:[22,23,27,25,25,25,27,20,26,24,22,22,24,23,22,23,27,25,25,35,27,20,26,24,22,32,24,23,22,23,27,25,25,25,27,20,26,24,22,22,24,23,22,23,27,25,25,35,27,20,26,24,22,32],
-		threeData:[31,23,17,25,25,23,35,21,36,35,22,32,24,23,31,23,27,25,25,23,35,31,36,25,22,32,24,23,31,23,17,25,25,23,35,21,36,35,22,32,24,23,31,23,27,25,25,23,35,31,36,25,22,32],
-		fourData:[21,23,27,35,35,23,25,21,26,25,32,32,24,23,21,23,31,35,25,33,25,21,26,25,32,22,34,23,21,23,27,35,35,23,25,21,26,25,32,32,24,23,21,23,31,35,25,33,25,21,26,25,32,22],
-		Xvalue:['深圳', '北京', '上海', '广州', '佛山', '长春', '天津','长沙', '南京', '杭州', '厦门', '南宁', '武汉', '郑州','深圳', '北京', '上海', '广州', '佛山', '长春', '天津','长沙', '南京', '杭州', '厦门', '南宁', '武汉', '郑州','深圳', '北京', '上海', '广州', '佛山', '长春', '天津','长沙', '南京', '杭州', '厦门', '南宁', '武汉', '郑州','深圳', '北京', '上海', '广州', '佛山', '长春', '天津','长沙', '南京', '杭州', '厦门', '南宁'],
-		//图表二数据
-		twoText:"停车月卡收费分析",
-		twoLegend:"",
-		unit1:"万元",
-		Series1: [{
-	            name:"月卡收费",
-	            type:'bar',
-	            barWidth: '45%%',
-	            data:[150, 52, 200, 334, 390, 330, 220,233,364,64,352,46,98,75,150, 52, 200, 334, 390, 330, 220,233,364,64,352,46,98,75,150, 52, 200, 334, 390, 330, 220,233,364,64,352,46,98,75,150, 52, 200, 334, 390, 330, 220,233,364,64,352,46],
-	        }],
-		//图表三数据
-		threeText:"停车储值卡收费分析",
-		threeLegend:"",
-		unit2:"万元",
-		Series2: [{
-	            name:"储值卡收费",
-	            type:'bar',
-	            barWidth: '45%%',
-	            data:[150, 52, 200, 334, 390, 330, 220,233,364,64,352,46,98,75,150, 52, 200, 334, 390, 330, 220,233,364,64,352,46,98,75,150, 52, 200, 334, 390, 330, 220,233,364,64,352,46,98,75,150, 52, 200, 334, 390, 330, 220,233,364,64,352,46],
-	        }],
-		//图表4数据
-		fourText:"停车场临停收费分析",
-		fourLegend:"",
-		unit3:"万元",
-		Series3: [{
-	            name:"临停收费",
-	            type:'bar',
-	            barWidth: '45%%',
-	            data:[150, 52, 200, 334, 390, 330, 220,233,364,64,352,46,98,75,150, 52, 200, 334, 390, 330, 220,233,364,64,352,46,98,75,150, 52, 200, 334, 390, 330, 220,233,364,64,352,46,98,75,150, 52, 200, 334, 390, 330, 220,233,364,64,352,46],
-	        }],
-		conTents: [
-                {
-                    "plate": "2017-8-01",
-                    "amount": "9",
-                    "Paidin": "19%",
-                    "treatment": "8",
-                    "entrance": "12%",
-                    "appearance": "14",
-                    "parking": "12%"
-                },
-                {
-                    "plate": "2017-8-01",
-                    "amount": "9",
-                    "Paidin": "19%",
-                    "treatment": "8",
-                    "entrance": "12%",
-                    "appearance": "14",
-                    "parking": "12%"
-                },
-                {
-                    "plate": "2017-8-01",
-                    "amount": "9",
-                    "Paidin": "19%",
-                    "treatment": "8",
-                    "entrance": "12%",
-                    "appearance": "14",
-                    "parking": "12%"
-                }, {
-                    "plate": "2017-8-01",
-                    "amount": "9",
-                    "Paidin": "19%",
-                    "treatment": "8",
-                    "entrance": "12%",
-                    "appearance": "14",
-                    "parking": "12%"
-                }, {
-                    "plate": "2017-8-01",
-                    "amount": "9",
-                    "Paidin": "19%",
-                    "treatment": "8",
-                    "entrance": "12%",
-                    "appearance": "14",
-                    "parking": "12%"
-                }, {
-                    "plate": "2017-8-01",
-                    "amount": "9",
-                    "Paidin": "19%",
-                    "treatment": "8",
-                    "entrance": "12%",
-                    "appearance": "14",
-                    "parking": "12%"
-                },
-                {
-                    "plate": "2017-8-01",
-                    "amount": "9",
-                    "Paidin": "19%",
-                    "treatment": "8",
-                    "entrance": "12%",
-                    "appearance": "14",
-                    "parking": "12%"
-                },
-                {
-                    "plate": "2017-8-01",
-                    "amount": "9",
-                    "Paidin": "19%",
-                    "treatment": "8",
-                    "entrance": "12%",
-                    "appearance": "14",
-                    "parking": "12%"
-                },
-                {
-                    "plate": "2017-8-01",
-                    "amount": "9",
-                    "Paidin": "19%",
-                    "treatment": "8",
-                    "entrance": "12%",
-                    "appearance": "14",
-                    "parking": "12%"
-                },
-                {
-                    "plate": "2017-8-01",
-                    "amount": "9",
-                    "Paidin": "19%",
-                    "treatment": "8",
-                    "entrance": "12%",
-                    "appearance": "14",
-                    "parking": "12%"
-                }
-            ],
-       }
-    },
-    computed:{
-		...mapState(['contentSize','mnUrl']),       	
-	},
-    components: {
-      Bread,
-      Echarts,
-      echartsTwo1,
-      echartsTwo2,
-      echartsTwo3,
-    },
-	mounted(){
-		//初始化时获取数据
-		this.getData();
-	},
-    methods: {
-		method55(tableExcel) {
-		        this.$func.method5(tableExcel)
-		    },
-	  	choiseModel(num){
-			if(num==0){
-				this.showSelf=0;
-				this.model = 'chart';
-				this.$store.commit('CHANGE_SIZE');
-			}else if(num==1){
-				this.showSelf=1;
-				this.model = 'table';
-			}
-		},
-		getData(){
-			this.$http({
-				url:this.mnUrl+"/tmp/finance/overview",
-				method:'get',
-			}).then(function(res){
-				
-			},function(error){
-			//失败回调的函数								
-			console.log(error)
-			})
-		}       
+      abc: ['数据应用', '财务数据', '出纳收支分析', "停车场收费"],
+      showSelf: 0,
+      width: '99.8%',
+      model: 'chart',
+      //图表1数据
+      noeText: '停车场收费分析',
+      noeLegend: ['月卡收费占比', '储值卡收费占比', '临停收费占比'],
+      noeName: '停车场收费',
+      twoName: '月卡收费占比',
+      threeName: '储值卡收费占比',
+      fourName: '临停收费占比',
+      oneData: [150, 52, 200, 334, 390, 330, 220, 233, 364, 64, 352, 46, 98, 75, 150, 52, 200, 334, 390, 330, 220, 233, 364, 64, 352, 46, 98, 75, 150, 52, 200, 334, 390, 330, 220, 233, 364, 64, 352, 46, 98, 75, 150, 52, 200, 334, 390, 330, 220, 233,
+        364, 64, 352, 46
+      ],
+      twoData: [22, 23, 27, 25, 25, 25, 27, 20, 26, 24, 22, 22, 24, 23, 22, 23, 27, 25, 25, 35, 27, 20, 26, 24, 22, 32, 24, 23, 22, 23, 27, 25, 25, 25, 27, 20, 26, 24, 22, 22, 24, 23, 22, 23, 27, 25, 25, 35, 27, 20, 26, 24, 22, 32],
+      threeData: [31, 23, 17, 25, 25, 23, 35, 21, 36, 35, 22, 32, 24, 23, 31, 23, 27, 25, 25, 23, 35, 31, 36, 25, 22, 32, 24, 23, 31, 23, 17, 25, 25, 23, 35, 21, 36, 35, 22, 32, 24, 23, 31, 23, 27, 25, 25, 23, 35, 31, 36, 25, 22, 32],
+      fourData: [21, 23, 27, 35, 35, 23, 25, 21, 26, 25, 32, 32, 24, 23, 21, 23, 31, 35, 25, 33, 25, 21, 26, 25, 32, 22, 34, 23, 21, 23, 27, 35, 35, 23, 25, 21, 26, 25, 32, 32, 24, 23, 21, 23, 31, 35, 25, 33, 25, 21, 26, 25, 32, 22],
+      Xvalue: ['深圳', '北京', '上海', '广州', '佛山', '长春', '天津', '长沙', '南京', '杭州', '厦门', '南宁', '武汉', '郑州', '深圳', '北京', '上海', '广州', '佛山', '长春', '天津', '长沙', '南京', '杭州', '厦门', '南宁', '武汉', '郑州', '深圳', '北京', '上海', '广州', '佛山', '长春', '天津', '长沙', '南京', '杭州', '厦门',
+        '南宁', '武汉', '郑州', '深圳', '北京', '上海', '广州', '佛山', '长春', '天津', '长沙', '南京', '杭州', '厦门', '南宁'
+      ],
+      //图表二数据
+      twoText: "停车月卡收费分析",
+      twoLegend: "",
+      unit1: "万元",
+      Series1: [{
+        name: "月卡收费",
+        type: 'bar',
+        barWidth: '45%%',
+        data: [150, 52, 200, 334, 390, 330, 220, 233, 364, 64, 352, 46, 98, 75, 150, 52, 200, 334, 390, 330, 220, 233, 364, 64, 352, 46, 98, 75, 150, 52, 200, 334, 390, 330, 220, 233, 364, 64, 352, 46, 98, 75, 150, 52, 200, 334, 390, 330, 220,
+          233, 364, 64, 352, 46
+        ],
+      }],
+      //图表三数据
+      threeText: "停车储值卡收费分析",
+      threeLegend: "",
+      unit2: "万元",
+      Series2: [{
+        name: "储值卡收费",
+        type: 'bar',
+        barWidth: '45%%',
+        data: [150, 52, 200, 334, 390, 330, 220, 233, 364, 64, 352, 46, 98, 75, 150, 52, 200, 334, 390, 330, 220, 233, 364, 64, 352, 46, 98, 75, 150, 52, 200, 334, 390, 330, 220, 233, 364, 64, 352, 46, 98, 75, 150, 52, 200, 334, 390, 330, 220,
+          233, 364, 64, 352, 46
+        ],
+      }],
+      //图表4数据
+      fourText: "停车场临停收费分析",
+      fourLegend: "",
+      unit3: "万元",
+      Series3: [{
+        name: "临停收费",
+        type: 'bar',
+        barWidth: '45%%',
+        data: [150, 52, 200, 334, 390, 330, 220, 233, 364, 64, 352, 46, 98, 75, 150, 52, 200, 334, 390, 330, 220, 233, 364, 64, 352, 46, 98, 75, 150, 52, 200, 334, 390, 330, 220, 233, 364, 64, 352, 46, 98, 75, 150, 52, 200, 334, 390, 330, 220,
+          233, 364, 64, 352, 46
+        ],
+      }],
+      conTents: [{
+          "plate": "2017-8-01",
+          "amount": "9",
+          "Paidin": "19%",
+          "treatment": "8",
+          "entrance": "12%",
+          "appearance": "14",
+          "parking": "12%"
+        },
+        {
+          "plate": "2017-8-01",
+          "amount": "9",
+          "Paidin": "19%",
+          "treatment": "8",
+          "entrance": "12%",
+          "appearance": "14",
+          "parking": "12%"
+        },
+        {
+          "plate": "2017-8-01",
+          "amount": "9",
+          "Paidin": "19%",
+          "treatment": "8",
+          "entrance": "12%",
+          "appearance": "14",
+          "parking": "12%"
+        }, {
+          "plate": "2017-8-01",
+          "amount": "9",
+          "Paidin": "19%",
+          "treatment": "8",
+          "entrance": "12%",
+          "appearance": "14",
+          "parking": "12%"
+        }, {
+          "plate": "2017-8-01",
+          "amount": "9",
+          "Paidin": "19%",
+          "treatment": "8",
+          "entrance": "12%",
+          "appearance": "14",
+          "parking": "12%"
+        }, {
+          "plate": "2017-8-01",
+          "amount": "9",
+          "Paidin": "19%",
+          "treatment": "8",
+          "entrance": "12%",
+          "appearance": "14",
+          "parking": "12%"
+        },
+        {
+          "plate": "2017-8-01",
+          "amount": "9",
+          "Paidin": "19%",
+          "treatment": "8",
+          "entrance": "12%",
+          "appearance": "14",
+          "parking": "12%"
+        },
+        {
+          "plate": "2017-8-01",
+          "amount": "9",
+          "Paidin": "19%",
+          "treatment": "8",
+          "entrance": "12%",
+          "appearance": "14",
+          "parking": "12%"
+        },
+        {
+          "plate": "2017-8-01",
+          "amount": "9",
+          "Paidin": "19%",
+          "treatment": "8",
+          "entrance": "12%",
+          "appearance": "14",
+          "parking": "12%"
+        },
+        {
+          "plate": "2017-8-01",
+          "amount": "9",
+          "Paidin": "19%",
+          "treatment": "8",
+          "entrance": "12%",
+          "appearance": "14",
+          "parking": "12%"
+        }
+      ],
     }
+  },
+  computed: {
+    ...mapState(['contentSize', 'mnUrl']),
+  },
+  components: {
+    Bread,
+    Echarts,
+    echartsTwo1,
+    echartsTwo2,
+    echartsTwo3,
+  },
+  mounted() {
+    //初始化时获取数据
+    this.getData();
+  },
+  methods: {
+    method55(tableExcel) {
+      this.$func.method5(tableExcel)
+    },
+    choiseModel(num) {
+      if (num == 0) {
+        this.showSelf = 0;
+        this.model = 'chart';
+        this.$store.commit('CHANGE_SIZE');
+      } else if (num == 1) {
+        this.showSelf = 1;
+        this.model = 'table';
+      }
+    },
+    getData() {}
+  }
 }
 </script>
 <style lang="scss" scoped>
 @import 'src/style/mixin';
-	/*可视区外框样式*/	
+	/*可视区外框样式*/
 .Chart_div{
 	width: 100%;
 	height: 7.55rem;
@@ -286,7 +288,7 @@
 	scrollbar-base-color: #12253d; // 滚动条滑块按钮的颜色
     scrollbar-face-color: #184e7a; // 滚动条整体颜色
     scrollbar-track-color: #12253d;
-    scrollbar-arrow-color: #12253d;	
+    scrollbar-arrow-color: #12253d;
 }
 /*图表外框*/
 .chart2{
@@ -324,7 +326,7 @@
 			height: 0.6rem;
 			color: #67bce9;
 			outline: none;
-			margin:0 0.05rem;				
+			margin:0 0.05rem;
 			.el_picker{
 				display: inline-block;
 				width: 2.58rem;
@@ -340,7 +342,7 @@
             z-index: 999;
             align-items: center;
         }
-  	}	  	
+  	}
 }
 /*顶部按钮样式*/
 .boutton_div{
@@ -353,7 +355,7 @@
 	.unactive{
 		@include unactBt(0.85rem, 0.33rem);
 	}
-}	
+}
 .hide{
 	display: none;
 }
@@ -361,7 +363,7 @@
 .table_big{
 	display: block;
 	width: 100%;
-	height: 7.25rem;	
+	height: 7.25rem;
     .table {
         width: 100%;
         height: 6.7rem;
@@ -413,7 +415,7 @@
                 overflow-y: scroll;
                 .center_table {
                     display: flex;
-                    align-items: center; 
+                    align-items: center;
                     justify-content: space-around;
                     border-bottom: 2px solid #698499;
                     td {
@@ -423,12 +425,12 @@
                         line-height: 0.4rem;
                         text-align: center;
                         display: inline-block;
-                      
+
                     }
                 }
             }
         }
-    }	
+    }
 }
 .Hide{
 	display: none !important;
@@ -485,5 +487,5 @@ select {
 
 select::-ms-expand {
     display: none;
-}	
+}
 </style>

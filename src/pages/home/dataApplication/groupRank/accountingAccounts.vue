@@ -5,7 +5,7 @@
 				<span class="title">会计账目分析</span>
 				<div class="top_right">
 					<div class="boutton_div">
-						<span class="chart_model" :class="{active: model=='chart', unactive: model == 'table'}" @click="choiseModel(0)">图表模式</span><!--  
+						<span class="chart_model" :class="{active: model=='chart', unactive: model == 'table'}" @click="choiseModel(0)">图表模式</span><!--
 					 --><span class="table_model" :class="{active: model=='table', unactive: model == 'chart'}" @click="choiseModel(1)">表格模式</span>
 					</div>
 					<div class="date-time">
@@ -15,12 +15,12 @@
 						</div>
 					</div>
 					<img src="../../../../images/inout.png" class="inout_a" :class="{Hide: showSelf==0}" @click="method55('tableExcel')" />
-				</div>				
+				</div>
 			</div>
-		<div class="Chart_div">									
+		<div class="Chart_div">
 			<echarts-two1 :class="{hide: showSelf==1,chart2: showSelf=='0'}" :Text='noeText'
 				 :Xvalue="Xvalue" :Legend="noeLegend" :Series="Series1" :Unit="unit1" :PropsWith="width">
-			</echarts-two1>																													
+			</echarts-two1>
 			<div class="hide" :class="{table_big: showSelf=='1'}">
 				<div class="table">
 		            <table id="tableExcel" cellspacing="0" cellpadding="0">
@@ -28,7 +28,7 @@
 		                    <tr class="nav_table">
 		                        <th class="left_none">时间</th>
 		                        <th> 财务对账收入（元）</th>
-		                        <th> 财务对账支出（元）</th>		                 
+		                        <th> 财务对账支出（元）</th>
 		                    </tr>
 		                </thead>
 		                <tbody class="table_body">
@@ -39,7 +39,7 @@
 		                    </tr>
 		                </tbody>
 		            </table>
-		       </div>			
+		       </div>
 				<div class="page">
 		            <span>每页显示</span>
 		            <select class="select">
@@ -54,142 +54,146 @@
 		            </div>
 		        </div>
 			</div>
-		</div>		
+		</div>
 	</div>
 
 </template>
 
 <script>
-	import { mapState, mapMutations } from 'vuex'
-	import echarts from 'echarts'
-	import Bread from '@/components/common/bread'
-	import echartsTwo1 from '@/components/common/echarts1/2echarts_five'
-	export default {
-  data () {
+import {
+  mapState,
+  mapMutations
+} from 'vuex'
+import echarts from 'echarts'
+import Bread from '@/components/common/bread'
+import echartsTwo1 from '@/components/common/echarts1/2echarts_five'
+export default {
+  data() {
     return {
-		abc:['数据应用','财务数据','会计账目分析'],
-		showSelf: 0,
-		width:"99.8%",
-		model: 'chart',
-		//图表1数据
-		noeText:"停车场临停收费稽查",
-		noeLegend:["实收","应收"],
-		unit1:"元",
-		Series1:[{
-		        name: "实收",
-		        type: 'bar',
-		        barWidth: '25%',
-		        itemStyle: {
-		            normal: {
-		                color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{offset: 0,color: 'rgba(211,201,39,0.9)'},
-		                {offset: 1,color: 'rgba(236,255,25,0.1)'}])
-		            }
-		        },
-		        data: [122,123,127,125,125,125,127,120,126,124,122,122,124,123,122,123,127,125,125,135,127,120,126,124,122,132,124,123,122,123,127,125,125,125,127,120,126,124,122,122,124,123,122,123,127,125,125,135,127,120,126,124,122,132],
-		    }, {
-		        name: "应收",
-		        type: 'bar',
-		        barGap: '-165%',
-		        barWidth: '60%',		
-		        z: -12,
-		        data:[150, 52, 200, 334, 390, 330, 220,233,364,64,352,46,98,75,150, 52, 200, 334, 390, 330, 220,233,364,64,352,46,98,75,150, 52, 200, 334, 390, 330, 220,233,364,64,352,46,98,75,150, 52, 200, 334, 390, 330, 220,233,364,64,352,46],
-		    }],
-		Xvalue:['深圳', '北京', '上海', '广州', '佛山', '长春', '天津','长沙', '南京', '杭州', '厦门', '南宁', '武汉', '郑州','深圳', '北京', '上海', '广州', '佛山', '长春', '天津','长沙', '南京', '杭州', '厦门', '南宁', '武汉', '郑州','深圳', '北京', '上海', '广州', '佛山', '长春', '天津','长沙', '南京', '杭州', '厦门', '南宁', '武汉', '郑州','深圳', '北京', '上海', '广州', '佛山', '长春', '天津','长沙', '南京', '杭州', '厦门', '南宁'],		
-		conTents: [
-                {
-                    "plate": "2017-8-01",
-                    "amount": "9",
-                    "Paidin": "19%",
-                },
-                {
-                    "plate": "2017-8-01",
-                    "amount": "9",
-                    "Paidin": "19%",  
-                },
-                {
-                    "plate": "2017-8-01",
-                    "amount": "9",
-                    "Paidin": "19%",
-                }, {
-                    "plate": "2017-8-01",
-                    "amount": "9",
-                    "Paidin": "19%",
-                   
-                }, {
-                    "plate": "2017-8-01",
-                    "amount": "9",
-                    "Paidin": "19%",
-                   
-                }, {
-                    "plate": "2017-8-01",
-                    "amount": "9",
-                    "Paidin": "19%",
-                  
-                },
-                {
-                    "plate": "2017-8-01",
-                    "amount": "9",
-                    "Paidin": "19%",
-                   
-                },
-                {
-                    "plate": "2017-8-01",
-                    "amount": "9",
-                    "Paidin": "19%",
-                   
-                }
-            ],
-       }
-    },
-    computed:{
-		...mapState(['contentSize','mnUrl']),       	
-	},
-    components: {
-      Bread,
-      echartsTwo1
-    },
-	mounted(){
-		//初始化时获取数据
-		this.getData();
-	},
-    methods: {
-	    method55(tableExcel) {
-	        this.$func.method5(tableExcel)
-	    },
-	  	choiseModel(num){
-			if(num==0){
-				this.showSelf=0;
-				this.model = 'chart';
-				this.$store.commit('CHANGE_SIZE');
-			}else if(num==1){
-				this.showSelf=1;
-				this.model = 'table';
-			}
-		},
-		getData(){
-			this.$http({
-				url:this.mnUrl+"/tmp/finance/overview",
-				method:'get',
-			}).then(function(res){
-				
-		
-			},function(error){
-			//失败回调的函数								
-			console.log(error)
-			})
-		}      
+      abc: ['数据应用', '财务数据', '会计账目分析'],
+      showSelf: 0,
+      width: "99.8%",
+      model: 'chart',
+      //图表1数据
+      noeText: "停车场临停收费稽查",
+      noeLegend: ["实收", "应收"],
+      unit1: "元",
+      Series1: [{
+        name: "实收",
+        type: 'bar',
+        barWidth: '25%',
+        itemStyle: {
+          normal: {
+            color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+                offset: 0,
+                color: 'rgba(211,201,39,0.9)'
+              },
+              {
+                offset: 1,
+                color: 'rgba(236,255,25,0.1)'
+              }
+            ])
+          }
+        },
+        data: [122, 123, 127, 125, 125, 125, 127, 120, 126, 124, 122, 122, 124, 123, 122, 123, 127, 125, 125, 135, 127, 120, 126, 124, 122, 132, 124, 123, 122, 123, 127, 125, 125, 125, 127, 120, 126, 124, 122, 122, 124, 123, 122, 123, 127, 125,
+          125, 135, 127, 120, 126, 124, 122, 132
+        ],
+      }, {
+        name: "应收",
+        type: 'bar',
+        barGap: '-165%',
+        barWidth: '60%',
+        z: -12,
+        data: [150, 52, 200, 334, 390, 330, 220, 233, 364, 64, 352, 46, 98, 75, 150, 52, 200, 334, 390, 330, 220, 233, 364, 64, 352, 46, 98, 75, 150, 52, 200, 334, 390, 330, 220, 233, 364, 64, 352, 46, 98, 75, 150, 52, 200, 334, 390, 330, 220,
+          233, 364, 64, 352, 46
+        ],
+      }],
+      Xvalue: ['深圳', '北京', '上海', '广州', '佛山', '长春', '天津', '长沙', '南京', '杭州', '厦门', '南宁', '武汉', '郑州', '深圳', '北京', '上海', '广州', '佛山', '长春', '天津', '长沙', '南京', '杭州', '厦门', '南宁', '武汉', '郑州', '深圳', '北京', '上海', '广州', '佛山', '长春', '天津', '长沙', '南京', '杭州', '厦门',
+        '南宁', '武汉', '郑州', '深圳', '北京', '上海', '广州', '佛山', '长春', '天津', '长沙', '南京', '杭州', '厦门', '南宁'
+      ],
+      conTents: [{
+          "plate": "2017-8-01",
+          "amount": "9",
+          "Paidin": "19%",
+        },
+        {
+          "plate": "2017-8-01",
+          "amount": "9",
+          "Paidin": "19%",
+        },
+        {
+          "plate": "2017-8-01",
+          "amount": "9",
+          "Paidin": "19%",
+        }, {
+          "plate": "2017-8-01",
+          "amount": "9",
+          "Paidin": "19%",
+
+        }, {
+          "plate": "2017-8-01",
+          "amount": "9",
+          "Paidin": "19%",
+
+        }, {
+          "plate": "2017-8-01",
+          "amount": "9",
+          "Paidin": "19%",
+
+        },
+        {
+          "plate": "2017-8-01",
+          "amount": "9",
+          "Paidin": "19%",
+
+        },
+        {
+          "plate": "2017-8-01",
+          "amount": "9",
+          "Paidin": "19%",
+
+        }
+      ],
     }
+  },
+  computed: {
+    ...mapState(['contentSize', 'mnUrl']),
+  },
+  components: {
+    Bread,
+    echartsTwo1
+  },
+  mounted() {
+    //初始化时获取数据
+    this.getData();
+  },
+  methods: {
+    method55(tableExcel) {
+      this.$func.method5(tableExcel)
+    },
+    choiseModel(num) {
+      if (num == 0) {
+        this.showSelf = 0;
+        this.model = 'chart';
+        this.$store.commit('CHANGE_SIZE');
+      } else if (num == 1) {
+        this.showSelf = 1;
+        this.model = 'table';
+      }
+    },
+    getData() {}
+  }
 }
 </script>
 
 <style lang="scss" scoped>
 @import 'src/style/mixin';
-/*可视区外框样式*/	
+/*可视区外框样式*/
 .Chart_div{
 	width: 100%;
 	height: 7.55rem;
 	overflow-y: auto;
-	margin: 0 auto;	
+	margin: 0 auto;
 }
 /*图表外框*/
 .chart2{
@@ -229,7 +233,7 @@
 			height: 0.6rem;
 			color: #67bce9;
 			outline: none;
-			margin:0 0.05rem;				
+			margin:0 0.05rem;
 			.el_picker{
 				display: inline-block;
 				width: 2.58rem;
@@ -259,8 +263,8 @@
             position: relative;
             top: 0.05rem;
         }
-  	}	  	
-}	
+  	}
+}
 .hide{
 	display: none;
 }
@@ -268,7 +272,7 @@
 .table_big{
 	display: block;
 	width: 100%;
-	height: 7.25rem;	
+	height: 7.25rem;
     .table {
         width: 100%;
         height: 6.7rem;
@@ -320,7 +324,7 @@
                 overflow-y: scroll;
                 .center_table {
                     display: flex;
-                    align-items: center; 
+                    align-items: center;
                     justify-content: space-around;
                     border-bottom: 2px solid #698499;
                     td {
@@ -330,12 +334,12 @@
                         line-height: 0.4rem;
                         text-align: center;
                         display: inline-block;
-                      
+
                     }
                 }
             }
         }
-    }	
+    }
 }
 .Hide{
 	display: none !important;
@@ -392,5 +396,5 @@ select {
 
 select::-ms-expand {
     display: none;
-}	
+}
 </style>

@@ -31,17 +31,18 @@
 				<div id="myChart1" class="myChart1" ></div>
 				<div id="myChart2" class="myChart2" ></div>
 				<div id="myChart3" class="myChart3"></div>
-				<div id="myChart4" class="myChart4"></div>			
+				<div id="myChart4" class="myChart4"></div>
 			</div>
 		</div>
-		<!--<time-Select @my-year="getYear"></time-Select>-->		
+		<!--<time-Select @my-year="getYear"></time-Select>-->
 	</div>
-	
+
 </template>
 
 <script>
 import echarts from "echarts"
 import Mapvue from '@/components/secureEnvironmentMap_3'
+import secureEnvironmentObj from '@/httpData/secureEnvironmentMap_3.js';
 //import timeSelect from '@/components/common/timeSelect'
 import Homenav from '@/components/common/homeNav'
 import {mapState} from 'vuex'
@@ -78,10 +79,10 @@ export default {
 //	    timeSelect
 	 },
 	computed:{
-		...mapState(['contentSize','mnUrl']),       	
+		...mapState(['contentSize','mnUrl']),
 	},
    	mounted(){
-  		this.getData()	
+  		this.getData()
   	},
   	destroyed(){
 	//页面跳转时销毁
@@ -95,7 +96,7 @@ export default {
 			var _resizeMap = this.mapStatus;
 			setTimeout(function(){
 				_resizeMap();
-			},1000)			
+			},1000)
 		}
 	},
   methods: {
@@ -104,76 +105,68 @@ export default {
 	    	},
 	loading(state) {
 			this.$store.commit('CHANGE_LOADING',state);
-		},    	
+		},
 	getData(){
 		this.loading(true);
-	 	this.$http({
-			url:this.mnUrl+"/tmp/safe/door_in_out",
-			method:'get',
-		}).then(function(res){
-		    this.content = res.body.content;
-			var value = res.body.content.门禁出入总数据;
-			this.data1 = value.业主入流量;
-			this.data2 = value.访客入场流量;
-			this.data3 = value.当前滞留人员数;
-			this.data4 = value.异常开门率;
-			var cityName1 = res.body.content.业主入流量前十;
-			var cityName2 = res.body.content.访客入场流量前十;
-			var cityName3 = res.body.content.滞留人员数前十;
-			var cityName4 = res.body.content.异常开门率前十;
-			for(var i=0;i<cityName1.length;i++){
-				this.cityName1[i] = cityName1[i].城市;
-				this.cityData1[i] = cityName1[i].数值;
-				this.cityName2[i] = cityName2[i].城市;
-				this.cityData2[i] = cityName2[i].数值;
-				this.cityName3[i] = cityName3[i].城市;
-				this.cityData3[i] = cityName3[i].数值;
-				this.cityName4[i] = cityName4[i].城市;
-				this.cityData4[i] = cityName4[i].数值;					
-			};
-			this.loading(false);
-			if(this.isFirst){
-		    	//第一次获取数据进行实列化
-		    	this.mapStatus = this.drawLine();
-		    	this.isFirst = false;
-		    }else{
-		    	// 否则进行重绘
-		    	var _resizeMap = this.mapStatus;
-					_resizeMap();
-		    }
-		},function(error){
-		//失败回调的函数								
-		console.log(error);
-			});						
- 	},    	
-  	environment(){	
+    this.content = secureEnvironmentObj.content
+    var value = this.content.门禁出入总数据;
+    this.data1 = value.业主入流量;
+    this.data2 = value.访客入场流量;
+    this.data3 = value.当前滞留人员数;
+    this.data4 = value.异常开门率;
+    var cityName1 = res.body.content.业主入流量前十;
+    var cityName2 = res.body.content.访客入场流量前十;
+    var cityName3 = res.body.content.滞留人员数前十;
+    var cityName4 = res.body.content.异常开门率前十;
+    for(var i=0;i<cityName1.length;i++){
+      this.cityName1[i] = cityName1[i].城市;
+      this.cityData1[i] = cityName1[i].数值;
+      this.cityName2[i] = cityName2[i].城市;
+      this.cityData2[i] = cityName2[i].数值;
+      this.cityName3[i] = cityName3[i].城市;
+      this.cityData3[i] = cityName3[i].数值;
+      this.cityName4[i] = cityName4[i].城市;
+      this.cityData4[i] = cityName4[i].数值;
+    };
+    this.loading(false);
+    if(this.isFirst){
+      //第一次获取数据进行实列化
+      this.mapStatus = this.drawLine();
+      this.isFirst = false;
+    }else{
+        // 否则进行重绘
+      var _resizeMap = this.mapStatus;
+      _resizeMap();
+    }
+ 	},
+  	environment(){
   			this.$router.push({path:'secureEnvironment_1'});
   		},
-  	cat(){	
+  	cat(){
   			this.$router.push({path:'secureEnvironment_2'});
   		},
 	drawLine() {
 		var  refThis = this;
 		var myChart1 = echarts.init(document.getElementById('myChart1'));
 		var myChart2 = echarts.init(document.getElementById('myChart2'));
-		var myChart3 = echarts.init(document.getElementById('myChart3')); 
+		var myChart3 = echarts.init(document.getElementById('myChart3'));
 		var myChart4 = echarts.init(document.getElementById('myChart4'));
 		var color = 'rgba(0,191,255,0.6)';
 		myChart1.on('click', function (params) {
 		 	refThis.$store.commit('CHANGE_CITY',{cityName:params.name});
-		 	refThis.$router.push({path:"C_secureEnvironment_2"});			 	
+		 	refThis.$router.push({path:"C_secureEnvironment_2"});
            		 });
         myChart2.on('click', function (params) {
 		 	refThis.$store.commit('CHANGE_CITY',{cityName:params.name});
-		 	refThis.$router.push({path:"C_secureEnvironment_2"});			 	
+		 	refThis.$router.push({path:"C_secureEnvironment_2"});
                 });
         myChart3.on('click', function (params) {
 		 	refThis.$store.commit('CHANGE_CITY',{cityName:params.name});
-		 	refThis.$router.push({path:"C_secureEnvironment_2"});			 	
+		 	refThis.$router.push({path:"C_secureEnvironment_2"});
                 });
         myChart4.on('click', function (params) {
 		 	refThis.$store.commit('CHANGE_CITY',{cityName:params.name});
-		 	refThis.$router.push({path:"C_secureEnvironment_2"});			 	
+		 	refThis.$router.push({path:"C_secureEnvironment_2"});
                });
 //右边5图形参数
    var option1 = {
@@ -220,7 +213,7 @@ export default {
         	}
     },
     itemStyle: {     //颜色渐变
-            normal: {                
+            normal: {
                 color: new echarts.graphic.LinearGradient(1, 0, 0, 0, [{
                     offset: 0,
                     color: 'rgba(0,191,255,0.9)'
@@ -291,7 +284,7 @@ myChart1.setOption(option1);
         	}
     },
     itemStyle: {     //颜色渐变
-            normal: {                
+            normal: {
                 color: new echarts.graphic.LinearGradient(1, 0, 0, 0, [{
                     offset: 0,
                     color: 'rgba(0,191,255,0.9)'
@@ -361,7 +354,7 @@ myChart2.setOption(option2);
         	}
     },
     itemStyle: {     //颜色渐变
-            normal: {                
+            normal: {
                 color: new echarts.graphic.LinearGradient(1, 0, 0, 0, [{
                     offset: 0,
                     color: 'rgba(0,191,255,0.9)'
@@ -432,7 +425,7 @@ myChart3.setOption(option3);
         	}
     },
     itemStyle: {     //颜色渐变
-            normal: {                
+            normal: {
                 color: new echarts.graphic.LinearGradient(1, 0, 0, 0, [{
                     offset: 0,
                     color: 'rgba(0,191,255,0.9)'
@@ -473,7 +466,7 @@ myChart4.setOption(option4);
 			}
 		}
 		return disposeMap;
- 		}			
+ 		}
   	}
  }
 </script>
@@ -532,28 +525,28 @@ myChart4.setOption(option4);
 	line-height: 0.42rem;
 	input{
 		flex: 1;
-		height: 0.41rem;		
+		height: 0.41rem;
 		float: right;
-		font-size: 0.14rem	
+		font-size: 0.14rem
 	}
 }
-#button1{	
+#button1{
 	color: darkgray;
 	background-image: url(../../../images/homeButton3.png);
 	background-size: cover;
-	background-position: center;	
+	background-position: center;
 }
 .button2{
 	color: darkgray;
 	background-image: url(../../../images/homeButton3.png);
 	background-size: cover;
-	background-position: center;;	
+	background-position: center;;
 }
 .button3{
 	color: white;
 	background-image: url(../../../images/homeButton2.png);
 	background-size: cover;
-	background-position: center;	
+	background-position: center;
 }
 /*图表区域*/
 .chart_div{
@@ -566,7 +559,7 @@ myChart4.setOption(option4);
 	flex: 1;
 	height: 8.1rem;
 	display: inline-block;
-	overflow: hidden;	
+	overflow: hidden;
 }
 .myChart1{
 	width: 50%;
@@ -576,13 +569,13 @@ myChart4.setOption(option4);
 }
 .myChart2{
 	width: 50%;
-	height: 3.2rem;	
+	height: 3.2rem;
 	float: left;
-	margin-top: 0.5rem;	
+	margin-top: 0.5rem;
 }
 .myChart3{
 	width: 50%;
-	height: 3.2rem;	
+	height: 3.2rem;
 	float: left;
 }
 .myChart4{

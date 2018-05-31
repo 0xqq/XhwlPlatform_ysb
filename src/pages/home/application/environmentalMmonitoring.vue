@@ -171,23 +171,15 @@ export default {
 	},
 	methods: {
 		getData() {
-			this.$http({
-				url: "../../../static/homepage.json",
-				method: 'get',
-			}).then(function(res) {
-				if (this.isFirst) {
-					//第一次获取数据进行实列化
-					this.mapStatus = this.drawLine();
-					this.isFirst = false;
-				} else {
-					// 否则进行重绘
-					var _resizeMap = this.mapStatus;
-					_resizeMap();
-				}
-			}, function(error) {
-				//失败回调的函数								
-				console.log(error);
-			});
+			if (this.isFirst) {
+				//第一次获取数据进行实列化
+				this.mapStatus = this.drawLine();
+				this.isFirst = false;
+			} else {
+				// 否则进行重绘
+				var _resizeMap = this.mapStatus;
+				_resizeMap();
+			}
 		},
 		drawLine() {
 			var refThis = this;

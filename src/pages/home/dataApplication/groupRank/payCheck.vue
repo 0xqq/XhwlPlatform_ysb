@@ -16,15 +16,15 @@
 				</div>
 				<img src="../../../../images/inout.png" class="inout_a" :class="{Hide: showSelf==0}" @click="method55('tableExcel')" />
 			</div>
-		<div class="Chart_div" :class="{hide: showSelf==1}">									
+		<div class="Chart_div" :class="{hide: showSelf==1}">
 			<echarts-two1 :class="{hide: showSelf==1,chart2: showSelf=='0'}" :Text='noeText'
 				 :Xvalue="Xvalue" :Legend="noeLegend" :Series="Series1" :PropsWith="width">
 			</echarts-two1>
 			<echarts-two2 :class="{hide: showSelf==1,chart2: showSelf=='0'}" :Text='twoText'
 				 :Xvalue="Xvalue" :Legend="twoLegend" :Series="Series2" :PropsWith="width">
-			</echarts-two2>	 
+			</echarts-two2>
 		</div>
-			
+
 			<div class="hide" :class="{table_big: showSelf=='1'}">
 				<div class="fixed_table">
 					<table cellpadding="0" cellspacing="0">
@@ -266,16 +266,6 @@ export default {
 			}
 		},
 		getData() {
-			this.$http({
-				url: this.mnUrl + "/tmp/finance/overview",
-				method: 'get',
-			}).then(function(res) {
-
-
-			}, function(error) {
-				//失败回调的函数								
-				console.log(error)
-			})
 		},
 		handleSizeChange(val) {
 			// console.log(`每页 ${val} 条`);

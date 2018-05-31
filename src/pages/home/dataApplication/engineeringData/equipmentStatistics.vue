@@ -6,7 +6,7 @@
 			<div class="top_right">
 				<div class="boutton_div">
 					<span class="chart_model" :class="{active: model=='chart', unactive: model == 'table'}" @click="choiseModel(0)">图表模式</span>
-					<!--  
+					<!--
 								 -->
 					<span class="table_model" :class="{active: model=='table', unactive: model == 'chart'}" @click="choiseModel(1)">表格模式</span>
 				</div>
@@ -158,15 +158,6 @@ export default {
 			}
 		},
 		getData() {
-			this.$http({
-				url: this.mnUrl + "/tmp/finance/overview",
-				method: 'get',
-			}).then(function(res) {
-
-			}, function(error) {
-				//失败回调的函数								
-				console.log(error)
-			})
 		},
 		handleSizeChange(val) {
 			// console.log(`每页 ${val} 条`);

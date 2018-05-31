@@ -6,7 +6,7 @@
 			<div class="top_right">
 				<div class="boutton_div">
 					<span class="chart_model" :class="{active: model=='chart', unactive: model == 'table'}" @click="choiseModel(0)">图表模式</span>
-					<!--  
+					<!--
 							 -->
 					<span class="table_model" :class="{active: model=='table', unactive: model == 'chart'}" @click="choiseModel(1)">表格模式</span>
 				</div>
@@ -18,15 +18,15 @@
 				</div>
 				<img src="../../../../images/inout.png" class="inout_a" :class="{Hide: showSelf==0}" @click="method55('tableExcel')" />
 			</div>
-		<div class="Chart_div" :class="{hide: showSelf==1}">									
+		<div class="Chart_div" :class="{hide: showSelf==1}">
 			<echarts-two1 :class="{hide: showSelf==1,chart2: showSelf=='0'}" :Text='noeText'
 				 :Xvalue="Xvalue" :Legend="noeLegend" :Series="Series1" :Unit="unit1" :PropsWith="width">
-			</echarts-two1>	
+			</echarts-two1>
 			<echarts-two2 :class="{hide: showSelf==1,chart2: showSelf=='0'}" :Text='twoText'
 				 :Xvalue="Xvalue" :Legend="twoLegend" :Series="Series2" :Unit="unit2" :PropsWith="width">
 			</echarts-two2>
 		</div>
-			
+
 			<div class="hide" :class="{table_big: showSelf=='1'}">
 				<el-table :data="tableData3" height="250" border style="width: 100%" id="tableExcel">
 					<el-table-column prop="name" label="时间">
@@ -210,16 +210,6 @@ export default {
 			}
 		},
 		getData() {
-			this.$http({
-				url: this.mnUrl + "/tmp/finance/overview",
-				method: 'get',
-			}).then(function(res) {
-
-
-			}, function(error) {
-				//失败回调的函数								
-				console.log(error)
-			})
 		},
 		handleSizeChange(val) {
 			// console.log(`每页 ${val} 条`);
@@ -239,7 +229,7 @@ export default {
 
 .Chart_div {
 	width: 100%;
-	height: 7.55rem; 
+	height: 7.55rem;
 	overflow-y: auto;
 	margin: 0 auto;
 }

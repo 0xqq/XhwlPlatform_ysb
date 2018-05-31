@@ -30,7 +30,7 @@
 						</li>
 						<li>
 							<ul class="all_menu3" v-for="c in b.projects">
-								<li class="all_name3" @click="goProject(c)"> 
+								<li class="all_name3" @click="goProject(c)">
 									<span>{{c.name}}</span>
 								</li>
 							</ul>
@@ -58,9 +58,9 @@
 					<span>400客服中心</span>
 					<span class="right" @click="closeVideo"></span>
 				</div>
-				<iframe class="video_iframe" v-if="openCall" scrolling="no" frameborder="0" src="http://xhmind.com:5050/video.html">
+				<!-- <iframe class="video_iframe" v-if="openCall" scrolling="no" frameborder="0" src="http://xhmind.com:5050/video.html">
 					<p>请使用360浏览器极速模式</p>
-				</iframe>
+				</iframe> -->
 			</div>
 			<transition name="el-zoom-in-center">
 				<div class="nav_left" v-if="showNav">
@@ -68,7 +68,7 @@
 						<!--一级导航-->
 						<li class="class_point" @click.stop="goHome">
 							<!-- <img src="navHome" alt=""> -->
-							<span :class="{ nav_active: indexOne=='首页'}"><img class="img_nav1" src="http://xhmind.com:5050/img/navHome.png" alt="">首页</span>
+							<span :class="{ nav_active: indexOne=='首页'}"><img class="img_nav1" src="" alt="">首页</span>
 						</li>
 						<li class="class_point" @mouseenter="showAllSevice" @mouseleave="hideAllSevice">
 							<span>所有服务</span>
@@ -159,16 +159,16 @@
 			<p @click="clickMenusys"></p>
 			<span @click="clickMenusys">管理应用</span>
 		</div>
-		<div :class="{small_circle3:backHome==true}">		
+		<div :class="{small_circle3:backHome==true}">
 			<p @click="clickMenugloss"></p>
 			<span @click="clickMenugloss">业务配置</span>
 		</div>
-		<div :class="{small_circle4:backHome==true}">		
+		<div :class="{small_circle4:backHome==true}">
 			<p @click="clickMenumap"></p>
 			<span @click="clickMenumap">数据分析</span>
 		</div>
-		<transition name="el-zoom-in-center">	
-			<div v-show="backHome" :class="{big_circle:backHome==true}">			
+		<transition name="el-zoom-in-center">
+			<div v-show="backHome" :class="{big_circle:backHome==true}">
 			</div>
 		</transition>
 	</div>
@@ -202,20 +202,20 @@ export default {
 		//刷新时获取菜单打开的相应项
 		this.changeIndexs();
 		//注册socket.io
-		setTimeout(function(){
-			var socket = io.connect('ws://202.105.104.105:8005');
-			socket.emit('login', { "roomid": "coppm_data", "userid": _this.genUUID(), "username": _this.genUUID() });//将用户名替换为用户名称
-			socket.on('message', function(obj) {
-				var msg = JSON.stringify(obj);
-				if((_this.$route.path.indexOf('carGuide')== -1)&&(_this.$route.path.indexOf('walkGuide')== -1)&&(_this.$route.path.indexOf('preVideo')== -1)){
-					if(!_this.openCall){
-					_this.newCall = true;
-					}else if(_this.openCall){
-						_this.newCall = false;
-					}
-				}
-			});
-		},1000)
+		// setTimeout(function(){
+		// 	var socket = io.connect('ws://202.105.104.105:8005');
+		// 	socket.emit('login', { "roomid": "coppm_data", "userid": _this.genUUID(), "username": _this.genUUID() });//将用户名替换为用户名称
+		// 	socket.on('message', function(obj) {
+		// 		var msg = JSON.stringify(obj);
+		// 		if((_this.$route.path.indexOf('carGuide')== -1)&&(_this.$route.path.indexOf('walkGuide')== -1)&&(_this.$route.path.indexOf('preVideo')== -1)){
+		// 			if(!_this.openCall){
+		// 			_this.newCall = true;
+		// 			}else if(_this.openCall){
+		// 				_this.newCall = false;
+		// 			}
+		// 		}
+		// 	});
+		// },1000)
 
 		setTimeout(function() {
 			window.addEventListener("resize", function() {	//监听窗口变化时改变CHANGE_SIZE——echarts图表重绘的依据
@@ -228,8 +228,8 @@ export default {
 		this.allMenu1 = this.testMenu[0].name;
 		var projectList = window.localStorage.getItem('projectList');
 		_this.positionMenu = JSON.parse(projectList);
-		_this.clickLtd = _this.positionMenu[0].citys;
-		_this.pMenu1 = _this.positionMenu[0].citys;
+		// _this.clickLtd = _this.positionMenu[0].citys;
+		// _this.pMenu1 = _this.positionMenu[0].citys;
 
 		//绑定点击事件到body让项目选择弹窗消失
 		document.getElementsByTagName("body")[0].addEventListener("click", function() {
@@ -285,7 +285,7 @@ export default {
 					this.$router.push({ path: '/' + b.submenu[0].url });
 				}
 				//或四级
-				if (b.submenu && b.submenu[0].submenu && b.submenu[0].submenu[0].url) {					
+				if (b.submenu && b.submenu[0].submenu && b.submenu[0].submenu[0].url) {
 					this.indexFour = b.submenu[0].submenu[0].name;
 					this.$router.push({ path: '/' + b.submenu[0].submenu[0].url });
 				}
@@ -561,7 +561,7 @@ span {
 		border-radius: 50%;
 		position: absolute;
 		left: 2%;
-		top: 9%;		
+		top: 9%;
 	}
 	.select {
 		display: inline-block;
@@ -581,8 +581,8 @@ span {
 		-webkit-user-select: none;
 		-ms-user-select: none;
 	}
-	.tir{      
-		transform:rotate(180deg);  
+	.tir{
+		transform:rotate(180deg);
 	}
 	.select_ul {
 		position: absolute;
@@ -637,7 +637,7 @@ span {
 	background-position: center;
 	position: absolute;
 	bottom: 0.2rem;
-	
+
 	.back_left {
 		position: absolute;
 		left: 30%;
@@ -990,7 +990,7 @@ span {
 	margin-top: 0.60rem;
 	display: inline-block;
 	position: relative;
-	z-index: 120; // overflow-y: scroll; 
+	z-index: 120; // overflow-y: scroll;
 	// overflow-x: visible;
 	// overflow-y: hidden;
 }
@@ -1431,7 +1431,7 @@ span {
 // ::-webkit-scrollbar {
 //   width: 0.1rem;
 //   height: 0px;
-//   background-color:#588095; 
+//   background-color:#588095;
 // }
 .class_point {
 	@include aa;

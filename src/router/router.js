@@ -229,10 +229,10 @@ export default new Router({
                 { path: '/monit/equip/water', component: waterSupply, name: 'waterSupply' },  //给排水页面
                 { path: '/monit/equip/airc', component: centrerAirconditioning, name: 'centrerAirconditioning' }, //中央空调案列
                 //环境物联监控
-                { path: '/monit/evrmt/air', component: airQuality, name: 'airQuality' },//空气质量监控  
+                { path: '/monit/evrmt/air', component: airQuality, name: 'airQuality' },//空气质量监控
                 	//水质质量监测
                 	{ path: '/monit/evrmt/water/swim', component: swimmingPoolwater, name: 'swimmingPoolwater' },//泳池水
-                	{ path: '/monit/evrmt/water/box', component: waterBox, name: 'waterBox' },							//水箱水 
+                	{ path: '/monit/evrmt/water/box', component: waterBox, name: 'waterBox' },							//水箱水
                 	{ path: '/monit/evrmt/water/sight', component: sightWater, name: 'sightWater' },						//景观水
                 //消防物联监控
             	{ path: '/monit/fire/monitor', component: fireMonitoring, name: 'fireMonitoring' },		//消防监测系统
@@ -245,10 +245,10 @@ export default new Router({
                 	{ path: '/monit/person/safe/site', component: siteCheck, name: 'siteCheck' }, 	//现场情况查看
                 	{ path: '/monit/person/safe/track', component: personnelHistory, name: 'personnelHistory' },	//历史轨迹查询
                 	{ path: '/monit/person/safe/msg', component: newMsg, name: 'newMsg' },						//实时信息下发
-                	{ path: '/monit/person/safe/msg/new', component: sendMsg, name: 'sendMsg' },				
+                	{ path: '/monit/person/safe/msg/new', component: sendMsg, name: 'sendMsg' },
 
             //管理应用
-            	//项目仪表盘	
+            	//项目仪表盘
         		// { path: '/manage/panel/panel', component: P_projectTote, name: 'P_projectTote' },	//项目仪表盘
             		//重大事件管理
         		//安管管理
@@ -273,12 +273,12 @@ export default new Router({
             	{ path: '/config/projectcfg/device', component: device, name: 'device' },			//设备监控阀值配置
             	{ path: '/config/projectcfg/energyset', component: energMonitoring, name: 'energMonitoring' },	//能耗监控阀值配置
             	{ path: '/config/projectcfg/resource', component: resourceMonitor, name: 'resourceMonitor' },	//资源监控阀值配置
-            	{ path: '/config/projectcfg/device/new', component: newDevice, name: 'newDevice' },								
+            	{ path: '/config/projectcfg/device/new', component: newDevice, name: 'newDevice' },
             	{ path: '/config/projectcfg/energy/new', component: newEnergmonitoring, name: 'newEnergmonitoring' },
             	{ path: '/config/projectcfg/resource/new', component: newResourcemonitor, name: 'newResourcemonitor' },
             	//环境业务配置
             		//日常清洁配置
-            		
+
             //数据分析
             	//数据概览
             	{ path: '/data/overview', component: main, name: 'main' },	//数据概览
@@ -295,7 +295,7 @@ export default new Router({
                 	{ path: '/data/finance/expendcheck/parktemp', component: parkingCharges, name: 'parkingCharges' },//停车场临停收费
                 	{ path: '/data/finance/expendcheck/valuecard', component: savingsCard, name: 'savingsCard' },//停车场储值卡收费查询
                 	{ path: '/data/finance/expendcheck/monthcard', component: monthCard, name: 'monthCard' },//停车场月卡收费查询
-                	{ path: '/data/finance/expendcheck/mngincome', component: claimExpense, name: 'claimExpense' },//财务稽查查询->物业管理费收费  
+                	{ path: '/data/finance/expendcheck/mngincome', component: claimExpense, name: 'claimExpense' },//财务稽查查询->物业管理费收费
                 	{ path: '/data/finance/expendcheck/mngowe', component: manageMentFee, name: 'manageMentFee' },//物业管理费欠费
                 	{ path: '/data/finance/expendcheck/decorate', component: decorateTheDeposit, name: 'decorateTheDeposit' },//装修押金收费
                 	{ path: '/data/finance/expendcheck/replace', component: collectionCharges, name: 'collectionCharges' },//代收费收费
@@ -324,7 +324,7 @@ export default new Router({
                 	{ path: '/data/projdata/projrun/decoration', component: engineeringSupervision, name: 'engineeringSupervision' },	//二次装修及工程监管
                 	{ path: '/data/projdata/projrun/equipment', component: equipmentStatistics, name: 'equipmentStatistics' },			//设备设施统计
                 { path: '/data/projdata/energy', component: energyConsumption, name: 'energyConsumption' },//能耗数据
-                { path: '/data/projdata/equipment', component: ledgerQuery, name: 'ledgerQuery' },							//设备设施台账查询  
+                { path: '/data/projdata/equipment', component: ledgerQuery, name: 'ledgerQuery' },							//设备设施台账查询
                 //人事数据
                 { path: '/data/psndata/attendanceData', component: attendanceData, name: 'attendanceData' },//出勤数据分析
                 	//考勤数据分析
@@ -350,15 +350,15 @@ export default new Router({
                 { path: '/M_custom', component: M_custom, name: 'M_custom' },
                 { path: '/M_humanAffairs', component: M_humanAffairs, name: 'M_humanAffairs' },
                 { path: '/M_environment', component: M_environment, name: 'M_environment' },
-                
+
                 { path: '/P_secureEnvironment', component: P_secureEnvironment, name: 'P_secureEnvironment' }, //项目级首页
                 { path: '/P_financialData', component: P_financialData, name: 'P_financialData' },
                 { path: '/P_engineeringData', component: P_engineeringData, name: 'P_engineeringData' },
                 { path: '/P_custom', component: P_custom, name: 'P_custom' },
                 { path: '/P_projectTote', component: P_projectTote, name: 'P_projectTote' },
                 { path: '/P_environment', component: P_environment, name: 'P_environment' },
-                
-                
+
+
                 { path: '/C_financialData', component: C_financialData, name: 'C_financialData' }, //城市级首页
                 { path: '/C_secureEnvironment_1', component: C_secureEnvironment_1, name: 'C_secureEnvironment_1' },
                 { path: '/C_secureEnvironment_2', component: C_secureEnvironment_2, name: 'C_secureEnvironment_2' },
@@ -368,7 +368,7 @@ export default new Router({
                 { path: '/C_humanAffairs', component: C_humanAffairs, name: 'C_humanAffairs' },
                 { path: '/C_custom', component: C_custom, name: 'C_custom' },
                 { path: '/newEnvironmentMsg', component: newEnvironmentMsg, name: 'newEnvironmentMsg' }, //现场情况查看
-                
+
             ]
         },
         {
