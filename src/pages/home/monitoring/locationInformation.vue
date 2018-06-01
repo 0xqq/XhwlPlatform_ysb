@@ -1,159 +1,156 @@
 <template>
-	<div class="peoplePlace">
-		<Bread :breadData="abcd"></Bread>
-		<div class="new_center_box">
-			<!--地图视口-->
-			<div id="XSDFXPage" class="XSDFXPage"></div>
-			<!--四个直角-->
-			<span class="newdevice1"></span>
-			<span class="newdevice2"></span>
-			<span class="newdevice3"></span>
-			<span class="newdevice4"></span>
-			<!--视频区域-->
-			<div class="video_content">
-				<span class="battery"></span>
-				<span class="battery_text">显示电量</span>
-				<span class="environment"></span>
-				<span class="environment_text">显示清洁度</span>
-			</div>
-		</div>
-		<!--底部表格-->
-		<div class="table">
-			<input type="button" class="personnel" value="人员" @click="toggle1(1)"  :class="{'bord_click':clickBtn==1}" />
-			<input type="button" class="assess" value="考核上报" @click="toggle1(2)" :class="{'bord_click':clickBtn==2}" />
-		</div>
-		<!--人员页面-->
-		<div v-show="clickBtn==1">
-			<ul class="table_content">
-				<li>序号</li>
-				<li>人员</li>
-				<li>电量</li>
-				<li>流量</li>
-				<li>清洁度</li>
-				<li>操作</li>
-			</ul>
-			<div class="content_div">
-				<ul class="ul_list" v-for='d in  value'>
-					<li>{{d.序号}}</li>
-					<li>{{d.人员}}</li>
-					<li>{{d.电量}}</li>
-					<li>{{d.流量}}</li>
-					<li>{{d.操作}}</li>
-					<li>
-						<input type='button' class="btn" @click="call" value="对讲">
-					</li>
-				</ul>
-			</div>
-		</div>
-		<!--考核上报页面-->
-		<div v-show="clickBtn==2">
-			<ul class="table_content">
-				<li>序号</li>
-				<li>人员</li>
-				<li>电量</li>
-				<li>流量</li>
-				<li>考核明细</li>
-				<li>操作</li>
-			</ul>
-			<div class="content_div">
-				<ul class="ul_list" v-for='d in  value'>
-					<li>{{d.序号}}</li>
-					<li>{{d.人员}}</li>
-					<li>70</li>
-					<li>75</li>
-					<li>
-						<input type='button' class="btn" @click="check" value="操作">
-					</li>
-					<li>
-						<input type='button' class="btn" @click="call" value="对讲">
-					</li>
-				</ul>
-			</div>
-		</div>
-		<!--底部每页显示-->
-		<div class="page">
-			<span>每页显示</span>
-			<select class="select">
+<div class="peoplePlace">
+  <Bread :breadData="abcd"></Bread>
+  <div class="new_center_box">
+    <!--地图视口-->
+    <div id="XSDFXPage" class="XSDFXPage"></div>
+    <!--四个直角-->
+    <span class="newdevice1"></span>
+    <span class="newdevice2"></span>
+    <span class="newdevice3"></span>
+    <span class="newdevice4"></span>
+    <!--视频区域-->
+    <div class="video_content">
+      <span class="battery"></span>
+      <span class="battery_text">显示电量</span>
+      <span class="environment"></span>
+      <span class="environment_text">显示清洁度</span>
+    </div>
+  </div>
+  <!--底部表格-->
+  <div class="table">
+    <input type="button" class="personnel" value="人员" @click="toggle1(1)" :class="{'bord_click':clickBtn==1}" />
+    <input type="button" class="assess" value="考核上报" @click="toggle1(2)" :class="{'bord_click':clickBtn==2}" />
+  </div>
+  <!--人员页面-->
+  <div v-show="clickBtn==1">
+    <ul class="table_content">
+      <li>序号</li>
+      <li>人员</li>
+      <li>电量</li>
+      <li>流量</li>
+      <li>清洁度</li>
+      <li>操作</li>
+    </ul>
+    <div class="content_div">
+      <ul class="ul_list" v-for='d in  value'>
+        <li>{{d.序号}}</li>
+        <li>{{d.人员}}</li>
+        <li>{{d.电量}}</li>
+        <li>{{d.流量}}</li>
+        <li>{{d.操作}}</li>
+        <li>
+          <input type='button' class="btn" @click="call" value="对讲">
+        </li>
+      </ul>
+    </div>
+  </div>
+  <!--考核上报页面-->
+  <div v-show="clickBtn==2">
+    <ul class="table_content">
+      <li>序号</li>
+      <li>人员</li>
+      <li>电量</li>
+      <li>流量</li>
+      <li>考核明细</li>
+      <li>操作</li>
+    </ul>
+    <div class="content_div">
+      <ul class="ul_list" v-for='d in  value'>
+        <li>{{d.序号}}</li>
+        <li>{{d.人员}}</li>
+        <li>70</li>
+        <li>75</li>
+        <li>
+          <input type='button' class="btn" @click="check" value="操作">
+        </li>
+        <li>
+          <input type='button' class="btn" @click="call" value="对讲">
+        </li>
+      </ul>
+    </div>
+  </div>
+  <!--底部每页显示-->
+  <div class="page">
+    <span>每页显示</span>
+    <select class="select">
 				<option value="A">10</option>
 				<option value="B">20</option>
 				<option value="C">30</option>
 			</select>
-			<div class="pageDiv">
-				<img src="../../../images/left_select.png" />
-				<span>1/1</span>
-				<img src="../../../images/right_select.png" />
-			</div>
-		</div>
-	</div>
+    <div class="pageDiv">
+      <img src="../../../images/left_select.png" />
+      <span>1/1</span>
+      <img src="../../../images/right_select.png" />
+    </div>
+  </div>
+</div>
 </template>
 
 <script>
-	import Bread from '@/components/common/bread'
-	import { mapState} from 'vuex'	
+import Bread from '@/components/common/bread'
+import locationInfor from '@/httpData/locationInformation'
+import {
+  mapState
+} from 'vuex'
 
-export default{
-	data(){
-		return{
-			show:true,
-			showImg:false,
-			abcd: ['物联监控','人员物联监控','环境人员','位置信息'],
-			value: [],
-			clickBtn:'1',
-		}
-	},
-	mounted(){
-		this.initMap();
-		this.getData();
-	},
-	components: {
-		Bread
-	},
-	computed:{
-		...mapState(['mnUrl'])
-	},
-	methods:{
-		toggle2(){
-			this.show=false;
-		},
-		toggle1(num) {
-			this.clickBtn = num;
-		},
-		check(){
-			this.showImg=true;
-		},
-		call(){
-			
-		},
-		hideImg(){
-			this.showImg=false;
-		},
-		call() {
+export default {
+  data() {
+    return {
+      show: true,
+      showImg: false,
+      abcd: ['物联监控', '人员物联监控', '环境人员', '位置信息'],
+      value: [],
+      clickBtn: '1',
+    }
+  },
+  mounted() {
+    this.initMap();
+    this.getData();
+  },
+  components: {
+    Bread
+  },
+  computed: {
+    ...mapState(['mnUrl'])
+  },
+  methods: {
+    toggle2() {
+      this.show = false;
+    },
+    toggle1(num) {
+      this.clickBtn = num;
+    },
+    check() {
+      this.showImg = true;
+    },
+    call() {
 
-		},
-		initMap() {
-			// 创建Map实例及设置类型
-			var map = new BMap.Map("XSDFXPage", { mapType: BMAP_PERSPECTIVE_MAP });
-			// 设置中心点坐标
-			var point = new BMap.Point(114.058167, 22.540106);
-			// 设置地图显示的城市(必须)
-			map.setCurrentCity("深圳市");
-			// 设置地图级别:1-19越大越清晰
-			map.centerAndZoom(point, 18);
-			// 设置鼠标滚轮缩放
-			map.enableScrollWheelZoom(true);
-		},
-		getData(){
-		 		 const url = this.mnUrl+"/tmp/watching/partrol/person"
-					this.$http.get(url).then(res => {
-						console.log(res)
-						this.value = res.body.content;
-						console.log(this.value)
-					},function(error){
-						console.log(error)
-					})
-			}	
+    },
+    hideImg() {
+      this.showImg = false;
+    },
+    call() {
 
-	}
+    },
+    initMap() {
+      // 创建Map实例及设置类型
+      var map = new BMap.Map("XSDFXPage", {
+        mapType: BMAP_PERSPECTIVE_MAP
+      });
+      // 设置中心点坐标
+      var point = new BMap.Point(114.058167, 22.540106);
+      // 设置地图显示的城市(必须)
+      map.setCurrentCity("深圳市");
+      // 设置地图级别:1-19越大越清晰
+      map.centerAndZoom(point, 18);
+      // 设置鼠标滚轮缩放
+      map.enableScrollWheelZoom(true);
+    },
+    getData() {
+      this.value = locationInfor.content
+    }
+  }
 }
 </script>
 
@@ -363,7 +360,7 @@ $padding_top: 0.1rem;
 		height: 0.47rem;
 		line-height: 0.47rem;
 		color: white;
-		/*border: 1px solid #698499;*/ 
+		/*border: 1px solid #698499;*/
 		font-size:0.16rem;
 	}
 	.ul_list{
@@ -372,7 +369,7 @@ $padding_top: 0.1rem;
 		display: flex;
 		height: 1.166rem;
 		width: 100%;
-	
+
 	}
 	.ul_list li{
 		display: flex;

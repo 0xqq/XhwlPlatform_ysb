@@ -46,6 +46,7 @@ import echarts from "echarts"
 import zenModal from '@/components/Bomb_box'
 import Mapvue from '@/components/common/map'
 import Homenav from '@/components/common/homeNav'
+import mainObj from '@/httpData/main.js'
 import {
   mapState
 } from 'vuex';
@@ -164,72 +165,46 @@ export default {
     },
     getData() {
       //this.loading(true);
-      this.$http({
-        url: "http://xhmind.com:5051/tmp/total/overview",
-        method: 'get',
-      }).then(function(res) {
-        if (res.body.status) {
-          this.data1 = res.body.content.联网项目数;
-          this.data2 = res.body.content.管理面积数;
-          this.data3 = res.body.content.服务业主数;
-          this.manage[0] = res.body.content.停车场收费应收;
-          this.manage[1] = res.body.content.停车场收费实收;
-          this.Community_safety = res.body.content.社区安全指数;
-          this.fire_protection = res.body.content.消防报警;
-          this.boundary = res.body.content.周界防范报警;
-          this.personnel = res.body.content.人员报警;
-          this.video = res.body.content.视频报警;
-          this.engineering1 = res.body.content.巡检计划完成率;
-          this.engineering2 = res.body.content.维修完成率;
-          this.engineering3 = res.body.content.能耗指标;
-          this.environment = res.body.content.环境工作完成率;
-          this.satisfied = res.body.content.客户满意度;
-          this.month_card = res.body.content.停车场月卡催缴率;
-          this.turn_out_for_work = res.body.content.出勤率;
-          this.Rate_of_detachment[0] = res.body.content.重点岗位脱岗率;
-          this.Rate_of_detachment[1] = res.body.content.安防脱岗率;
-          this.Rate_of_detachment[2] = res.body.content.工程脱岗率;
-          this.Rate_of_detachment[3] = res.body.content.环境脱岗率;
-          this.Rate_of_detachment[4] = res.body.content.客服脱岗率;
-          this.Rate_of_detachment_over[0] = 0;
-          this.Rate_of_detachment_over[1] = this.Rate_of_detachment[0] - this.Rate_of_detachment[1];
-          this.Rate_of_detachment_over[2] = this.Rate_of_detachment_over[1] - this.Rate_of_detachment[2]
-          this.Rate_of_detachment_over[3] = this.Rate_of_detachment_over[2] - this.Rate_of_detachment[3];
-          this.Rate_of_detachment_over[4] = (this.Rate_of_detachment_over[3] + 0.001) - this.Rate_of_detachment[4];
-          this.loading(false);
-        }
-        if (this.isFirst) {
-          //第一次获取数据进行实列化
-          this.loading(false);
-          this.mapStatus = this.drawLine();
-          this.isFirst = false;
-        } else {
-          // 否则进行重绘
-          var _resizeMap = this.mapStatus;
-          _resizeMap();
-        }
+      var content = mainObj.content
+      this.data1 = content.联网项目数;
+      this.data2 = content.管理面积数;
+      this.data3 = content.服务业主数;
+      this.manage[0] = content.停车场收费应收;
+      this.manage[1] = content.停车场收费实收;
+      this.Community_safety = content.社区安全指数;
+      this.fire_protection = content.消防报警;
+      this.boundary = content.周界防范报警;
+      this.personnel = content.人员报警;
+      this.video = content.视频报警;
+      this.engineering1 = content.巡检计划完成率;
+      this.engineering2 = content.维修完成率;
+      this.engineering3 = content.能耗指标;
+      this.environment = content.环境工作完成率;
+      this.satisfied = content.客户满意度;
+      this.month_card = content.停车场月卡催缴率;
+      this.turn_out_for_work = content.出勤率;
+      this.Rate_of_detachment[0] = content.重点岗位脱岗率;
+      this.Rate_of_detachment[1] = content.安防脱岗率;
+      this.Rate_of_detachment[2] = content.工程脱岗率;
+      this.Rate_of_detachment[3] = content.环境脱岗率;
+      this.Rate_of_detachment[4] = content.客服脱岗率;
+      this.Rate_of_detachment_over[0] = 0;
+      this.Rate_of_detachment_over[1] = this.Rate_of_detachment[0] - this.Rate_of_detachment[1];
+      this.Rate_of_detachment_over[2] = this.Rate_of_detachment_over[1] - this.Rate_of_detachment[2]
+      this.Rate_of_detachment_over[3] = this.Rate_of_detachment_over[2] - this.Rate_of_detachment[3];
+      this.Rate_of_detachment_over[4] = (this.Rate_of_detachment_over[3] + 0.001) - this.Rate_of_detachment[4];
+      this.loading(false);
+      if (this.isFirst) {
+        //第一次获取数据进行实列化
         this.loading(false);
-      }, function(error) {
-        //失败回调的函数
-        console.log(error);
-
-      });
+        this.mapStatus = this.drawLine();
+        this.isFirst = false;
+      } else {
+        // 否则进行重绘
+        var _resizeMap = this.mapStatus;
+        _resizeMap();
+      }
     },
-    //	getDpr(){
-    //      var dpr = window.screen.height ;
-    //      //alert(dpr)
-    //      if (dpr <= 1080) {
-    //          return 16;
-    //         console.log(234)
-    //      }else if (dpr <= 900&dpr>=700) {
-    //          return  14;
-    //
-    //           console.log(264)
-    //      }else {
-    //      	 console.log(27784)
-    //          return 12;
-    //      }
-    //  },
     drawLine() {
       var refThis = this;
       var myChart1 = echarts.init(document.getElementById('myChart1'));

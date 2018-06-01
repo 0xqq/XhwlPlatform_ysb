@@ -1,123 +1,121 @@
 <template>
-    <div class="electronicMap">
-        <!--面包导航组件-->
-        <Bread :breadData="abc"></Bread>
-        <button class="btn_1">实时数据</button><button class="btn_2">历史数据</button>
-        <div class="content">
-        	<span class="newdevice1"></span>
-            <span class="newdevice2"></span>
-            <span class="newdevice3"></span>
-            <span class="newdevice4"></span>
-            <!--地图视口-->   
-            <div id="XSDFXPage" class="XSDFXPage"></div>
-            <div class="top_2">
-            	<p class="air_text1">水箱水质</p>
-            	<div class="bar_box">优</div>
-            	<ul class="ul">
-            		<li>
-            			<div class="box_1">
-            				<p class="p1">PH值</p>
-            				<p class="p2">7.5</p>
-            				<p class="p3">(国际:7.2~7.8)</p>
-            			</div>
-            		</li>
-            		<li>
-            			<div class="box_1">
-            				<p class="p1">TDS</p>
-            				<p class="p2">300<sub>mg/L</sub></p>
-            				<p class="p3">(国际:≤1000mg/L)</p>
-            			</div>
-            		</li>
-            		<!--<li>
+<div class="electronicMap">
+  <!--面包导航组件-->
+  <Bread :breadData="abc"></Bread>
+  <button class="btn_1">实时数据</button><button class="btn_2">历史数据</button>
+  <div class="content">
+    <span class="newdevice1"></span>
+    <span class="newdevice2"></span>
+    <span class="newdevice3"></span>
+    <span class="newdevice4"></span>
+    <!--地图视口-->
+    <div id="XSDFXPage" class="XSDFXPage"></div>
+    <div class="top_2">
+      <p class="air_text1">水箱水质</p>
+      <div class="bar_box">优</div>
+      <ul class="ul">
+        <li>
+          <div class="box_1">
+            <p class="p1">PH值</p>
+            <p class="p2">7.5</p>
+            <p class="p3">(国际:7.2~7.8)</p>
+          </div>
+        </li>
+        <li>
+          <div class="box_1">
+            <p class="p1">TDS</p>
+            <p class="p2">300<sub>mg/L</sub></p>
+            <p class="p3">(国际:≤1000mg/L)</p>
+          </div>
+        </li>
+        <!--<li>
             			<div class="box_1">
             				<p class="p1">TDC</p>
             				<p class="p2">25</p>
             				<p class="p3">(国际:1~100%)</p>
             			</div>
             		</li>-->
-            		<li>
-            			<div class="box_1">
-            				<p class="p1">浊度</p>
-            				<p class="p2">0.2</p>
-            				<p class="p3">(国际:≤1)</p>
-            			</div>
-            		</li>
-            		<li>
-            			<div class="box_1">
-            				<p class="p1">总氯</p>
-            				<p class="p2">0.35<sub>mg/L</sub></p>
-            				<p class="p3">(国际:0.3~1.0mg/L)</p>
-            			</div>
-            		</li>
-            	</ul>
-            </div>
-        </div>
+        <li>
+          <div class="box_1">
+            <p class="p1">浊度</p>
+            <p class="p2">0.2</p>
+            <p class="p3">(国际:≤1)</p>
+          </div>
+        </li>
+        <li>
+          <div class="box_1">
+            <p class="p1">总氯</p>
+            <p class="p2">0.35<sub>mg/L</sub></p>
+            <p class="p3">(国际:0.3~1.0mg/L)</p>
+          </div>
+        </li>
+      </ul>
     </div>
+  </div>
+</div>
 </template>
 
 <script>
 import Bread from '@/components/common/bread'
-import { mapState} from 'vuex'
+import waterBox from '@/httpData/waterBox'
+import {
+  mapState
+} from 'vuex'
 export default {
-    data() {
-        return {
-            abc: ['物联监控', '环境物联监控','水箱水质监控'],
-            all:[
-   				{"x":"114.05937","y":"22.538647"},
-            ],
-            value:[]
-        }
-    },
-    computed: {
-		...mapState(['mnUrl'])
-    },
-    components: {
-        Bread,
-    },
-    mounted() {
-        this.initMap();
-        this.showAll();
-        this.getData();
-    },
-    methods: {
-        initMap(){
-            // 创建Map实例及设置类型
-            var map = new BMap.Map("XSDFXPage");
-            // 设置中心点坐标
-            var point = new BMap.Point(114.058167,22.539506);
-            // 设置地图显示的城市(必须)
-            map.setCurrentCity("深圳市");
-            // 设置地图级别:1-19越大越清晰
-            map.centerAndZoom(point,19);
-            // 设置鼠标滚轮缩放
-            map.enableScrollWheelZoom(true);
-            return map
-        },
-//		setTimeout(){
-//			setTimeout(function(){
-//				showAll()
-//			},1000)
-//		},
-		showAll(){
-            var _map = this.initMap();
-            for(var i=0; i<=this.all.length-1; i++){ 
-                var marker = new BMap.Marker(new BMap.Point(this.all[i].x,this.all[i].y));
-                _map.addOverlay(marker);
-            }
-        },
-        getData(){
-				const url = this.mnUrl + "/tmp/watching/environment/water"
-				this.$http.get(url).then(res => {
-						this.value=res.body.content.水箱水
-					//console.log(res.body.content.水箱水[1].指标);
-				},(err)=>{
-					console.log(err);
-				})
-			}
-    },
-    created(){
-		
+  data() {
+    return {
+      abc: ['物联监控', '环境物联监控', '水箱水质监控'],
+      all: [{
+        "x": "114.05937",
+        "y": "22.538647"
+      }, ],
+      value: []
     }
+  },
+  computed: {
+    ...mapState(['mnUrl'])
+  },
+  components: {
+    Bread,
+  },
+  mounted() {
+    this.initMap();
+    this.showAll();
+    this.getData();
+  },
+  methods: {
+    initMap() {
+      // 创建Map实例及设置类型
+      var map = new BMap.Map("XSDFXPage");
+      // 设置中心点坐标
+      var point = new BMap.Point(114.058167, 22.539506);
+      // 设置地图显示的城市(必须)
+      map.setCurrentCity("深圳市");
+      // 设置地图级别:1-19越大越清晰
+      map.centerAndZoom(point, 19);
+      // 设置鼠标滚轮缩放
+      map.enableScrollWheelZoom(true);
+      return map
+    },
+    //		setTimeout(){
+    //			setTimeout(function(){
+    //				showAll()
+    //			},1000)
+    //		},
+    showAll() {
+      var _map = this.initMap();
+      for (var i = 0; i <= this.all.length - 1; i++) {
+        var marker = new BMap.Marker(new BMap.Point(this.all[i].x, this.all[i].y));
+        _map.addOverlay(marker);
+      }
+    },
+    getData() {
+      this.value = waterBox.content.水箱水
+    }
+  },
+  created() {
+
+  }
 }
 </script>
 
@@ -132,7 +130,7 @@ export default {
     }
     .electronicMap {
         width: 100%;
-        height: 100%; 
+        height: 100%;
     }
     .btn_1,.btn_2{
     	width: 1.41rem;

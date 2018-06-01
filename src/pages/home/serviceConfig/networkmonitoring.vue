@@ -1,176 +1,182 @@
 <template>
-	<div class="device">
-		<!--业务配置/设备监控阀值配置组件-->
-		<Bread :breadData="abc"></Bread>
-		<div class="device-nav">
-			<button class="btn" @click="modifu('')">
+<div class="device">
+  <!--业务配置/设备监控阀值配置组件-->
+  <Bread :breadData="abc"></Bread>
+  <div class="device-nav">
+    <button class="btn" @click="modifu('')">
 				<span>+</span>
 				新建网络监控</button>
-			<div class="img-time">
-				<div class="date-time">
-					<div class="block">
-						<span class="demonstration"></span>
-						<el-date-picker v-model="value6" type="daterange" placeholder="选择日期范围" class="el_picker">
-						</el-date-picker>
-					</div>
-				</div>
-				<div class="date-device">
-					<div>
-						<el-input placeholder="请输入内容" v-model="input5" class="place">
-							<el-select v-model="select" slot="prepend" placeholder="请选择">
-								<el-option label="餐厅名" value="1"></el-option>
-								<el-option label="订单号" value="2"></el-option>
-								<el-option label="用户电话" value="3"></el-option>
-							</el-select>
-							<el-button slot="append" icon="search"></el-button>
-						</el-input>
-					</div>
-				</div>
-				<input type="button" value="搜索" class="bttn">
-			</div>
-		</div>
-		<!--顶部导航-->
-		<ul class="content_divNav">
-			<li class="serial1">序号</li>
-			<li>配置名称</li>
-			<li>配置日期</li>
-			<li>监控对象类型</li>
-			<li>监控对象名称 </li>
-			<li>报警阀值</li>
-			<li>触发动作</li>
-			<li>推送方式</li>
-			<li>接收人</li>
-			<li>推送内容</li>
-			<li class="operation">操作&nbsp&nbsp</li>
-		</ul>
-		<!--中间内容-->
-		<div class="content_div">
-			<ul class="ul_list" v-for='(d, index) in  value'>
-				<li>{{d.序号}}</li>
-				<li>{{d.配置名称}}</li>
-				<li>{{d.配置日期}}</li>
-				<li>{{d.监控对象类型}}</li>
-				<li>{{d.监控对象名称}}</li>
-				<li>{{d.报警阈值}}</li>
-				<li>{{d.触发动作}}</li>
-				<li>{{d.推送方式}}</li>
-				<li>{{d.接收人}}</li>
-				<li>{{d.推送内容}}</li>
-				<li class="btn_center">
-					<button class="btn1" @click="modifu(d)">修改</button>
-					<button class="btn2" @click="show_model(index)">删除</button>
-				</li>
-			</ul>
-		</div>
-		<!--底部每页显示-->
-		<div class="page">
-			<span>每页显示</span>
-			<select class="select">
+    <div class="img-time">
+      <div class="date-time">
+        <div class="block">
+          <span class="demonstration"></span>
+          <el-date-picker v-model="value6" type="daterange" placeholder="选择日期范围" class="el_picker">
+          </el-date-picker>
+        </div>
+      </div>
+      <div class="date-device">
+        <div>
+          <el-input placeholder="请输入内容" v-model="input5" class="place">
+            <el-select v-model="select" slot="prepend" placeholder="请选择">
+              <el-option label="餐厅名" value="1"></el-option>
+              <el-option label="订单号" value="2"></el-option>
+              <el-option label="用户电话" value="3"></el-option>
+            </el-select>
+            <el-button slot="append" icon="search"></el-button>
+          </el-input>
+        </div>
+      </div>
+      <input type="button" value="搜索" class="bttn">
+    </div>
+  </div>
+  <!--顶部导航-->
+  <ul class="content_divNav">
+    <li class="serial1">序号</li>
+    <li>配置名称</li>
+    <li>配置日期</li>
+    <li>监控对象类型</li>
+    <li>监控对象名称 </li>
+    <li>报警阀值</li>
+    <li>触发动作</li>
+    <li>推送方式</li>
+    <li>接收人</li>
+    <li>推送内容</li>
+    <li class="operation">操作&nbsp&nbsp</li>
+  </ul>
+  <!--中间内容-->
+  <div class="content_div">
+    <ul class="ul_list" v-for='(d, index) in  value'>
+      <li>{{d.序号}}</li>
+      <li>{{d.配置名称}}</li>
+      <li>{{d.配置日期}}</li>
+      <li>{{d.监控对象类型}}</li>
+      <li>{{d.监控对象名称}}</li>
+      <li>{{d.报警阈值}}</li>
+      <li>{{d.触发动作}}</li>
+      <li>{{d.推送方式}}</li>
+      <li>{{d.接收人}}</li>
+      <li>{{d.推送内容}}</li>
+      <li class="btn_center">
+        <button class="btn1" @click="modifu(d)">修改</button>
+        <button class="btn2" @click="show_model(index)">删除</button>
+      </li>
+    </ul>
+  </div>
+  <!--底部每页显示-->
+  <div class="page">
+    <span>每页显示</span>
+    <select class="select">
 				<option value="A">10</option>
 				<option value="B">20</option>
 				<option value="C">30</option>
 			</select>
-			<div class="pageDiv">
-				<img src="../../../images/left_select.png" />
-				<span>1/1</span>
-				<img src="../../../images/right_select.png" />
-			</div>
-		</div>
-		<!--点击删除出现的模态框-->
-		<div class="box_model" v-if="box_model">
-			<p>确 认 删 除</p>
-			<button @click="removeTode(keepIndex)">确认</button>
-			<button class="btn2" @click="cancal">取消</button>
-		</div>
-	</div>
+    <div class="pageDiv">
+      <img src="../../../images/left_select.png" />
+      <span>1/1</span>
+      <img src="../../../images/right_select.png" />
+    </div>
+  </div>
+  <!--点击删除出现的模态框-->
+  <div class="box_model" v-if="box_model">
+    <p>确 认 删 除</p>
+    <button @click="removeTode(keepIndex)">确认</button>
+    <button class="btn2" @click="cancal">取消</button>
+  </div>
+</div>
 </template>
 <script>
 import Bread from '@/components/common/bread'
-import { mapState, mapMutations } from 'vuex'
+import networKmonitoring from '@/httpData/networKmonitoring'
+import { format, gapTime } from '@/script/timeFormat.js'
+import {
+  mapState,
+  mapMutations
+} from 'vuex'
 export default {
-	data() {
-		return {
-			abc: ['业务配置', '物联业务', '物联监控阀值配置'],
-			modifyvue: null,
-			box_model: false,
-			keepIndex: null,
-			input5: '',
-			select: '',
-			pickerOptions2: {
-				shortcuts: [{
-					text: '最近一周',
-					onClick(picker) {
-						const end = new Date();
-						const start = new Date();
-						start.setTime(start.getTime() - 3600 * 1000 * 24 * 7);
-						picker.$emit('pick', [start, end]);
-					}
-				}, {
-					text: '最近一个月',
-					onClick(picker) {
-						const end = new Date();
-						const start = new Date();
-						start.setTime(start.getTime() - 3600 * 1000 * 24 * 30);
-						picker.$emit('pick', [start, end]);
-					}
-				}, {
-					text: '最近三个月',
-					onClick(picker) {
-						const end = new Date();
-						const start = new Date();
-						start.setTime(start.getTime() - 3600 * 1000 * 24 * 90);
-						picker.$emit('pick', [start, end]);
-					}
-				}]
-			},
-			value6: '',
-			value: []
+  data() {
+    return {
+      abc: ['业务配置', '物联业务', '物联监控阀值配置'],
+      modifyvue: null,
+      box_model: false,
+      keepIndex: null,
+      input5: '',
+      select: '',
+      pickerOptions2: {
+        shortcuts: [{
+          text: '最近一周',
+          onClick(picker) {
+            const end = new Date();
+            const start = new Date();
+            start.setTime(start.getTime() - 3600 * 1000 * 24 * 7);
+            picker.$emit('pick', [start, end]);
+          }
+        }, {
+          text: '最近一个月',
+          onClick(picker) {
+            const end = new Date();
+            const start = new Date();
+            start.setTime(start.getTime() - 3600 * 1000 * 24 * 30);
+            picker.$emit('pick', [start, end]);
+          }
+        }, {
+          text: '最近三个月',
+          onClick(picker) {
+            const end = new Date();
+            const start = new Date();
+            start.setTime(start.getTime() - 3600 * 1000 * 24 * 90);
+            picker.$emit('pick', [start, end]);
+          }
+        }]
+      },
+      value6: '',
+      value: []
 
 
-		}
-	},
-	computed: {
-		...mapState([
-      	'token','mnUrl'
+    }
+  },
+  computed: {
+    ...mapState([
+      'token', 'mnUrl'
     ])
-	},
-	components: {
-		Bread
-	},
-	mounted() {
-	},
-	created() {
+  },
+  components: {
+    Bread
+  },
+  mounted() {},
+  created() {
 
-		this.getDate();
+    this.getDate();
 
-	},
-	methods: {
-		modifu(d) {
-			this.modifyvue = d;
-			this.$router.push({ path: '/newnetworkmonitoring', query: { value: this.modifyvue } });
-		},
-		removeTode(keep) {
-			this.value.splice(keep, 1);
-			this.box_model = false;
-		},
-		show_model(index) {
-			this.keepIndex = index;
-			this.box_model = true;
-		},
-		cancal() {
-			this.box_model = false;
-		},
-		getDate() {
-			const url = this.mnUrl+"/tmp/config/iot/net"
-			this.$http.get(url).then(res => {
-				this.value = res.body.content;
-				// console.log(res);
-			},function(error){
-				console.log(error)
-
-			})
-		}
-	}
+  },
+  methods: {
+    modifu(d) {
+      this.modifyvue = d;
+      this.$router.push({
+        path: '/newnetworkmonitoring',
+        query: {
+          value: this.modifyvue
+        }
+      });
+    },
+    removeTode(keep) {
+      this.value.splice(keep, 1);
+      this.box_model = false;
+    },
+    show_model(index) {
+      this.keepIndex = index;
+      this.box_model = true;
+    },
+    cancal() {
+      this.box_model = false;
+    },
+    getDate() {
+      this.value = networKmonitoring.content
+      this.value.forEach((item, index) => {
+        var time1 = new Date().getTime() - (Math.random() + index + 2) * 86400000 //
+        item.配置日期 = format(time1, 'yyyy-MM-dd HH:mm:ss')
+      })
+    }
+  }
 }
 </script>
 <style lang="scss" scoped>
@@ -284,7 +290,7 @@ export default {
 		// scrollbar-highlight-color: #333;
 		// 滚动条阴影
 		// scrollbar-shadow-color: #ccc;
-		// 滚动条轨道颜色·································································	··································································	
+		// 滚动条轨道颜色·································································	··································································
 		scrollbar-track-color: #12253d;
 		scrollbar-arrow-color: #12253d;
 	}
@@ -332,7 +338,7 @@ export default {
 		li {
 			flex: 1;
 			height: auto;
-			display: flex; 
+			display: flex;
 			align-items: center;
 			justify-content: center;
 			// line-height: 1rem;
@@ -340,7 +346,7 @@ export default {
 			color: white;
 			border-bottom: 2px solid #698499;
 			font-size: 0.16rem;
-			padding: 0.2rem 0;	
+			padding: 0.2rem 0;
 
 		}
 	}

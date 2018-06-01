@@ -1,204 +1,204 @@
 <template>
-    <div class="Cruise">
-        <!--业务配置/设备监控阀值配置组件-->
-        <Bread :breadData="abc"></Bread>
-        <div class="device-nav">
-            <div class="top_div1">
-                <span class="span_left">视频巡检设置</span>
-                <button class="cruise_btn" @click="showmodel" v-if="vanish">
+<div class="Cruise">
+  <!--业务配置/设备监控阀值配置组件-->
+  <Bread :breadData="abc"></Bread>
+  <div class="device-nav">
+    <div class="top_div1">
+      <span class="span_left">视频巡检设置</span>
+      <button class="cruise_btn" @click="showmodel" v-if="vanish">
                     <span class="cruise_span">+</span> 添加巡检计划</button>
-            </div>
-        </div>
-        <div class="cruise_center" v-if="!stopshow" >
-            <div class="cruise_top" v-for="d in vaLue">
-                <span class="newdevice2"></span>
-                <span class="newdevice3"></span>
-                <span class="newdevice1"></span>
-                <span class="newdevice5"></span>
-                <div class="cruise_num">
-                    {{d.序号}}
-                </div>
-                <div class="cruise_ul">
-                    <ul >
-                        <li><span>巡检配置名称：</span><span>{{d.巡检配置名称}}</span></li>
-                        <li><span>巡检时间：</span><span>{{d.巡检时间}}</span></li>
-                        <li><span>巡检周期：</span><span>{{d.巡检周期}}</span></li>
-                        <li><span>计划巡检摄像头列表：</span><span>{{d.计划巡检摄像头}}</span></li>
-                        <li><span>巡检状态：</span><span>{{d.状态}}</span></li>
-                         <li><span>视频切换间隔时间：</span><span>{{d.视频切换间隔时间}}</span></li>
-                    </ul>
-                </div>
-                <div class="cruise_blue">
-                    <el-switch v-model="item.id" on-color="#13ce66" off-color="#ff4949"></el-switch>
-                </div>
-                <div class="rubbish1"></div>
-            </div>
-        </div>
-        <!--点击弹出的模态框-->
-        <div class="model_cruise" v-if="stopshow">
-            <div class="model_delete " @click="addplans">x</div>
-            <div class="model_top">
-                <section class="section">
-                    <span class="label">巡检名称：</span>
-                    <textarea name=""></textarea>
-                </section>
-                <section class="section1">
-                    <span class="label">巡检时间：</span>
-                    <textarea name=""></textarea>
-                    <span class="label3">—</span>
-                    <textarea name=""></textarea>
-                </section>
-                <section class="section3">
-                    <span class="label">视频间隔时间：</span>
-                    <textarea name=""></textarea>
-                    <span>秒</span>
-                    <span class="label1">&nbsp&nbsp巡检周期：</span>
-                    <input type="checkbox"> 全选
-                    <input type="checkbox"> 周一
-                    <input type="checkbox"> 周二
-                    <input type="checkbox"> 周三
-                    <input type="checkbox"> 周四
-                    <input type="checkbox"> 周五
-                    <input type="checkbox"> 周六
-                    <input type="checkbox"> 周日
-                </section>
-                <section class="section3">
-                    <span class="label">在线验证间隔时间：</span>
-                    <textarea name=""></textarea>
-                    <span>分钟</span> 
-                    <span  class="label1">巡检设备：</span>
-                    <span class="label2"> 1号摄像头</span>
-                    <span class="label2"> 2号摄像头</span>
-                    <span class="label2"> 5号摄像头</span>
-                </section>
-            </div>
-            <div class="model_buttom">
-                <ul class="modle_ul" v-for="(key,index) in camera" :key="index" >
-                    <li class="modle_li_one">{{key.center}}</li>
-                    <li>{{key.camera1}}</li>
-                    <li>{{key.camera2}}</li>
-                    <li>{{key.camera3}}</li>
-                    <li>{{key.camera4}}</li>
-                    <li>{{key.camera5}}</li>
-                </ul>
-            </div>
-            <div class="model_btn"><button class="btn" @click="addplan">确认</button></div>
-        </div>
     </div>
+  </div>
+  <div class="cruise_center" v-if="!stopshow">
+    <div class="cruise_top" v-for="d in vaLue">
+      <span class="newdevice2"></span>
+      <span class="newdevice3"></span>
+      <span class="newdevice1"></span>
+      <span class="newdevice5"></span>
+      <div class="cruise_num">
+        {{d.序号}}
+      </div>
+      <div class="cruise_ul">
+        <ul>
+          <li><span>巡检配置名称：</span><span>{{d.巡检配置名称}}</span></li>
+          <li><span>巡检时间：</span><span>{{d.巡检时间}}</span></li>
+          <li><span>巡检周期：</span><span>{{d.巡检周期}}</span></li>
+          <li><span>计划巡检摄像头列表：</span><span>{{d.计划巡检摄像头}}</span></li>
+          <li><span>巡检状态：</span><span>{{d.状态}}</span></li>
+          <li><span>视频切换间隔时间：</span><span>{{d.视频切换间隔时间}}</span></li>
+        </ul>
+      </div>
+      <div class="cruise_blue">
+        <el-switch v-model="item.id" on-color="#13ce66" off-color="#ff4949"></el-switch>
+      </div>
+      <div class="rubbish1"></div>
+    </div>
+  </div>
+  <!--点击弹出的模态框-->
+  <div class="model_cruise" v-if="stopshow">
+    <div class="model_delete " @click="addplans">x</div>
+    <div class="model_top">
+      <section class="section">
+        <span class="label">巡检名称：</span>
+        <textarea name=""></textarea>
+      </section>
+      <section class="section1">
+        <span class="label">巡检时间：</span>
+        <textarea name=""></textarea>
+        <span class="label3">—</span>
+        <textarea name=""></textarea>
+      </section>
+      <section class="section3">
+        <span class="label">视频间隔时间：</span>
+        <textarea name=""></textarea>
+        <span>秒</span>
+        <span class="label1">&nbsp&nbsp巡检周期：</span>
+        <input type="checkbox"> 全选
+        <input type="checkbox"> 周一
+        <input type="checkbox"> 周二
+        <input type="checkbox"> 周三
+        <input type="checkbox"> 周四
+        <input type="checkbox"> 周五
+        <input type="checkbox"> 周六
+        <input type="checkbox"> 周日
+      </section>
+      <section class="section3">
+        <span class="label">在线验证间隔时间：</span>
+        <textarea name=""></textarea>
+        <span>分钟</span>
+        <span class="label1">巡检设备：</span>
+        <span class="label2"> 1号摄像头</span>
+        <span class="label2"> 2号摄像头</span>
+        <span class="label2"> 5号摄像头</span>
+      </section>
+    </div>
+    <div class="model_buttom">
+      <ul class="modle_ul" v-for="(key,index) in camera" :key="index">
+        <li class="modle_li_one">{{key.center}}</li>
+        <li>{{key.camera1}}</li>
+        <li>{{key.camera2}}</li>
+        <li>{{key.camera3}}</li>
+        <li>{{key.camera4}}</li>
+        <li>{{key.camera5}}</li>
+      </ul>
+    </div>
+    <div class="model_btn"><button class="btn" @click="addplan">确认</button></div>
+  </div>
+</div>
 </template>
 <script>
 import Bread from '@/components/common/bread'
-import { mapState} from 'vuex'
+import cruiseObj from '@/httpData/cruise.js'
+import {
+  mapState
+} from 'vuex'
 export default {
-    data() {
-        return {
-            abc: ['物联监控', '视频物联监控', '巡检配置'],
-            item:[{id1:true},{id2:true}],
-            datas: {},
-            value1: true,
-            value2: false,
-            stopshow:false,
-            vanish:true,
-            camera:[{
-                "center":"监控中心",
-                "camera1":"监控室  ",
-                
-            },{
-                "center":"财务类",
-               "camera1":"财务室",
-            },{
-                "center":"客服类",
-                "camera1":"游泳池1",
-                "camera2":"游泳池2",
-                "camera3":"小花园1",
-                "camera4":"小花园2",
-                "camera5":"会所1",
-                "camera6":"会所2",
-            },{
-                "center":"道口岗",
-                "camera1":"地上车场岗亭",
-                "camera2":"地库车场岗亭",
-                "camera3":"地上车场入口",
-                "camera4":"北区地库车场出口",
-                "camera5":"南区地库出口门口",
-                "camera6":"南区负一层地库入口通道",
-            },{
-                "center":"大门",
-                "camera1":"东大门1",
-                "camera2":"东大门2",
-                "camera3":"西大门1",
-                "camera4":"西大门2",
-                "camera5":"南大门1",
-                "camera6":"南大门2",
-                "camera7":"北大门1",
-                "camera8":"北大门2",
-            },{
-                "center":"社区户外公共区域",
-                "camera1":"东面摄像头1",
-                "camera2":"东面摄像头2",
-                "camera3":"南面摄像头1",
-                "camera4":"南面摄像头2",
-                "camera5":"西面摄像头1",
-                "camera6":"西面摄像头2",
-                "camera7":"北面摄像头1",
-                "camera8":"北面摄像头2",
-            },{
-                "center":"单元门口",
-               "camera1":"华景轩一座后楼道",
-                "camera2":"华景轩二座后楼道",
-                "camera3":"华景轩三座后楼道",
-                "camera4":"华景峰一座后楼道",
-                "camera5":"华景峰二座后楼道",
-                "camera6":"华景台一座后楼道",
-                "camera7":"华景台二座后楼道",
-            },{
-                "center":"电梯厅",
-                "camera1":"大堂摄像头1",
-                "camera2":"大堂摄像头2",
-                "camera3":"管理处前台",                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  
-            }
-                
-            ],
-            vaLue:[]    
+  data() {
+    return {
+      abc: ['物联监控', '视频物联监控', '巡检配置'],
+      item: [{
+        id1: true
+      }, {
+        id2: true
+      }],
+      datas: {},
+      value1: true,
+      value2: false,
+      stopshow: false,
+      vanish: true,
+      camera: [{
+          "center": "监控中心",
+          "camera1": "监控室  ",
+
+        }, {
+          "center": "财务类",
+          "camera1": "财务室",
+        }, {
+          "center": "客服类",
+          "camera1": "游泳池1",
+          "camera2": "游泳池2",
+          "camera3": "小花园1",
+          "camera4": "小花园2",
+          "camera5": "会所1",
+          "camera6": "会所2",
+        }, {
+          "center": "道口岗",
+          "camera1": "地上车场岗亭",
+          "camera2": "地库车场岗亭",
+          "camera3": "地上车场入口",
+          "camera4": "北区地库车场出口",
+          "camera5": "南区地库出口门口",
+          "camera6": "南区负一层地库入口通道",
+        }, {
+          "center": "大门",
+          "camera1": "东大门1",
+          "camera2": "东大门2",
+          "camera3": "西大门1",
+          "camera4": "西大门2",
+          "camera5": "南大门1",
+          "camera6": "南大门2",
+          "camera7": "北大门1",
+          "camera8": "北大门2",
+        }, {
+          "center": "社区户外公共区域",
+          "camera1": "东面摄像头1",
+          "camera2": "东面摄像头2",
+          "camera3": "南面摄像头1",
+          "camera4": "南面摄像头2",
+          "camera5": "西面摄像头1",
+          "camera6": "西面摄像头2",
+          "camera7": "北面摄像头1",
+          "camera8": "北面摄像头2",
+        }, {
+          "center": "单元门口",
+          "camera1": "华景轩一座后楼道",
+          "camera2": "华景轩二座后楼道",
+          "camera3": "华景轩三座后楼道",
+          "camera4": "华景峰一座后楼道",
+          "camera5": "华景峰二座后楼道",
+          "camera6": "华景台一座后楼道",
+          "camera7": "华景台二座后楼道",
+        }, {
+          "center": "电梯厅",
+          "camera1": "大堂摄像头1",
+          "camera2": "大堂摄像头2",
+          "camera3": "管理处前台",
         }
-    },
-    computed: {
-		...mapState(['token','mnUrl'])
-    },
-    components: {
-        Bread
-    },
-    mounted() {
-        this.add();
-        this.getData()
-    },
-    methods: {
-        add() {
-            this.datas = this.$route.query.value;
-        },
-        showmodel(){
-              this.stopshow=true;
-              this.vanish=false;
-        },
-        addplan(){
-            this.stopshow=false;
-            this.vanish=true;
-        },
-        addplans(){
-            this.stopshow=false;
-            this.vanish=true;
-        },
-        getData(){
-				const url = this.mnUrl + "/tmp/watching/video/configs"
-				this.$http.get(url).then(res => {
-					
-					this.vaLue = res.body.content;
-					//console.log(this.vaLue);
-				},(err)=>{
-					console.log(err);
-				})
-			}
+
+      ],
+      vaLue: []
     }
+  },
+  computed: {
+    ...mapState(['token', 'mnUrl'])
+  },
+  components: {
+    Bread
+  },
+  mounted() {
+    this.add();
+    this.getData()
+  },
+  methods: {
+    add() {
+      this.datas = this.$route.query.value;
+    },
+    showmodel() {
+      this.stopshow = true;
+      this.vanish = false;
+    },
+    addplan() {
+      this.stopshow = false;
+      this.vanish = true;
+    },
+    addplans() {
+      this.stopshow = false;
+      this.vanish = true;
+    },
+    getData() {
+      this.vaLue = cruiseObj.content
+    }
+  }
 }
 </script>
 <style lang="scss" scoped>
@@ -225,11 +225,11 @@ export default {
             background-size: 100% 100%;
             background-position: center;
         }
-        .cruise_btn {       
+        .cruise_btn {
             line-height: 0.33rem;
             margin-left: 0.21rem;
             @include btn(1.41rem,0.36rem);
-            
+
             .cruise_span {
                 display: inline-block;
                 color: #fff;
@@ -320,7 +320,7 @@ export default {
             position: absolute;
             right:0.1rem;
             top:0.1rem;
-           
+
         }
         .model_delete:hover{
              color:red;
@@ -379,7 +379,7 @@ export default {
                     vertical-align: middle;
                     border-radius: 0.05rem;
                 }
-                
+
                 input{
                     margin-left:0.15rem;
                 }
@@ -398,8 +398,8 @@ export default {
                 width: 2.5rem;
                 height: 1.9rem;
                 margin-bottom: 0.2rem;
-                
-                
+
+
                 li{
                      text-align: center;
                      margin-top:0.1rem;
@@ -410,7 +410,7 @@ export default {
                     border-bottom: 0.02rem solid #fff;
                     margin-left:0.3rem;
                     // margin-top:0.4rem;
-                   
+
                 }
             }
         }
@@ -418,8 +418,8 @@ export default {
               text-align: center;
                 .btn{
             margin-top:0.15rem;
-            @include btn(1.41rem,0.36rem);    
-        }    
+            @include btn(1.41rem,0.36rem);
+        }
         }
     }
 }
@@ -479,7 +479,7 @@ export default {
     	width:8.5rem ;
         color: #fff;
         margin-bottom: 0.18rem;
-        
+
     }
 }
 textarea {

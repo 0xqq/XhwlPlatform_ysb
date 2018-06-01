@@ -152,7 +152,7 @@ export default {
       var content = carout.content
       for (var i = 0; i < content.length; i++) {
         var time1 = new Date().getTime() - (Math.random() + i + 2) * 86400000 // 入场时间
-        var time2 = (Math.random() * 2 + 0) * 86400000  // 停车时间为0-2天
+        var time2 = (Math.random() * 1 + 0) * 86400000  // 停车时间为0-2天
         var time3 = time1 + time2 // 出场时间
         content[i].入场时间 = format(time1, 'yyyy-MM-dd HH:mm:ss')
         content[i].出场时间 = format(time3, 'yyyy-MM-dd HH:mm:ss')

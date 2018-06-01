@@ -91,6 +91,7 @@
 
 <script>
 import Bread from '@/components/common/bread'
+import siteCheck from '@/httpData/siteCheck'
 import { mapState } from 'vuex'
 export default {
 	data() {
@@ -142,15 +143,9 @@ export default {
 			map.enableScrollWheelZoom(true);
 		},
 		getData() {
-			const url = this.mnUrl + "/tmp/watching/person/safe_location"
-			this.$http.get(url).then(res => {
-				this.value1 = res.body.content;
-				this.value2 = res.body.content
-				this.value3 = res.body.content
-				console.log(this.value1)
-			}, function(error) {
-				console.log(error)
-			})
+      this.value1 = siteCheck.content
+      this.value2 = siteCheck.content
+      this.value3 = siteCheck.content
 		},
 		handleSizeChange(val) {
 			// console.log(`每页 ${val} 条`);

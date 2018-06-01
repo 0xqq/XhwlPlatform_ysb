@@ -1,175 +1,178 @@
 <template>
-    <div class="device">
-        <!--业务配置/设备监控阀值配置组件-->
-        <Bread :breadData="abc"></Bread>
-        <div class="content_left">
-            <div class="device-nav">
-                <div class="img-time">
-                    <div class="date_time">
-                        <div class="block">
-                            <span class="demonstration"></span>
-                            <el-date-picker v-model="value6" type="daterange" placeholder="输入日期范围" class="el_picker">
-                            </el-date-picker>
-                        </div>
-                    </div>
-                    <div class="date-device">
-                        <div>
-                            <el-input placeholder="请输入搜索内容" v-model="input5" class="place">
-                                <el-select v-model="select" slot="prepend" placeholder="请选择" class="place">
-                                    <el-option label="报修人" value="1"></el-option>
-                                    <el-option label="跟进人" value="2"></el-option>
-                                </el-select>
-                                <el-button slot="append" icon="search"></el-button>
-                            </el-input>
-                        </div>
-                    </div>
-                    <input type="button" value="搜索" class="bttn">
-                    <img src="../../../images/inout.png" alt="" @click="derivedForm('tableExcel')">
-                </div>
-            </div>
-            <div class="table">
-                <table id="tableExcel" cellspacing="0" cellpadding="0">
-                    <thead class="table_thead">
-                        <tr class="nav_table">
-                            <th> 单号</th>
-                            <th> 生成时间</th>
-                            <th> 完成时间</th>
-                            <th> 报修人</th>
-                            <th class="left_none">
-                                <select>
-                                    <option value="volvo">全部状态</option>
-                                    <option value="saab">进行中</option>
-                                    <option value="opel">已完成</option>
-                                    <option value="audi">未完成</option>
-                                </select>
-                            </th>
-                            <th>跟进人</th>
-                            <th> 操作</th>
-                        </tr>
-                    </thead>
-                    <tbody class="table_body">
-                        <tr v-for='(d, index) in  vaLue' :key="index" class="center_table">
-                            <td>{{d.单号}}</td>
-                            <td>{{d.生成时间}}</td>
-                            <td>{{d.完成时间}}</td>
-                            <td>{{d.报修人}}</td>
-                            <td>{{d.全部状态}}</td>
-                            <td>{{d.跟进人}} </td>
-                            <td class="btn_center">
-                                <button class="btn1">修改</button>
-                                <button class="btn2">删除</button>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-            <!--底部换页-->
-            <div class="pager">
-                <div class="block">
-                    <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page.sync="currentPage2" :page-sizes="[30,60,90]" :page-size="100" layout="sizes, prev, pager, next" :total="100">
-                    </el-pagination>
-                </div>
-            </div>
+<div class="device">
+  <!--业务配置/设备监控阀值配置组件-->
+  <Bread :breadData="abc"></Bread>
+  <div class="content_left">
+    <div class="device-nav">
+      <div class="img-time">
+        <div class="date_time">
+          <div class="block">
+            <span class="demonstration"></span>
+            <el-date-picker v-model="value6" type="daterange" placeholder="输入日期范围" class="el_picker">
+            </el-date-picker>
+          </div>
         </div>
+        <div class="date-device">
+          <div>
+            <el-input placeholder="请输入搜索内容" v-model="input5" class="place">
+              <el-select v-model="select" slot="prepend" placeholder="请选择" class="place">
+                <el-option label="报修人" value="1"></el-option>
+                <el-option label="跟进人" value="2"></el-option>
+              </el-select>
+              <el-button slot="append" icon="search"></el-button>
+            </el-input>
+          </div>
+        </div>
+        <input type="button" value="搜索" class="bttn">
+        <img src="../../../images/inout.png" alt="" @click="derivedForm('tableExcel')">
+      </div>
     </div>
+    <div class="table">
+      <table id="tableExcel" cellspacing="0" cellpadding="0">
+        <thead class="table_thead">
+          <tr class="nav_table">
+            <th> 单号</th>
+            <th> 生成时间</th>
+            <th> 完成时间</th>
+            <th> 报修人</th>
+            <th class="left_none">
+              <select>
+                <option value="volvo">全部状态</option>
+                <option value="saab">进行中</option>
+                <option value="opel">已完成</option>
+                <option value="audi">未完成</option>
+              </select>
+            </th>
+            <th>跟进人</th>
+            <th> 操作</th>
+          </tr>
+        </thead>
+        <tbody class="table_body">
+          <tr v-for='(d, index) in  vaLue' :key="index" class="center_table">
+            <td>{{d.单号}}</td>
+            <td>{{d.生成时间}}</td>
+            <td>{{d.完成时间}}</td>
+            <td>{{d.报修人}}</td>
+            <td>{{d.全部状态}}</td>
+            <td>{{d.跟进人}} </td>
+            <td class="btn_center">
+              <button class="btn1">修改</button>
+              <button class="btn2">删除</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <!--底部换页-->
+    <div class="pager">
+      <div class="block">
+        <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page.sync="currentPage2" :page-sizes="[30,60,90]" :page-size="100" layout="sizes, prev, pager, next" :total="100">
+        </el-pagination>
+      </div>
+    </div>
+  </div>
+</div>
 </template>
 <script>
 import Bread from '@/components/common/bread'
-import { mapState } from 'vuex'
+import safeguardObj from '@/httpData/maintenanceManagement'
+import { format, gapTime } from '@/script/timeFormat.js'
+import {
+  mapState
+} from 'vuex'
 export default {
-    data() {
-        return {
-            abc: ['管理应用', '工程管理', '维修管理'],
-            modifyvue: null,
-            box_model: false,
-            currentPage2: 5,
-            keepIndex: null,
-            input5: '',
-            select: '',
-            pickerOptions2: {
-                shortcuts: [{
-                    text: '最近一周',
-                    onClick(picker) {
-                        const end = new Date();
-                        const start = new Date();
-                        start.setTime(start.getTime() - 3600 * 1000 * 24 * 7);
-                        picker.$emit('pick', [start, end]);
-                    }
-                }, {
-                    text: '最近一个月',
-                    onClick(picker) {
-                        const end = new Date();
-                        const start = new Date();
-                        start.setTime(start.getTime() - 3600 * 1000 * 24 * 30);
-                        picker.$emit('pick', [start, end]);
-                    }
-                }, {
-                    text: '最近三个月',
-                    onClick(picker) {
-                        const end = new Date();
-                        const start = new Date();
-                        start.setTime(start.getTime() - 3600 * 1000 * 24 * 90);
-                        picker.$emit('pick', [start, end]);
-                    }
-                }]
-            },
-            value6: '',
-            vaLue: [],
-            options: [{
-                value: '选项1',
-                label: '已完成'
-            }, {
-                value: '选项2',
-                label: '进行中'
-            }, {
-                value: '选项3',
-                label: '已关闭'
-            }],
-            value: '',
-        }
-    },
-    computed: {
-        ...mapState(['mnUrl'])
-    },
-    components: {
-        Bread
-    },
-    mounted() {
-        this.getData()
-    },
-    methods: {
-        removeTode(keep) {
-            // console.log(keep);
-            this.value.splice(keep, 1);
-            this.box_model = false;
-        },
-        show_model(index) {
-            this.keepIndex = index;
-            this.box_model = true;
-        },
-        cancal() {
-            this.box_model = false;
-        },
-        getData() {
-            const url = this.mnUrl + "/tmp/watching/engineer/repaire"
-            this.$http.get(url).then(res => {
-                // console.log(res)
-                this.vaLue = res.body.content;
-                // console.log(this.vaLue)
-            }, function(error) {
-                console.log(error)
-            })
-        },
-        handleSizeChange(val) {
-            // console.log(`每页 ${val} 条`);
-        },
-        handleCurrentChange(val) {
-            // console.log(`当前页: ${val}`);
-        },
-        derivedForm(tableExcel) {
-            this.$func.method5(tableExcel)
-        },
+  data() {
+    return {
+      abc: ['管理应用', '工程管理', '维修管理'],
+      modifyvue: null,
+      box_model: false,
+      currentPage2: 5,
+      keepIndex: null,
+      input5: '',
+      select: '',
+      pickerOptions2: {
+        shortcuts: [{
+          text: '最近一周',
+          onClick(picker) {
+            const end = new Date();
+            const start = new Date();
+            start.setTime(start.getTime() - 3600 * 1000 * 24 * 7);
+            picker.$emit('pick', [start, end]);
+          }
+        }, {
+          text: '最近一个月',
+          onClick(picker) {
+            const end = new Date();
+            const start = new Date();
+            start.setTime(start.getTime() - 3600 * 1000 * 24 * 30);
+            picker.$emit('pick', [start, end]);
+          }
+        }, {
+          text: '最近三个月',
+          onClick(picker) {
+            const end = new Date();
+            const start = new Date();
+            start.setTime(start.getTime() - 3600 * 1000 * 24 * 90);
+            picker.$emit('pick', [start, end]);
+          }
+        }]
+      },
+      value6: '',
+      vaLue: [],
+      options: [{
+        value: '选项1',
+        label: '已完成'
+      }, {
+        value: '选项2',
+        label: '进行中'
+      }, {
+        value: '选项3',
+        label: '已关闭'
+      }],
+      value: '',
     }
+  },
+  computed: {
+    ...mapState(['mnUrl'])
+  },
+  components: {
+    Bread
+  },
+  mounted() {
+    this.getData()
+  },
+  methods: {
+    removeTode(keep) {
+      // console.log(keep);
+      this.value.splice(keep, 1);
+      this.box_model = false;
+    },
+    show_model(index) {
+      this.keepIndex = index;
+      this.box_model = true;
+    },
+    cancal() {
+      this.box_model = false;
+    },
+    getData() {
+      this.vaLue = safeguardObj.content
+      console.log('vaLue', this.vaLue)
+      this.vaLue.forEach((item, index) => {
+        var time1 = new Date().getTime() - (Math.random() + index + 1) * 86400000 // 上报时间
+        item.生成时间 = format(time1, 'yyyy-MM-dd') + ' ' + item.生成时间.substr(-8) //日期随机+时间取定值
+        item.完成时间 = format(time1, 'yyyy-MM-dd') + ' ' + item.完成时间.substr(-8) //日期随机+时间取定值
+      })
+    },
+    handleSizeChange(val) {
+      // console.log(`每页 ${val} 条`);
+    },
+    handleCurrentChange(val) {
+      // console.log(`当前页: ${val}`);
+    },
+    derivedForm(tableExcel) {
+      this.$func.method5(tableExcel)
+    },
+  }
 }
 </script>
 <style lang="scss" scoped>
@@ -271,7 +274,7 @@ export default {
             // scrollbar-highlight-color: #333;
             // 滚动条阴影
             // scrollbar-shadow-color: #ccc;
-            // 滚动条轨道颜色·································································	··································································	
+            // 滚动条轨道颜色·································································	··································································
             scrollbar-track-color: #12253d;
             scrollbar-arrow-color: #12253d;
             table {

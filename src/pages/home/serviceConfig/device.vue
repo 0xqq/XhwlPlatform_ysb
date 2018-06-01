@@ -84,6 +84,8 @@
 </template>
 <script>
 import Bread from '@/components/common/bread'
+import deviceObj from '@/httpData/device'
+import { format, gapTime } from '@/script/timeFormat.js'
 import {
   mapState,
   mapMutations
@@ -169,13 +171,10 @@ export default {
       this.box_model = false;
     },
     getDate() {
-      const url = this.mnUrl + "/tmp/config/iot/device"
-      console.log('url', url)
-      this.$http.get(url).then(res => {
-        this.value = res.body.content;
-        console.log(res);
-      }, function(error) {
-        console.log(error)
+      this.value = deviceObj.content
+      this.value.forEach((item, index) => {
+        var time1 = new Date().getTime() - (Math.random() + index + 2) * 86400000 // 入场时间
+        item.配置日期 = format(time1, 'yyyy-MM-dd')
       })
     },
     loadMore() {},

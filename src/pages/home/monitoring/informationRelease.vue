@@ -1,169 +1,175 @@
 <template>
-    <div class="device">
-        <!--业务配置/设备监控阀值配置组件-->
-        <Bread :breadData="abc"></Bread>
-        <div class="device-nav">
-            <button class="btn" @click="modifu('')">
-                <span>+</span>
-                新建信息发布</button>
-            <div class="img-time">
-                <div class="info">
-                    <el-select v-model="value1" placeholder="发布时间">
-                        <el-option v-for="item in options1" :key="item.value1" :label="item.label" :value="item.value1">
-                        </el-option>
-                    </el-select>
-                </div>
-                <div class="date_time">
-                    <div class="block">
-                        <span class="demonstration"></span>
-                        <el-date-picker v-model="value6" type="daterange" placeholder="选择日期范围" class="el_picker">
-                        </el-date-picker>
-                    </div>
-                </div>
-                <div class="date-device">
-                    <div>
-                        <el-input placeholder="请输入搜索内容" v-model="input5" class="">
-                            <el-select v-model="select" slot="prepend" placeholder="请选择" class="place">
-                                <el-option label="发布人" value="1"></el-option>
-                                <el-option label="审核人" value="2"></el-option>
-                            </el-select>
-                            <el-button slot="append" icon="search"></el-button>
-                        </el-input>
-                    </div>
-                </div>
-                <input type="button" value="搜索" class="bttn">
-                <img src="../../../images/inout.png" alt="" @click="derivedForm('tableExcel')">
-            </div>
+<div class="device">
+  <!--业务配置/设备监控阀值配置组件-->
+  <Bread :breadData="abc"></Bread>
+  <div class="device-nav">
+    <button class="btn" @click="modifu('')">
+      <span>+</span>
+      新建信息发布
+    </button>
+    <div class="img-time">
+      <div class="info">
+        <el-select v-model="value1" placeholder="发布时间">
+          <el-option v-for="item in options1" :key="item.value1" :label="item.label" :value="item.value1">
+          </el-option>
+        </el-select>
+      </div>
+      <div class="date_time">
+        <div class="block">
+          <span class="demonstration"></span>
+          <el-date-picker v-model="value6" type="daterange" placeholder="选择日期范围" class="el_picker">
+          </el-date-picker>
         </div>
-        <el-table :data="tableData3" height="250" border style="width: 100%" id="tableExcel">
-            <el-table-column prop="发布时间" label="发布时间">
-            </el-table-column>
-            <el-table-column prop="发布人" label="发布人">
-            </el-table-column>
-            <el-table-column prop="全部类型" label="全部类型">
-            </el-table-column>
-            <el-table-column prop="发布内容简述" label="发布内容简述">
-            </el-table-column>
-            <el-table-column prop="审核人" label="审核人">
-            </el-table-column>
-            <el-table-column prop="审核时间" label="审核时间">
-            </el-table-column>
-        </el-table>
-        <div class="pager">
-            <div class="block">
-                <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page.sync="currentPage2" :page-sizes="[30,60,90]" :page-size="100" layout="sizes, prev, pager, next" :total="100">
-                </el-pagination>
-            </div>
+      </div>
+      <div class="date-device">
+        <div>
+          <el-input placeholder="请输入搜索内容" v-model="input5" class="">
+            <el-select v-model="select" slot="prepend" placeholder="请选择" class="place">
+              <el-option label="发布人" value="1"></el-option>
+              <el-option label="审核人" value="2"></el-option>
+            </el-select>
+            <el-button slot="append" icon="search"></el-button>
+          </el-input>
         </div>
+      </div>
+      <input type="button" value="搜索" class="bttn">
+      <img src="../../../images/inout.png" alt="" @click="derivedForm('tableExcel')">
     </div>
+  </div>
+  <el-table :data="tableData3" height="250" border style="width: 100%" id="tableExcel">
+    <el-table-column prop="发布时间" label="发布时间">
+    </el-table-column>
+    <el-table-column prop="发布人" label="发布人">
+    </el-table-column>
+    <el-table-column prop="全部类型" label="全部类型">
+    </el-table-column>
+    <el-table-column prop="发布内容简述" label="发布内容简述">
+    </el-table-column>
+    <el-table-column prop="审核人" label="审核人">
+    </el-table-column>
+    <el-table-column prop="审核时间" label="审核时间">
+    </el-table-column>
+  </el-table>
+  <div class="pager">
+    <div class="block">
+      <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page.sync="currentPage2" :page-sizes="[30,60,90]" :page-size="100" layout="sizes, prev, pager, next" :total="100">
+      </el-pagination>
+    </div>
+  </div>
+</div>
 </template>
 <script>
 import Bread from '@/components/common/bread'
-import { mapState, mapMutations } from 'vuex'
+import informationObj from '@/httpData/informationRelease'
+import { format, gapTime } from '@/script/timeFormat.js'
+import {
+  mapState,
+  mapMutations
+} from 'vuex'
 export default {
-    data() {
-        return {
-            abc: ['物联监控', '信息发布中心', '信息发布'],
-            tableData3: [],
-            currentPage2: 5,
-            modifyvue: null,
-            box_model: false,
-            keepIndex: null,
-            input5: '',
-            select: '',
-            pickerOptions2: {
-                shortcuts: [{
-                    text: '最近一周',
-                    onClick(picker) {
-                        const end = new Date();
-                        const start = new Date();
-                        start.setTime(start.getTime() - 3600 * 1000 * 24 * 7);
-                        picker.$emit('pick', [start, end]);
-                    }
-                }, {
-                    text: '最近一个月',
-                    onClick(picker) {
-                        const end = new Date();
-                        const start = new Date();
-                        start.setTime(start.getTime() - 3600 * 1000 * 24 * 30);
-                        picker.$emit('pick', [start, end]);
-                    }
-                }, {
-                    text: '最近三个月',
-                    onClick(picker) {
-                        const end = new Date();
-                        const start = new Date();
-                        start.setTime(start.getTime() - 3600 * 1000 * 24 * 90);
-                        picker.$emit('pick', [start, end]);
-                    }
-                }]
-            },
-            options1: [
-                {
-                    value1: 'zhinan1',
-                    label: '发布时间'
-                },
-                {
-                    value1: 'zhinan2',
-                    label: '审核时间'
-                }
-            ],
-            value1: '',
-            value6: '',
+  data() {
+    return {
+      abc: ['物联监控', '信息发布中心', '信息发布'],
+      tableData3: [],
+      currentPage2: 5,
+      modifyvue: null,
+      box_model: false,
+      keepIndex: null,
+      input5: '',
+      select: '',
+      pickerOptions2: {
+        shortcuts: [{
+          text: '最近一周',
+          onClick(picker) {
+            const end = new Date();
+            const start = new Date();
+            start.setTime(start.getTime() - 3600 * 1000 * 24 * 7);
+            picker.$emit('pick', [start, end]);
+          }
+        }, {
+          text: '最近一个月',
+          onClick(picker) {
+            const end = new Date();
+            const start = new Date();
+            start.setTime(start.getTime() - 3600 * 1000 * 24 * 30);
+            picker.$emit('pick', [start, end]);
+          }
+        }, {
+          text: '最近三个月',
+          onClick(picker) {
+            const end = new Date();
+            const start = new Date();
+            start.setTime(start.getTime() - 3600 * 1000 * 24 * 90);
+            picker.$emit('pick', [start, end]);
+          }
+        }]
+      },
+      options1: [{
+          value1: 'zhinan1',
+          label: '发布时间'
+        },
+        {
+          value1: 'zhinan2',
+          label: '审核时间'
         }
-    },
-    computed: {
-        ...mapState([
-            'token', 'mnUrl'
-        ])
-    },
-    components: {
-        Bread
-    },
-    mounted() {
-    },
-    created() {
-        this.getDate();
-    },
-    methods: {
-        modifu(d) {
-            this.modifyvue = d;
-            this.$router.push({
-                path: '/monit/msg/release/new',
-                query: {
-                    value: this.modifyvue
-                }
-            });
-        },
-        removeTode(keep) {
-            this.value.splice(keep, 1);
-            this.box_model = false;
-        },
-        show_model(index) {
-            this.keepIndex = index;
-            this.box_model = true;
-        },
-        cancal() {
-            this.box_model = false;
-        },
-        getDate() {
-            const url = this.mnUrl + "/tmp/watching/park/deploy_msg"
-            this.$http.get(url).then(res => {
-                this.tableData3 = res.body.content;
-            }, function(error) {
-                console.log(error)
-            })
-        },
-        handleSizeChange(val) {
-            // console.log(`每页 ${val} 条`);
-        },
-        handleCurrentChange(val) {
-            // console.log(`当前页: ${val}`);
-        },
-        derivedForm(tableExcel) {
-            this.$func.method5(tableExcel)
-        },
+      ],
+      value1: '',
+      value6: '',
     }
+  },
+  computed: {
+    ...mapState([
+      'token', 'mnUrl'
+    ])
+  },
+  components: {
+    Bread
+  },
+  mounted() {},
+  created() {
+    this.getDate();
+  },
+  methods: {
+    modifu(d) {
+      this.modifyvue = d;
+      this.$router.push({
+        path: '/monit/msg/release/new',
+        query: {
+          value: this.modifyvue
+        }
+      });
+    },
+    removeTode(keep) {
+      this.value.splice(keep, 1);
+      this.box_model = false;
+    },
+    show_model(index) {
+      this.keepIndex = index;
+      this.box_model = true;
+    },
+    cancal() {
+      this.box_model = false;
+    },
+    getDate() {
+      this.tableData3 = informationObj.content
+      this.tableData3.forEach((item, index) => {
+        var time1 = new Date().getTime() - (Math.random() + index + 2) * 86400000 // 发布时间
+        var time2 = (Math.random() * 2) * 86400000  // 停车时间为0-2天
+        var time3 = time1 + time2 // 时间差
+        item.发布时间 = format(time1, 'yyyy-MM-dd') //日期随机+时间取定值
+        item.审核时间 = format(time3, 'yyyy-MM-dd') //日期随机+时间取定值
+      })
+    },
+    handleSizeChange(val) {
+      // console.log(`每页 ${val} 条`);
+    },
+    handleCurrentChange(val) {
+      // console.log(`当前页: ${val}`);
+    },
+    derivedForm(tableExcel) {
+      this.$func.method5(tableExcel)
+    },
+  }
 }
 </script>
 <style lang="scss" scoped>
@@ -174,7 +180,7 @@ export default {
 .device {
     vertical-align: top;
     width: 100%;
-    height: 8.96rem; 
+    height: 8.96rem;
     margin: 0 auto;
     position: relative;
     .device-nav {

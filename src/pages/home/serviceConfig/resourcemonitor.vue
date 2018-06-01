@@ -85,6 +85,8 @@
 </template>
 <script>
 import Bread from '@/components/common/bread'
+import resourceObj from '@/httpData/resourceMonitor'
+import { format, gapTime } from '@/script/timeFormat.js'
 import { mapState, mapMutations } from 'vuex'
 export default {
 	data() {
@@ -158,13 +160,11 @@ export default {
 			this.box_model = false;
 		},
 		getData() {
-			const url = this.mnUrl + "/tmp/config/iot/resource"
-			this.$http.get(url).then(res => {
-				// console.log(res)
-				this.value = res.body.content;
-			}, function(error) {
-				console.log(error)
-			})
+      this.value = resourceObj.content
+      this.value.forEach((item, index) => {
+        var time1 = new Date().getTime() - (Math.random() + index + 2) * 86400000 // 入场时间
+        item.配置日期 = format(time1, 'yyyy-MM-dd')
+      })
 		},
 		derivedForm(tableExcel) {
 			this.$func.method5(tableExcel)
@@ -211,7 +211,7 @@ export default {
 		.img-time {
 			display: inline-block;
 			height: 0.6rem;
-			width: auto; 
+			width: auto;
 			position: relative;
 			margin-bottom: 0.1rem;
 			float: right;
@@ -326,7 +326,7 @@ export default {
 						border-right:2px solid #698499;
 					}
 					.left_none {
-						
+
 					}
 				}
 			}

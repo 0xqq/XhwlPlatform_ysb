@@ -4,7 +4,7 @@
 			<li v-for="(b, index) in breadData"><span>{{index?'/ ':''}}{{b}}</span></li>
 		</ul>
 	</div>
-	
+
 </template>
 
 <script>
@@ -17,6 +17,7 @@ import routerMap from '../../router/routerMap'
    	 		}
 		},
 		mounted(){
+      // console.log('breadData', this.breadData)
 			this.getUrl();
 		},
 		methods:{
@@ -59,7 +60,7 @@ import routerMap from '../../router/routerMap'
 						}
 					}
 				}
-				console.log(this.breadData);
+				console.log('breadData', this.breadData);
 			},
 		}
 	}
@@ -71,7 +72,7 @@ import routerMap from '../../router/routerMap'
 	height: 0.53rem;
 }
 .bread_nav li{
-	text-align: center;	
+	text-align: center;
 	line-height: 0.53rem;
 	font-size: 0.15rem;
 	float: left;

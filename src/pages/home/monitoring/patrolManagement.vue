@@ -48,6 +48,8 @@
 </template>
 <script>
 import Bread from '@/components/common/bread'
+import patrolObj from '@/httpData/patrolManagement.js'
+import { format } from '@/script/timeFormat.js'
 import { mapState } from 'vuex'
 export default {
 	data() {
@@ -113,14 +115,11 @@ export default {
 			this.box_model = false;
 		},
 		getData() {
-			const url = this.mnUrl + "/tmp/watching/engineer/partrol"
-			this.$http.get(url).then(res => {
-				// console.log(res)
-				this.tableData3 = res.body.content;
-				// console.log(this.value)
-			}, function(error) {
-				console.log(error)
-			})
+      this.tableData3 = patrolObj.content
+      this.tableData3.forEach((item, index) => {
+        var time1 = new Date().getTime() - (Math.random() + index + 1) * 86400000 // 发生时间
+        item.日期 = format(time1, 'yyyy-MM-dd') + ' ' + item.日期.substr(-8) //日期随机+时间取定值
+      })
 		},
 		derivedForm(tableExcel) {
 			this.$func.method5(tableExcel)

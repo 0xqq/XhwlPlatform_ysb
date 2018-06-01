@@ -19,7 +19,7 @@
    				</div>
    			</div>
    			<!--<div class="weather_data">
-   				
+
    			</div>-->
    		</div>
    		<!--<div class="right">-->
@@ -125,13 +125,13 @@
 				 </ul>
 			</div>
    		<!--</div>-->
-		
-  </div>	
+
+  </div>
 </template>
 
 <script>
 
-
+import weatherForecast from '@/httpData/weatherForecast'
 export default {
   data () {
     return {
@@ -158,7 +158,7 @@ export default {
     	today_wind:'',
     	tomorrow:'',
     	tomorrow_cond:'',
-    	tomorrow_wind:'', 
+    	tomorrow_wind:'',
     	after_tomorrow:'',
     	after_tomorrow_cond:'',
     	after_tomorrow_wind:'',
@@ -193,61 +193,51 @@ export default {
 		},
 	getData(){
 		this.loading(true);
-	 	this.$http({
-			url:'https://free-api.heweather.com/v5/weather?city=深圳&key=7759326f472d4581926d0c0ace9bdc6f',
-			method:'get',
-		}).then(function(res){
-			if(res.body.HeWeather5[0].status){
-				var forecast_weather = res.body.HeWeather5[0].daily_forecast;
-				this.now = res.body.HeWeather5[0].now;
-				this.city = res.body.HeWeather5[0].basic.city;
-				this.loc = res.body.HeWeather5[0].basic.update.loc;
-				this.uv_brf = res.body.HeWeather5[0].suggestion.uv.brf;
-				this.uv_txt = res.body.HeWeather5[0].suggestion.uv.txt;
-				this.flu = res.body.HeWeather5[0].suggestion.flu;
-				this.drsg = res.body.HeWeather5[0].suggestion.drsg;
-				this.cw = res.body.HeWeather5[0].suggestion.cw;
-				this.sport = res.body.HeWeather5[0].suggestion.sport;
-				this.air = res.body.HeWeather5[0].suggestion.air;
-				this.now_cond = res.body.HeWeather5[0].now.cond;
-				this.now_dir = res.body.HeWeather5[0].now.wind.dir;
-				this.now_sc = res.body.HeWeather5[0].now.wind.sc;
-				this.now_spd = res.body.HeWeather5[0].now.wind.spd;
-				this.now_img = res.body.HeWeather5[0].now.cond.code;
-				this.now_tmp= res.body.HeWeather5[0].now.tmp;
-				this.now_fl= res.body.HeWeather5[0].now.fl;
-				this.now_hum= res.body.HeWeather5[0].now.hum;
-				this.now_qlty= res.body.HeWeather5[0].aqi.city.qlty;
-				this.now_pm25= res.body.HeWeather5[0].aqi.city.pm25;
-				this.today = forecast_weather[0];
-				this.today_img1 = forecast_weather[0].cond.code_d;
-				this.today_img2 = forecast_weather[0].cond.code_n;
-				this.today_tmp = forecast_weather[0].tmp;
-				this.today_wind = forecast_weather[0].wind;
-				this.tomorrow = forecast_weather[1];
-				this.tomorrow_tmp = forecast_weather[1].tmp;
-				this.tomorrow_cond = forecast_weather[1].cond;
-				this.tomorrow_img1 = forecast_weather[1].cond.code_d;
-				this.tomorrow_img2 = forecast_weather[1].cond.code_n;
-				this.tomorrow_wind = forecast_weather[1].wind;
-				this.after_tomorrow = forecast_weather[2];
-				this.after_tomorrow_cond = forecast_weather[2].cond;
-				this.after_tomorrow_img1 = forecast_weather[2].cond.code_d;
-				this.after_tomorrow_img2 = forecast_weather[2].cond.code_n;
-				this.after_tomorrow_wind = forecast_weather[2].wind;
-				this.after_tomorrow_tmp = forecast_weather[2].tmp;
-				this.today_time=forecast_weather[0].date.substring(8,10);
-				this.tomorrow_time = forecast_weather[1].date.substring(8,10);
-				this.after_tomorrow_time = forecast_weather[2].date.substring(8,10);
-				this.loading(false);
-			}						
-		},
-		function(error){
-			//失败回调的函数								
-			alert(error)
-				});						
-		},
-  	},
+    var data = weatherForecast.HeWeather5[0]
+    var forecast_weather = data.daily_forecast;
+    this.now = data.now;
+    this.city = data.basic.city;
+    this.loc = data.basic.update.loc;
+    this.uv_brf = data.suggestion.uv.brf;
+    this.uv_txt = data.suggestion.uv.txt;
+    this.flu = data.suggestion.flu;
+    this.drsg = data.suggestion.drsg;
+    this.cw = data.suggestion.cw;
+    this.sport = data.suggestion.sport;
+    this.air = data.suggestion.air;
+    this.now_cond = data.now.cond;
+    this.now_dir = data.now.wind.dir;
+    this.now_sc = data.now.wind.sc;
+    this.now_spd = data.now.wind.spd;
+    this.now_img = data.now.cond.code;
+    this.now_tmp= data.now.tmp;
+    this.now_fl= data.now.fl;
+    this.now_hum= data.now.hum;
+    this.now_qlty= data.aqi.city.qlty;
+    this.now_pm25= data.aqi.city.pm25;
+    this.today = forecast_weather[0];
+    this.today_img1 = forecast_weather[0].cond.code_d;
+    this.today_img2 = forecast_weather[0].cond.code_n;
+    this.today_tmp = forecast_weather[0].tmp;
+    this.today_wind = forecast_weather[0].wind;
+    this.tomorrow = forecast_weather[1];
+    this.tomorrow_tmp = forecast_weather[1].tmp;
+    this.tomorrow_cond = forecast_weather[1].cond;
+    this.tomorrow_img1 = forecast_weather[1].cond.code_d;
+    this.tomorrow_img2 = forecast_weather[1].cond.code_n;
+    this.tomorrow_wind = forecast_weather[1].wind;
+    this.after_tomorrow = forecast_weather[2];
+    this.after_tomorrow_cond = forecast_weather[2].cond;
+    this.after_tomorrow_img1 = forecast_weather[2].cond.code_d;
+    this.after_tomorrow_img2 = forecast_weather[2].cond.code_n;
+    this.after_tomorrow_wind = forecast_weather[2].wind;
+    this.after_tomorrow_tmp = forecast_weather[2].tmp;
+    this.today_time=forecast_weather[0].date.substring(8,10);
+    this.tomorrow_time = forecast_weather[1].date.substring(8,10);
+    this.after_tomorrow_time = forecast_weather[2].date.substring(8,10);
+    this.loading(false);
+		}
+  }
 }
 </script>
 
@@ -278,7 +268,7 @@ export default {
 				width: 100%;
 				font-size: 0.8rem;
 				display: inline-block;
-				margin-bottom: 0.1rem;				
+				margin-bottom: 0.1rem;
 			}
 			i{
 				display: inline-block;
@@ -314,7 +304,7 @@ export default {
 	height: 8.7rem;
 }
 .weather_list{
-	
+
 	width: 65%;
 	height: 3,8rem;
 	display: flex;
@@ -361,7 +351,7 @@ export default {
 	float: right;
 	width: 65%;
 	height:4.2rem;
-	ul{		
+	ul{
 		width: 100%;
 		height: 50%;
 		margin-bottom: 0.05rem;
@@ -375,7 +365,7 @@ export default {
 			float: left;
 			flex: 1;
 			display: flex;
-			height: 100%;		
+			height: 100%;
 			.left{
 				flex: 1.4;
 				text-align: center;
@@ -385,7 +375,7 @@ export default {
 					margin-top: 0.5rem;
 					margin-bottom: 0.2rem;
 				}
-				p{   
+				p{
 					font-size: 0.18rem;
 					text-align: center;
 				};

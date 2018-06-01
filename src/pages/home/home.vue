@@ -105,10 +105,10 @@
 							</li>
 							<li>
 								<ul class="all_menu3" v-for="c in b.submenu">
-									<li class="all_name3" :class="{title3: c.submenu}" @click="golike(c,3)">
+									<li class="all_name3" :class="{title3: c.submenu}" @click.stop="golike(c,3)">
 										<span>{{c.name}}</span>
 									</li>
-									<li class="all_name4" v-for="d in c.submenu" @click="golike(d,4)">{{d.name}}</li>
+									<li class="all_name4" v-for="d in c.submenu" @click.stop="golike(d,4)">{{d.name}}</li>
 								</ul>
 							</li>
 						</ul>
@@ -124,10 +124,10 @@
 			<transition name="el-zoom-in-center">
 				<div class="nav_side" v-if="navText" :class="{margin_left: navText&&!showNav,_opacity: hasAllSevice||hasStay||showLtd||backHome}">
 					<ul class="ul_nav3" :class="{ only_nav3: null==navText[0].submenu}">
-						<li class="ul_navli3" v-for="(c,index) in navText" :class="{active_nav3: c.url}" @click="golike(c,3)">
+						<li class="ul_navli3" v-for="(c,index) in navText" :class="{active_nav3: c.url}" @click.stop="golike(c,3)">
 							<span class="nav_span3" :class="{ nav_active: c.name == indexThree }">{{c.name}}</span>
 							<ul class="ul_nav4">
-								<li v-for="(d,index) in c.submenu" :class="{ nav_active: d.name == indexFour , active_nav3: d.url}" @click="golike(d,4)">{{d.name}}</li>
+								<li v-for="(d,index) in c.submenu" :class="{ nav_active: d.name == indexFour , active_nav3: d.url}" @click.stop="golike(d,4)">{{d.name}}</li>
 							</ul>
 						</li>
 					</ul>
@@ -292,6 +292,8 @@ export default {
 			}
 		},
 		golike(value, num) {
+			console.log('value', value)
+			console.log('num', num)
 			if (!value.submenu) {
 				if (num == 3 && value.url) {
 					this.indexFour = null;

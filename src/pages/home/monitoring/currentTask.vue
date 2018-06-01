@@ -1,82 +1,82 @@
 <template>
-    <div class="device">
-        <!--业务配置/设备监控阀值配置组件-->
-        <Bread :breadData="abc"></Bread>
-        <div class="content_left">
-            <div class="device-nav">
-                <div class="img-time">
-                    <div class="date-time">
-                        <div class="block">
-                            <span class="demonstration"></span>
-                            <el-date-picker v-model="value6" type="daterange" placeholder="选择日期范围" class="el_picker">
-                            </el-date-picker>
-                        </div>
-                    </div>
-                    <div class="date-device">
-                        <div>
-                            <el-input placeholder="请输入搜索内容" v-model="input5" class="place">
-                                <el-select v-model="select" slot="prepend" placeholder="请选择">
-                                    <el-option label="餐厅名" value="1"></el-option>
-                                    <el-option label="订单号" value="2"></el-option>
-                                    <el-option label="用户电话" value="3"></el-option>
-                                </el-select>
-                                <el-button slot="append" icon="search"></el-button>
-                            </el-input>
-                        </div>
-                    </div>
-                    <input type="button" value="搜索" class="bttn">
-                </div>
-            </div>
-            <!--顶部导航-->
-            <ul class="content_divNav">
-                <li class="serial1">单号</li>
-                <li>生成时间/完成时间</li>
-                <li>报修人</li>
-                <li class="left_none">
-                    <el-select v-model="value" placeholder="全部状态" class="el_box">
-                        <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value">
-                        </el-option>
-                    </el-select>
-                    <li class="people_leftnone">跟进人</li>
-                    <li>操作</li>
-            </ul>
-            <!--顶部导航-->
-            <!--中间内容-->
-            <div class="content_div">
-                <ul class="ul_list" v-for='(d, index) in  vaLue'>
-                    <li>{{d.单号}}</li>
-                    <li>
-                        <span>{{d.生成时间}}</span>
-                        <span>{{d.完成时间}}</span>
-                    </li>
-                    <li>{{d.报修人}}</li>
-                    <li>{{d.全部状态}}</li>
-                    <li>{{d.跟进人}}</li>
-                    <li class="btn_center">
-                        <button class="btn1">修改</button>
-                        <button class="btn2">删除</button>
-                    </li>
+<div class="device">
+  <!--业务配置/设备监控阀值配置组件-->
+  <Bread :breadData="abc"></Bread>
+  <div class="content_left">
+    <div class="device-nav">
+      <div class="img-time">
+        <div class="date-time">
+          <div class="block">
+            <span class="demonstration"></span>
+            <el-date-picker v-model="value6" type="daterange" placeholder="选择日期范围" class="el_picker">
+            </el-date-picker>
+          </div>
+        </div>
+        <div class="date-device">
+          <div>
+            <el-input placeholder="请输入搜索内容" v-model="input5" class="place">
+              <el-select v-model="select" slot="prepend" placeholder="请选择">
+                <el-option label="餐厅名" value="1"></el-option>
+                <el-option label="订单号" value="2"></el-option>
+                <el-option label="用户电话" value="3"></el-option>
+              </el-select>
+              <el-button slot="append" icon="search"></el-button>
+            </el-input>
+          </div>
+        </div>
+        <input type="button" value="搜索" class="bttn">
+      </div>
+    </div>
+    <!--顶部导航-->
+    <ul class="content_divNav">
+      <li class="serial1">单号</li>
+      <li>生成时间/完成时间</li>
+      <li>报修人</li>
+      <li class="left_none">
+        <el-select v-model="value" placeholder="全部状态" class="el_box">
+          <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value">
+          </el-option>
+        </el-select>
+        <li class="people_leftnone">跟进人</li>
+        <li>操作</li>
+    </ul>
+    <!--顶部导航-->
+    <!--中间内容-->
+    <div class="content_div">
+      <ul class="ul_list" v-for='(d, index) in  vaLue'>
+        <li>{{d.单号}}</li>
+        <li>
+          <span>{{d.生成时间}}</span>
+          <span>{{d.完成时间}}</span>
+        </li>
+        <li>{{d.报修人}}</li>
+        <li>{{d.全部状态}}</li>
+        <li>{{d.跟进人}}</li>
+        <li class="btn_center">
+          <button class="btn1">修改</button>
+          <button class="btn2">删除</button>
+        </li>
 
-                </ul>
-            </div>
-            <!--底部每页显示-->
-            <div class="page">
-                <span>每页显示</span>
-                <select class="select">
+      </ul>
+    </div>
+    <!--底部每页显示-->
+    <div class="page">
+      <span>每页显示</span>
+      <select class="select">
                     <option value="A">10</option>
                     <option value="B">20</option>
                     <option value="C">30</option>
                 </select>
-                <div class="pageDiv">
-                    <img src="../../../images/left_select.png" />
-                    <span>1/1</span>
-                    <img src="../../../images/right_select.png" />
-                </div>
-            </div>
-        </div>
+      <div class="pageDiv">
+        <img src="../../../images/left_select.png" />
+        <span>1/1</span>
+        <img src="../../../images/right_select.png" />
+      </div>
+    </div>
+  </div>
 
-        <!--右边内容-->
-        <!--<div class="content_right">
+  <!--右边内容-->
+  <!--<div class="content_right">
             <div class="new_Device_right">
                 <p>选择人员</p>
                 <select class="date_device">
@@ -109,94 +109,95 @@
             </div>
 
         </div>-->
-    </div>
+</div>
 </template>
 <script>
 import Bread from '@/components/common/bread'
-import { mapState} from 'vuex'
+import currentTask from '@/httpData/currentTask'
+import { format, gapTime } from '@/script/timeFormat.js'
+import {
+  mapState
+} from 'vuex'
 export default {
-    data() {
-        return {
-            abc: ['物联监控', '人员物联监控', '工程人员', '当前任务'],
-            modifyvue: null,
-            box_model: false,
-            keepIndex: null,
-            input5: '',
-            select: '',
-            pickerOptions2: {
-                shortcuts: [{
-                    text: '最近一周',
-                    onClick(picker) {
-                        const end = new Date();
-                        const start = new Date();
-                        start.setTime(start.getTime() - 3600 * 1000 * 24 * 7);
-                        picker.$emit('pick', [start, end]);
-                    }
-                }, {
-                    text: '最近一个月',
-                    onClick(picker) {
-                        const end = new Date();
-                        const start = new Date();
-                        start.setTime(start.getTime() - 3600 * 1000 * 24 * 30);
-                        picker.$emit('pick', [start, end]);
-                    }
-                }, {
-                    text: '最近三个月',
-                    onClick(picker) {
-                        const end = new Date();
-                        const start = new Date();
-                        start.setTime(start.getTime() - 3600 * 1000 * 24 * 90);
-                        picker.$emit('pick', [start, end]);
-                    }
-                }]
-            },
-            value6: '',
-            vaLue: [],
-            options: [{
-                value: '选项1',
-                label: '已完成'
-            }, {
-                value: '选项2',
-                label: '进行中'
-            }, {
-                value: '选项3',
-                label: '已关闭'
-            }],
-            value: '',
-        }
-    },
-    computed: {
-    },
-    components: {
-        Bread
-    },
-    mounted() {
-        this.getData()
-    },
-    methods: {
-        removeTode(keep) {
-            console.log(keep);
-            this.value.splice(keep, 1);
-            this.box_model = false;
-        },
-        show_model(index) {
-            this.keepIndex = index;
-            this.box_model = true;
-        },
-        cancal() {
-            this.box_model = false;
-        },
-        getData() {
-            const url = this.mnUrl+"/tmp/watching/engineer/repaire"
-            this.$http.get(url).then(res => {
-                console.log(res)
-                this.vaLue = res.body.content;
-                console.log(this.vaLue)
-            }, function(error) {
-                console.log(error)
-            })
-        }
+  data() {
+    return {
+      abc: ['物联监控', '人员物联监控', '工程人员', '当前任务'],
+      modifyvue: null,
+      box_model: false,
+      keepIndex: null,
+      input5: '',
+      select: '',
+      pickerOptions2: {
+        shortcuts: [{
+          text: '最近一周',
+          onClick(picker) {
+            const end = new Date();
+            const start = new Date();
+            start.setTime(start.getTime() - 3600 * 1000 * 24 * 7);
+            picker.$emit('pick', [start, end]);
+          }
+        }, {
+          text: '最近一个月',
+          onClick(picker) {
+            const end = new Date();
+            const start = new Date();
+            start.setTime(start.getTime() - 3600 * 1000 * 24 * 30);
+            picker.$emit('pick', [start, end]);
+          }
+        }, {
+          text: '最近三个月',
+          onClick(picker) {
+            const end = new Date();
+            const start = new Date();
+            start.setTime(start.getTime() - 3600 * 1000 * 24 * 90);
+            picker.$emit('pick', [start, end]);
+          }
+        }]
+      },
+      value6: '',
+      vaLue: [],
+      options: [{
+        value: '选项1',
+        label: '已完成'
+      }, {
+        value: '选项2',
+        label: '进行中'
+      }, {
+        value: '选项3',
+        label: '已关闭'
+      }],
+      value: '',
     }
+  },
+  computed: {},
+  components: {
+    Bread
+  },
+  mounted() {
+    this.getData()
+  },
+  methods: {
+    removeTode(keep) {
+      console.log(keep);
+      this.value.splice(keep, 1);
+      this.box_model = false;
+    },
+    show_model(index) {
+      this.keepIndex = index;
+      this.box_model = true;
+    },
+    cancal() {
+      this.box_model = false;
+    },
+    getData() {
+      this.vaLue = currentTask.content;
+      this.vaLue.forEach((item, index) => {
+        var time1 = new Date().getTime() - (Math.random() + index + 1) * 86400000 // 上报时间
+        item.生成时间 = format(time1, 'yyyy-MM-dd') + ' ' + item.生成时间.substr(-8) //日期随机+时间取定值
+        item.完成时间 = format(time1, 'yyyy-MM-dd') + ' ' + item.完成时间.substr(-8) //日期随机+时间取定值
+      })
+    }
+  }
 }
 </script>
 <style lang="scss" scoped>
@@ -280,7 +281,7 @@ export default {
             // scrollbar-highlight-color: #333;
             // 滚动条阴影
             // scrollbar-shadow-color: #ccc;
-            // 滚动条轨道颜色·································································	··································································	
+            // 滚动条轨道颜色·································································	··································································
             scrollbar-track-color: #12253d;
             scrollbar-arrow-color: #12253d;
         }
@@ -467,16 +468,16 @@ export default {
     //         }
     //         button {
     //             margin:0.5rem 0.3rem;
-                
+
     //         }
     //         .btn1 {
-                    
+
     //                 @include btn(1rem,
     //                 0.36rem);
     //                 margin-left:0.7rem;
     //             }
     //              .btn2 {
-                    
+
     //                 @include btnX(1rem,
     //                 0.36rem);
     //             }

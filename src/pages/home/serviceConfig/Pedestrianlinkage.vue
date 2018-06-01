@@ -1,145 +1,142 @@
 <template>
-    <div class="Pedestrianlinkage">
-        <!--业务配置/设备监控阀值配置组件-->
-        <Bread :breadData="abc"></Bread>
-        <div class="dealer-box">
-            <div class="dealer-top">
-                <!--最上面两个角-->
-                <span class="newdevice3 newdevice4"></span>
-                <span class="newdevice1 newdevice4"></span>
-                <!--左边的用户身份部分-->
-                <div class="dealer-massage">
-                    用户身份&nbsp&nbsp&nbsp&nbsp
-                    <select class="date-device">
+<div class="Pedestrianlinkage">
+  <!--业务配置/设备监控阀值配置组件-->
+  <Bread :breadData="abc"></Bread>
+  <div class="dealer-box">
+    <div class="dealer-top">
+      <!--最上面两个角-->
+      <span class="newdevice3 newdevice4"></span>
+      <span class="newdevice1 newdevice4"></span>
+      <!--左边的用户身份部分-->
+      <div class="dealer-massage">
+        用户身份&nbsp&nbsp&nbsp&nbsp
+        <select class="date-device">
                         <option value="volvo">红名单</option>
                         <option value="saab">黄名单</option>
                         <option value="opel">黑名单</option>
                         <option value="audi">灰名单</option>
                         <option value="audi">VIP名单</option>
                     </select>
-                    <p class="select_img"></p>
-                    </br>
-                    联动动作
-                    <div class="dealer-device2">
-                        <input type="checkbox"> &nbsp&nbsp短消息推送</br>
-                        <input type="checkbox"> &nbsp&nbspAPP消息推送</br>
-                        <input type="checkbox"> &nbsp&nbsp呼梯</br>
-                        <input type="checkbox"> &nbsp&nbsp... ...
-                    </div>
-                    </br>
-                    <section>
-                        <span class="label">接受人</span>
-                        <textarea name=""></textarea>
-                    </section>
-                    配置名称&nbsp&nbsp&nbsp&nbsp&nbsp<input type="text" placeholder="车行联动配置" class="bus_tx"></br>
-                    <!--<img src="../../../assets/delete.png" class="delete_img"></img>-->
-                    <input type="button" class="btn btn1" value="按钮"> <input type="button" class="btn" value="重置">
-                </div>
-                <!--右边的触发条件部分-->
-                <div class="dealer-text">
-                    触发条件&nbsp&nbsp&nbsp
-                    <select class="date-device">
+        <p class="select_img"></p>
+        </br>
+        联动动作
+        <div class="dealer-device2">
+          <input type="checkbox"> &nbsp&nbsp短消息推送</br>
+          <input type="checkbox"> &nbsp&nbspAPP消息推送</br>
+          <input type="checkbox"> &nbsp&nbsp呼梯</br>
+          <input type="checkbox"> &nbsp&nbsp... ...
+        </div>
+        </br>
+        <section>
+          <span class="label">接受人</span>
+          <textarea name=""></textarea>
+        </section>
+        配置名称&nbsp&nbsp&nbsp&nbsp&nbsp<input type="text" placeholder="车行联动配置" class="bus_tx"></br>
+        <!--<img src="../../../assets/delete.png" class="delete_img"></img>-->
+        <input type="button" class="btn btn1" value="按钮"> <input type="button" class="btn" value="重置">
+      </div>
+      <!--右边的触发条件部分-->
+      <div class="dealer-text">
+        触发条件&nbsp&nbsp&nbsp
+        <select class="date-device">
                         <option value="volvo">入场</option>
                         <option value="saab">出场</option>
                     </select>
-                    <p class="select_img"></p>
-                    </br>
-                    <section>
-                        <span class="label1">推送内容&nbsp&nbsp</span>
-                        <textarea name=""></textarea>
-                    </section>
-                    <section>
-                        <span class="label1">应用到 &nbsp&nbsp&nbsp&nbsp</span>
-                        <textarea name=""></textarea>
-                    </section>
-                </div>
-                <img src="../../../assets/gloss1.png" alt="" class="gloss_img">
-            </div>
-            <!--中间输入关键字部分-->
-            <div class="dealer-center">
-                <img src="../../../assets/delete.png" class="delete_img2"></img>
-                <input type="text" class="ipt-text" value="" placeholder="请输入关键字">
-                <input class="btn2" type="button" value="查询">
-                <input class="btn3" type="button" value="删除">
-            </div>
-            <!--底部导航-->
-            <ul class="content_divNav">
-                <li class="one_left"><input type="checkbox" name="Fruit" value="" /></li>
-                <li>序号</li>
-                <li>配置名称</li>
-                <li>用户身份</li>
-                <li>触发动作</li>
-                <li>联动动作</li>
-                <li>推送内容</li>
-                <li>接收人</li>
-                <li>配置应用</li>
+        <p class="select_img"></p>
+        </br>
+        <section>
+          <span class="label1">推送内容&nbsp&nbsp</span>
+          <textarea name=""></textarea>
+        </section>
+        <section>
+          <span class="label1">应用到 &nbsp&nbsp&nbsp&nbsp</span>
+          <textarea name=""></textarea>
+        </section>
+      </div>
+      <img src="../../../assets/gloss1.png" alt="" class="gloss_img">
+    </div>
+    <!--中间输入关键字部分-->
+    <div class="dealer-center">
+      <img src="../../../assets/delete.png" class="delete_img2"></img>
+      <input type="text" class="ipt-text" value="" placeholder="请输入关键字">
+      <input class="btn2" type="button" value="查询">
+      <input class="btn3" type="button" value="删除">
+    </div>
+    <!--底部导航-->
+    <ul class="content_divNav">
+      <li class="one_left"><input type="checkbox" name="Fruit" value="" /></li>
+      <li>序号</li>
+      <li>配置名称</li>
+      <li>用户身份</li>
+      <li>触发动作</li>
+      <li>联动动作</li>
+      <li>推送内容</li>
+      <li>接收人</li>
+      <li>配置应用</li>
 
-            </ul>
-            <!--底部中间内容-->
-            <div class="content_div">
-                <ul class="ul_list" v-for='d in  value'>
-                    <li class="one_left"><input type="checkbox" name="Fruit" value="" /></li>
-                    <li>{{d.序号}}</li>
-                    <li>{{d.配置名称}}</li>
-                    <li>{{d.用户身份}}</li>
-                    <li>{{d.触发动作}}</li>
-                    <li>{{d.联动动作}}</li>
-                    <li>{{d.推送内容}}</li>
-                    <li>{{d.接收人}}</li>
-                    <li>{{d.配置应用}}</li>
-                </ul>
-            </div>
-            <!--底部每页显示-->
-            <div class="page">
-                <span>每页显示</span>
-                <select class="select">
+    </ul>
+    <!--底部中间内容-->
+    <div class="content_div">
+      <ul class="ul_list" v-for='d in  value'>
+        <li class="one_left"><input type="checkbox" name="Fruit" value="" /></li>
+        <li>{{d.序号}}</li>
+        <li>{{d.配置名称}}</li>
+        <li>{{d.用户身份}}</li>
+        <li>{{d.触发动作}}</li>
+        <li>{{d.联动动作}}</li>
+        <li>{{d.推送内容}}</li>
+        <li>{{d.接收人}}</li>
+        <li>{{d.配置应用}}</li>
+      </ul>
+    </div>
+    <!--底部每页显示-->
+    <div class="page">
+      <span>每页显示</span>
+      <select class="select">
                     <option value="A">10</option>
                     <option value="B">20</option>
                     <option value="C">30</option>
                 </select>
-                <div class="pageDiv">
-                    <img src="../../../images/left_select.png" />
-                    <span>1/1</span>
-                    <img src="../../../images/right_select.png" />
-                </div>
-            </div>
-        </div>
+      <div class="pageDiv">
+        <img src="../../../images/left_select.png" />
+        <span>1/1</span>
+        <img src="../../../images/right_select.png" />
+      </div>
     </div>
+  </div>
+</div>
 </template>
 <script>
 import Bread from '@/components/common/bread'
-import { mapState, mapMutations } from 'vuex'
+import pedestObj from '@/httpData/Pedestrianlinkage'
+import {
+  mapState,
+  mapMutations
+} from 'vuex'
 export default {
-    data() {
-        return {
-            abc: ['业务配置', '安防业务配置', '人行出入配置', '人行联动配置'],
-            value: []
-        }
-    },
-    created() {
-        this.getData()
-    },
-    computed: {
-        ...mapState([
-            'token', 'mnUrl'
-        ])
-    },
-    components: {
-        Bread
-    },
-    mounted() {
-    },
-    methods: {
-        getData() {
-            const url = this.mnUrl + "/tmp/config/entry/person"
-            this.$http.get(url).then(res => {
-                //    console.log(res)
-                this.value = res.body.content;
-            }, function(err) {
-                //    console.log(err)
-            })
-        }
+  data() {
+    return {
+      abc: ['业务配置', '安防业务配置', '人行出入配置', '人行联动配置'],
+      value: []
     }
+  },
+  created() {
+    this.getData()
+  },
+  computed: {
+    ...mapState([
+      'token', 'mnUrl'
+    ])
+  },
+  components: {
+    Bread
+  },
+  mounted() {},
+  methods: {
+    getData() {
+      this.value = pedestObj.content
+    }
+  }
 }
 </script>
 <style lang="scss" scoped>

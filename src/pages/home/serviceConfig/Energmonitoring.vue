@@ -84,6 +84,8 @@
 </template>
 <script>
 import Bread from '@/components/common/bread'
+import energMonitor from '@/httpData/energMonitoring'
+import { format, gapTime } from '@/script/timeFormat.js'
 import { mapState, mapMutations } from 'vuex'
 export default {
 	data() {
@@ -160,13 +162,11 @@ export default {
 			this.box_model = false;
 		},
 		getData() {
-			const url = this.mnUrl + "/tmp/config/iot/energy"
-			this.$http.get(url).then(res => {
-				// console.log(res)
-				this.value = res.body.content
-			}, function(error) {
-				console.log(error)
-			})
+      this.value = energMonitor.content
+      this.value.forEach((item, index) => {
+        var time1 = new Date().getTime() - (Math.random() + index + 2) * 86400000 // 入场时间
+        item.配置日期 = format(time1, 'yyyy-MM-dd')
+      })
 		},
 		derivedForm(tableExcel) {
 			this.$func.method5(tableExcel)
@@ -330,7 +330,7 @@ export default {
 						font-size: 0.12rem;
 					}
 					.left_none {
-						
+
 					}
 				}
 			}

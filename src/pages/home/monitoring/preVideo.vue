@@ -1,6 +1,6 @@
 <template>
 <div class="back_ground">
-     <!--面包导航组件-->  
+     <!--面包导航组件-->
     <Bread :breadData="abc"></Bread>
     <div class="pre_video">
         <div>{{}}</div>
@@ -102,7 +102,7 @@
         background-color: rgba(163,219,255,0.3);
         height: 1.5rem;
         width: 0.6rem;
-        border-radius: 0.3rem 0.3rem; 
+        border-radius: 0.3rem 0.3rem;
         position: absolute;
         top: 50%;
         right: -0.35rem;
@@ -133,7 +133,7 @@
     export default {
         data () {
             return {
-                abc: ['物联监控','视频物联监控','实时预览'], 
+                abc: ['物联监控','视频物联监控','实时预览'],
                 treeFlag: false,
                 loading: true,
                 loadFlag: true,
@@ -189,7 +189,7 @@
                     default:
                         break;
                 }
-                
+
             },
             initTree(){
                 var OCXobj = document.getElementById("PreviewOcx");
@@ -200,7 +200,7 @@
                 var orderdCellIds = this.initControlUnitNodes(xmlStr);   //把xml赋给dom树，产生中海物业集团和空ul
                 //初始化区域节点
                 if(orderdCellIds.length > 0){
-                    xmlStr = OCXobj.GetResourceInfo(2);     //获取所有 
+                    xmlStr = OCXobj.GetResourceInfo(2);     //获取所有
                     var regionIds = this.initRegionNodes(xmlStr, orderdCellIds);     //把xml赋给dom树，产生广州云麓公馆和空ul
                     //初始化监控点节点
                     if(regionIds.length > 0){
@@ -232,7 +232,7 @@
                 });
                 if(ctrlCells.length > 0){
                     var rootUnit = ctrlCells[0];
-                    
+
                     var curLevelCellIds = new Array();
                     var parentCellId = 0;
                     var curCellId = 0;
@@ -241,7 +241,7 @@
                     while(ctrlCells.length>0){
                         //本次for循环查找所用parentCellId
                         parentCellId = curLevelCellIds.pop();
-                        
+
                         //循环查找父中心Id=parentCellId的CtrlCell
                         for(var i=0; i<ctrlCells.length; ){
                             if ($(ctrlCells[i]).find("ParentUnitID").text() == parentCellId) {
@@ -307,7 +307,7 @@
                         }
                     }
                 }
-                
+
                 return regionIds;
             },
              // * 将监控点节点挂到各区域下
@@ -320,7 +320,7 @@
                 for(var i=0; i<cameras.length; i++){
                     expr = "#ul_region_" + $(cameras[i]).find("RegionID").text();
                     $(expr).append("<li class='camera_li' ondblclick='hehehe(" + $(cameras[i]).find("CameraID").text() + ");'><a href='javascript:return 0'>" + $(cameras[i]).find("CameraName").text() + "</a></li>");
-                } 
+                }
             },
             getXmlDomFromStr(xmlStr){
                 var xmldom=null;
@@ -368,7 +368,7 @@
                     // alert("保存路径不能为空！");
                     return;
                 }
-                
+
                 var OCXobj = document.getElementById("PreviewOcx");
 
                 //设置图片保存路径和格式
@@ -448,4 +448,3 @@
         }
     }
 </script>
-

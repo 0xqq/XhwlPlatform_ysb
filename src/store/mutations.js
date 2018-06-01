@@ -11,6 +11,8 @@ import{
 	GET_TOKEN,
 	CHANGE_LOADING,
 	HAS_CALL,
+  CHANGE_PROJECT,
+  CHANGE_STAFF
 } from './mutation-types.js'
 
 import {setStore, getStore, setSession, getSession} from '../script/func'
@@ -56,6 +58,14 @@ export default{
 	},
 	[CHANGE_LOADING](state,state1){
 		state.loading= state1;
+	},
+  [CHANGE_PROJECT](state, project){
+		state.currentProject = project;
+		state.dogUid = state.currentProject.code + "-staffweb-" + state.currentStaff.code;
+	},
+	[CHANGE_STAFF](state, staff){
+		state.currentStaff = staff;
+		state.dogUid = state.currentProject.code + "-staffweb-" + state.currentStaff.code;
 	},
 	[GET_TOKEN](state,token){
 		state.token = token;

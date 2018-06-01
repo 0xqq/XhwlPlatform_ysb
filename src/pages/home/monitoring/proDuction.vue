@@ -46,7 +46,7 @@
 				<tbody class="table_body">
 					<tr v-for='(d, index) in  value' :key="index" class="center_table">
 						<td>{{d.巡检线路}}</td>
-						<td v-for="(n, index2) in all" v-if="index == index2 " :key="index2">{{n}}</td>
+            <td>{{d.巡检完成时间}}</td>
 						<td>{{d.巡检任务完成度*10000}}%</td>
 						<td>{{d.巡检人}}</td>
 						<td>
@@ -70,6 +70,8 @@
 </template>
 <script>
 import Bread from '@/components/common/bread'
+import proDuction from '@/httpData/proDuction'
+import { format } from '@/script/timeFormat.js'
 import { mapState } from 'vuex'
 export default {
 	data() {
@@ -138,19 +140,12 @@ export default {
 			this.box_model = false;
 		},
 		getData() {
-			const url = this.mnUrl + "/tmp/watching/video/records"
-			this.$http.get(url).then(res => {
-				for (var i = 0; i < res.body.content.length; i++) {
-					this.sum1.push(res.body.content[i].巡检完成时间.substring(0, 10))
-					this.sum2.push(res.body.content[i].巡检完成时间.substring(11, 19))
-					var aa = this.sum1[i];
-					var bb = this.sum2[i];
-					this.all.push(aa + "-" + bb)
-				}
-				this.value = res.body.content;
-			}, (err) => {
-				console.log(err);
-			})
+      this.value = proDuction.content
+      this.value.forEach((item, index) => {
+        var time1 = new Date().getTime() - (Math.random() + index + 1) * 86400000 // 发生时间
+        item.巡检完成时间 = format(time1, 'yyyy-MM-dd') + ' ' + item.巡检完成时间.substr(-13, 8) //日期随机+时间取定值
+        item.审核时间 = format(time1, 'yyyy-MM-dd')
+      })
 		},
 		method55(tableExcel) {
 			this.$func.method5(tableExcel)
@@ -184,7 +179,7 @@ export default {
 		.img-time {
 			display: inline-block;
 			height: 0.6rem;
-			width: auto; 
+			width: auto;
 			position: relative;
 			margin-bottom: 0.1rem;
 			float: right;
@@ -195,7 +190,7 @@ export default {
 				color: #67bce9;
 				outline: none;
 				margin-right: 0.2rem;
-				vertical-align: middle; 
+				vertical-align: middle;
 				.el_picker {
 					display: inline-block;
 					width: 2.58rem;
@@ -248,7 +243,7 @@ export default {
 		// scrollbar-highlight-color: #333;
 		// 滚动条阴影
 		// scrollbar-shadow-color: #ccc;
-		// 滚动条轨道颜色·································································	··································································	
+		// 滚动条轨道颜色·································································	··································································
 		scrollbar-track-color: #12253d;
 		scrollbar-arrow-color: #12253d;
 		table {

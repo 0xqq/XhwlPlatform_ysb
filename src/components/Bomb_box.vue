@@ -11,38 +11,8 @@
       </ul>
       <div class="table_body">
         <div class="table_content">
-          <ul class="content_ul">
-            <li v-for='content in contentData1'>{{content}}</li>
-          </ul>
-          <ul class="content_ul">
-            <li v-for='content in contentData2'>{{content}}</li>
-          </ul>
-          <ul class="content_ul">
-            <li v-for='content in contentData3'>{{content}}</li>
-          </ul>
-          <ul class="content_ul">
-            <li v-for='content in contentData4'>{{content}}</li>
-          </ul>
-          <ul class="content_ul">
-            <li v-for='content in contentData5'>{{content}}</li>
-          </ul>
-          <ul class="content_ul">
-            <li v-for='content in contentData6'>{{content}}</li>
-          </ul>
-          <ul class="content_ul">
-            <li v-for='content in contentData7'>{{content}}</li>
-          </ul>
-          <ul class="content_ul">
-            <li v-for='content in contentData8'>{{content}}</li>
-          </ul>
-          <ul class="content_ul">
-            <li v-for='content in contentData9'>{{content}}</li>
-          </ul>
-          <ul class="content_ul">
-            <li v-for='content in contentData10'>{{content}}</li>
-          </ul>
-          <ul class="content_ul">
-            <li v-for='content in contentData11'>{{content}}</li>
+          <ul class="content_ul" v-for="item in content">
+            <li v-for='sub in (Object.keys(item))'>{{item[sub]}}</li>
           </ul>
         </div>
       </div>
@@ -52,24 +22,15 @@
 </template>
 
 <script>
+import Bomb from '@/httpData/Bomb_box'
 import {
   mapState
 } from 'vuex';
 export default {
   data() {
     return {
-      titleData: ["城市", "项目名称", "联网子平台数量", "停车场子平台", "门禁子平台", "云瞳子平台", "巡更子平台", "机房监控子平台", "周界防范子平台", "云环控平台", "智能家居平台"],
-      contentData1: ["北京", "中海紫玉苑", "6", "√", "√", "√", "√", "√", "√", '', ''],
-      contentData2: ["广州", "中海云麓公馆", "6", "√", "√", "√", "√", "√", "√", '', ''],
-      contentData3: ["上海", "中建府邸", "5", "√", "√", "√", "", "√", "", '', ''],
-      contentData4: ["大连", "中海紫御观邸", "6", "√", "√", "√", "√", "√", "√", '', ''],
-      contentData5: ["西安", "中海御湖", "6", "√", "√", "√", "√", "√", "√", '', ''],
-      contentData6: ["长春", "中海紫御华府", "6", "√", "√", "√", "√", "√", "√", '', ''],
-      contentData7: ["成都", "中海城南华府", "6", "√", "√", "√", "√", "√", "√", '', ''],
-      contentData8: ["重庆", "紫御江山", "6", "√", "√", "√", "√", "√", "√", '', ''],
-      contentData9: ["佛山", "千灯湖一号", "7", "√", "√", "√", "√", "√", "√", '√', ''],
-      contentData10: ["深圳", "中海华庭", "6", "√", "√", "√", "√", "√", "√", '', ''],
-      contentData11: ["深圳", "兴海物联测试中心", "8", "√", "√", "√", "√", "√", "√", '√', '√']
+      titleData: [],
+      content: []
     }
   },
   computed: {
@@ -84,17 +45,7 @@ export default {
   methods: {
     getData() {
       this.titleData = ["城市", "项目名称", "联网子平台数量", "停车场子平台", "门禁子平台", "云瞳子平台", "巡更子平台", "机房监控子平台", "周界防范子平台", "云环控平台", "智能家居平台"],
-      this.contentData1 = ["北京", "中海紫玉苑", "6", "√", "√", "√", "√", "√", "√", '', ''],
-      this.contentData2 = ["广州", "中海云麓公馆", "6", "√", "√", "√", "√", "√", "√", '', ''],
-      this.contentData3 = ["上海", "中建府邸", "5", "√", "√", "√", "", "√", "", '', ''],
-      this.contentData4 = ["大连", "中海紫御观邸", "6", "√", "√", "√", "√", "√", "√", '', ''],
-      this.contentData5 = ["西安", "中海御湖", "6", "√", "√", "√", "√", "√", "√", '', ''],
-      this.contentData6 = ["长春", "中海紫御华府", "6", "√", "√", "√", "√", "√", "√", '', ''],
-      this.contentData7 = ["成都", "中海城南华府", "6", "√", "√", "√", "√", "√", "√", '', ''],
-      this.contentData8 = ["重庆", "紫御江山", "6", "√", "√", "√", "√", "√", "√", '', ''],
-      this.contentData9 = ["佛山", "千灯湖一号", "7", "√", "√", "√", "√", "√", "√", '√', ''],
-      this.contentData10 = ["深圳", "中海华庭", "6", "√", "√", "√", "√", "√", "√", '', ''],
-      this.contentData11 = ["深圳", "兴海物联测试中心", "8", "√", "√", "√", "√", "√", "√", '√', '√']
+      this.content = Bomb.content
     }
   }
 }

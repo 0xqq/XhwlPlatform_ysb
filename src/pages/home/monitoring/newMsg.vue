@@ -21,19 +21,19 @@
 			<img src="../../../images/inout.png" alt="" @click="derivedForm('tableExcel')">
 		</div>
 		<el-table :data="tableData3" height="250" border style="width: 100%" id="tableExcel">
-			<el-table-column prop="date" label="序号">
+			<el-table-column prop="序号" label="序号">
 			</el-table-column>
-			<el-table-column prop="name" label="标题">
+			<el-table-column prop="标题" label="标题">
 			</el-table-column>
-			<el-table-column prop="name" label="内容">
+			<el-table-column prop="内容" label="内容">
 			</el-table-column>
-			<el-table-column prop="name" label="发送者">
+			<el-table-column prop="发送者" label="发送者">
 			</el-table-column>
-			<el-table-column prop="name" label="接收人">
+			<el-table-column prop="接收人" label="接收人">
 			</el-table-column>
-			<el-table-column prop="name" label="发布时间">
+			<el-table-column prop="发布时间" label="发布时间">
 			</el-table-column>
-			<el-table-column prop="name" label="未读人">
+			<el-table-column prop="未读人" label="未读人">
 			</el-table-column>
 		</el-table>
 		<div class="pager">
@@ -47,25 +47,27 @@
 
 <script>
 import Bread from '@/components/common/bread'
+import newMsg from '@/httpData/newMsg'
+import { format, gapTime } from '@/script/timeFormat.js'
 import { mapState } from 'vuex'
 export default {
 	data() {
 		return {
 			options: [
 				{
-					value2: 'zhinan',
+					value2: '1',
 					label: '标题'
 				},
 				{
-					value2: 'zhinan',
+					value2: '2',
 					label: '内容'
 				},
 				{
-					value2: 'zhinan',
+					value2: '3',
 					label: '发送者'
 				},
 				{
-					value2: 'zhinan',
+					value2: '4',
 					label: '接受者'
 				}
 			],
@@ -101,56 +103,8 @@ export default {
 			value6: '',
 			value7: '',
 			abcd: ['物联监控', '人员物联监控', '安防人员', '实时信息下发'],
-			currentPage2: 5,
-			tableData3: [{
-				date: '2016-05-03',
-				name: '王小虎',
-				province: '上海',
-			}, {
-				date: '2016-05-02',
-				name: '王小虎王小虎王小虎王小虎王小虎王小虎王小虎王小虎王小虎王小虎王小虎',
-				province: '上海',
-			}, {
-				date: '2016-05-04',
-				name: '王小虎',
-				province: '上海',
-			}, {
-				date: '2016-05-01',
-				name: '王小虎',
-				province: '上海',
-			}, {
-				date: '2016-05-08',
-				name: '王小虎',
-				province: '上海',
-			}, {
-				date: '2016-05-06',
-				name: '王小虎',
-				province: '上海',
-			}, {
-				date: '2016-05-07',
-				name: '王小虎',
-				province: '上海',
-			}, {
-				date: '2016-05-07',
-				name: '王小虎',
-				province: '上海',
-			}, {
-				date: '2016-05-07',
-				name: '王小虎',
-				province: '上海',
-			}, {
-				date: '2016-05-07',
-				name: '王小虎',
-				province: '上海',
-			}, {
-				date: '2016-05-07',
-				name: '王小虎',
-				province: '上海',
-			}, {
-				date: '2016-05-07',
-				name: '王小虎',
-				province: '上海',
-			}],
+			currentPage2: 1,
+			tableData3: [],
 		}
 
 	},
@@ -165,13 +119,11 @@ export default {
 	},
 	methods: {
 		getData() {
-			const url = this.mnUrl + "/tmp/watching/partrol/info"
-			this.$http.get(url).then(res => {
-				console.log(res);
-				this.value = res.body.content;
-			}, (err) => {
-				console.log(err);
-			})
+      this.tableData3 = newMsg.content
+      this.tableData3.forEach((item, index) => {
+        var time1 = new Date().getTime() - (Math.random() + index + 1) * 86400000 // 上报时间
+        item.发布时间 = format(time1, 'yyyy-MM-dd') + ' ' + item.发布时间.substr(-8) //日期随机+时间取定值
+      })
 		},
 		handleSizeChange(val) {
 			// console.log(`每页 ${val} 条`);

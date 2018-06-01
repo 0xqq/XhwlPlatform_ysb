@@ -13,6 +13,9 @@ import func from './script/func'
 import allPicker from '@/components/common/allPicker'
 import bread from '@/components/common/bread'
 import allTable  from  '@/components/common/allTable'
+import { post, get } from '@/script/http'
+import apis from './config/apis'
+const { export_json_to_excel } = require('@/script/Export2Excel')   // json转excle
 
 // import 'element-ui/lib/theme-default/index.css'
 Vue.use(VueResource);
@@ -21,6 +24,11 @@ Vue.use(ElementUI);
 Vue.component('all-picker', allPicker);
 Vue.component('Bread', bread);
 Vue.component('all-table',allTable);
+
+Vue.prototype.$post = post
+Vue.prototype.$get = get
+// Vue.prototype.yqURl = yqURl;
+Vue.prototype.apis = apis
 
 Vue.config.productionTip = false;
 Vue.prototype.$func = func

@@ -84,6 +84,8 @@
 
 <script>
 import Bread from '@/components/common/bread'
+import callPolice from '@/httpData/callPolice.js'
+import { format, gapTime } from '@/script/timeFormat.js'
 import { mapState } from 'vuex'
 export default {
 	data() {
@@ -149,14 +151,12 @@ export default {
 			this.$func.method5(tableExcel)
 		},
 		getData() {
-			const url = this.mnUrl + "/tmp/watching/park/alarm_manage"
-			this.$http.get(url).then(res => {
-				// console.log(res)
-				this.value = res.body.content;
-				// console.log(this.value)
-			}, function(error) {
-				console.log(error)
-			})
+      this.value  = callPolice.content
+      this.value.forEach((item, index) => {
+        var time1 = new Date().getTime() - (Math.random() + index + 1) * 86400000 // 上报时间
+        item.上报时间 = format(time1, 'yyyy-MM-dd') + ' ' + item.上报时间.substr(-8) //日期随机+时间取定值
+        item.处理时间 = format(time1, 'yyyy-MM-dd') + ' ' + item.处理时间.substr(-8) //日期随机+时间取定值
+      })
 		},
 		handleSizeChange(val) {
 			// console.log(`每页 ${val} 条`);
@@ -299,7 +299,7 @@ $padding_top: 0.1rem;
 	// scrollbar-highlight-color: #333;
 	// 滚动条阴影
 	// scrollbar-shadow-color: #ccc;
-	// 滚动条轨道颜色·································································	··································································	
+	// 滚动条轨道颜色·································································	··································································
 	scrollbar-track-color: #12253d;
 	scrollbar-arrow-color: #12253d;
 	table {

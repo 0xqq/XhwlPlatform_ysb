@@ -62,6 +62,7 @@ const abnormityWarning = r => require.ensure([], () => r(require('@/pages/home/m
 const naswerNormal = r => require.ensure([], () => r(require('@/pages/home/monitoring/naswerNormal')), 'naswerNormal')
 const cruise = r => require.ensure([], () => r(require('@/pages/home/monitoring/cruise')), 'cruise')
 const proDuction = r => require.ensure([], () => r(require('@/pages/home/monitoring/proDuction')), 'proDuction')
+const ysVideo = r => require.ensure([], () => r(require('@/pages/home/monitoring/ysVideo')), 'ysVideo')
 const preVideo = r => require.ensure([], () => r(require('@/pages/home/monitoring/preVideo')), 'preVideo')
 const patrolManagement = r => require.ensure([], () => r(require('@/pages/home/monitoring/patrolManagement')), 'patrolManagement')
 const mainTenancecare = r => require.ensure([], () => r(require('@/pages/home/monitoring/mainTenancecare')), 'mainTenancecare')
@@ -99,11 +100,16 @@ const waterBox = r => require.ensure([], () => r(require('@/pages/home/monitorin
 const fireMonitoring = r => require.ensure([], () => r(require('@/pages/home/monitoring/fireMonitoring')), 'fireMonitoring')//消防监测系统
 const callCenter = r => require.ensure([], () => r(require('@/pages/home/monitoring/callCenter')), 'callCenter')//呼叫中心
 //业务应用
+//舆情分析
+const situationHistory = r => require.ensure([], () => r(require('@/pages/home/application/situation/situationHistory')), 'situationHistory')//舆情历史
+const situationCollection = r => require.ensure([], () => r(require('@/pages/home/application/situation/situationCollection')), 'situationCollection')//舆情收藏
+
 const Entryandexitbusiness = r => require.ensure([], () => r(require('@/pages/home/application/Entryandexitbusiness')), 'Entryandexitbusiness') //出入业务应用
 const commercialization = r => require.ensure([], () => r(require('@/pages/home/application/commercialization')), 'commercialization') //工程业务应用
 const Securityapplication = r => require.ensure([], () => r(require('@/pages/home/application/Securityapplication')), 'Securityapplication') //安防业务应用
 const envirBusiness = r => require.ensure([], () => r(require('@/pages/home/application/envirBusiness')), 'envirBusiness') //环境业务应用
 const electronicNum = r => require.ensure([], () => r(require('@/pages/home/monitoring/electronicNum')), 'electronicNum') //园区电子地图
+
 const environmentalMmonitoring = r => require.ensure([], () => r(require('@/pages/home/application/environmentalMmonitoring')), 'environmentalMmonitoring')//环境监测报警管理
 const serviceManagement = r => require.ensure([], () => r(require('@/pages/home/application/serviceManagement')), 'serviceManagement')//客服管理
 const Carout = r => require.ensure([], () => r(require('@/pages/home/application/Carout')), 'Carout')
@@ -220,7 +226,8 @@ export default new Router({
                     { path: '/monit/inout/person/guide', component: walkGuide, name: 'walkGuide' }, //人行指挥调度
                     { path: '/monit/inout/person/record', component: openRecord, name: 'openRecord' }, //开门记录
                 //视频物联监控
-                { path: '/monit/video/patrolrecord', component: proDuction, name: 'proDuction' },     //巡检记录
+                { path: '/monit/video/patrolrecord', component: proDuction, name: 'proDuction' },
+                { path: '/monit/video/ysVideo', component: ysVideo, name: 'ysVideo' },     //巡检记录
                 { path: '/monit/video/prevideo', component: preVideo, name: 'preVideo' },           //实时预览
                 { path: '/monit/video/patrolcfg', component: cruise, name: 'cruise' },                 //巡检配置
                 //设备物联监控
@@ -248,6 +255,9 @@ export default new Router({
                 	{ path: '/monit/person/safe/msg/new', component: sendMsg, name: 'sendMsg' },
 
             //管理应用
+            //舆情分析
+             { path: '/manage/situation/history', component: situationHistory, name: 'situationHistory' },	//舆情历史
+             { path: '/manage/situation/collection', component: situationCollection, name: 'situationCollection' },	//舆情历史
             	//项目仪表盘
         		// { path: '/manage/panel/panel', component: P_projectTote, name: 'P_projectTote' },	//项目仪表盘
             		//重大事件管理

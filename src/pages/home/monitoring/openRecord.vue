@@ -89,6 +89,8 @@
 </template>
 <script>
 import Bread from '@/components/common/bread'
+import openRecord from '@/httpData/openRecord'
+import { format, gapTime } from '@/script/timeFormat.js'
 import { mapState } from 'vuex'
 export default {
 	data() {
@@ -112,14 +114,11 @@ export default {
 	},
 	methods: {
 		getData() {
-			const url = this.mnUrl + "/tmp/watching/person/record"
-			this.$http.get(url).then(res => {
-				// console.log(res)
-				this.openList = res.body.content;
-				// console.log(this.openList)
-			}, function(error) {
-				console.log(error)
-			})
+      this.openList = openRecord.content
+      this.openList.forEach((item, index) => {
+        var time1 = new Date().getTime() - (Math.random() + index + 1) * 86400000 // 上报时间
+        item.开门时间 = format(time1, 'yyyy-MM-dd') + ' ' + item.开门时间.substr(-8) //日期随机+时间取定值
+      })
 		},
 		method55(tableExcel) {
 			this.$func.method5(tableExcel)
@@ -136,12 +135,7 @@ export default {
 
 <style lang="scss" scoped>
 @import 'src/style/mixin';
-
-
-
-
 /*整个大框*/
-
 .bread_div {
 	vertical-align: top;
 	width: 100%;
@@ -221,7 +215,7 @@ export default {
 	// scrollbar-highlight-color: #333;
 	// 滚动条阴影
 	// scrollbar-shadow-color: #ccc;
-	// 滚动条轨道颜色·································································	··································································	
+	// 滚动条轨道颜色·································································	··································································
 	scrollbar-track-color: #12253d;
 	scrollbar-arrow-color: #12253d;
 	table {

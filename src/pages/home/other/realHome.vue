@@ -254,17 +254,6 @@ export default {
     document.getElementsByTagName("body")[0].addEventListener("click", function() {
       _this.showLtd = false;
     });
-    // var url = this.mnUrl + '/organizations';
-    // this.$http.get(url).then(res => {
-    //     var projectList = JSON.stringify(res.body.content[0].children);
-    //     window.localStorage.setItem('projectList', projectList);
-    //     projectList = window.localStorage.getItem('projectList');
-    //     _this.positionMenu = JSON.parse(projectList);
-    //     _this.clickLtd = _this.positionMenu[0].citys;
-    //     _this.pMenu1 = _this.positionMenu[0].citys;
-    // }, err => {
-    //     console.log("请求失败")
-    // })
   },
   methods: {
     light(num) {

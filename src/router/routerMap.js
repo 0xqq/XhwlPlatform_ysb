@@ -100,15 +100,20 @@ export default
 					"word": "video",
 					"submenu": [
 						{
-							"name": "巡检记录",
+              "name": "巡检记录",
 							"word": "patrolrecord",
 							"url": "monit/video/patrolrecord",
 						},
 						{
-							"name": "实时预览",
-							"word": "prevideo",
-							"url": "monit/video/prevideo",
+							"name": "点击预览",
+							"word": "ysVideo",
+							"url": "monit/video/ysVideo",
 						},
+            {
+              "name": "实时预览",
+              "word": "prevideo",
+              "url": "monit/video/prevideo"
+            },
 						{
 							"name": "录像回放",
 							"word": "",
@@ -616,6 +621,23 @@ export default
 							"name": "停车场收费管理",
 							"url": "",
 						},
+					]
+				},
+				{
+					"name": "舆情分析",
+          "url": "",
+          "word": "situation",
+					"submenu": [
+						{
+							"name": "舆情监测",
+              "word": "history",
+							"url": "manage/situation/history",
+						},
+						{
+							"name": "舆情收藏",
+              "word": "collection",
+							"url": "manage/situation/collection",
+						}
 					]
 				},
 
