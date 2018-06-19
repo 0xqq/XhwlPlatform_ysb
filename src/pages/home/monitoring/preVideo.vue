@@ -217,10 +217,10 @@
                 // OCXobj.SetWndNum(4);
                 // OCXobj.StartTask_Preview("1437");
                 // OCXobj.StartTask_Preview_InWnd("1684",1);
-                OCXobj.StartTask_Preview_InWnd("1586",0);
-                OCXobj.StartTask_Preview_InWnd("656",1);
-                OCXobj.StartTask_Preview_InWnd("806",2);
-                OCXobj.StartTask_Preview_InWnd("1283",3);
+                // OCXobj.StartTask_Preview_InWnd("1586",0);
+                // OCXobj.StartTask_Preview_InWnd("656",1);
+                // OCXobj.StartTask_Preview_InWnd("806",2);
+                // OCXobj.StartTask_Preview_InWnd("1283",3);
             },
             initControlUnitNodes(xmlStr){
                 var xmldom=this.getXmlDomFromStr(xmlStr);
