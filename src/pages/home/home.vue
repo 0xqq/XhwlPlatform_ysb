@@ -68,7 +68,7 @@
 						<!--一级导航-->
 						<li class="class_point" @click.stop="goHome">
 							<!-- <img src="navHome" alt=""> -->
-							<span :class="{ nav_active: indexOne=='首页'}"><img class="img_nav1" src="" alt="">首页</span>
+							<span :class="{ nav_active: indexOne=='首页'}"><img class="img_nav1" src="/static/img/navHome.png" alt="">首页</span>
 						</li>
 						<li class="class_point" @mouseenter="showAllSevice" @mouseleave="hideAllSevice">
 							<span>所有服务</span>

@@ -3,7 +3,7 @@ export default
 		{
 			"word": "monit",
 			"name": "物联监控",
-			"imgUrl": "",
+			"imgUrl": "/static/img/navCamera.png",
 			"submenu": [
 				{
 					"word": "garden",
@@ -105,7 +105,7 @@ export default
 							"url": "monit/video/patrolrecord",
 						},
 						{
-							"name": "点击预览",
+							"name": "重点预览",
 							"word": "ysVideo",
 							"url": "monit/video/ysVideo",
 						},
@@ -358,7 +358,7 @@ export default
 		{
 			"name": "管理应用",
 			"word": "manage",
-			"imgUrl": "",
+			"imgUrl": "/static/img/navBusi.png",
 			"submenu": [
 				{
 					"name": "项目仪表盘",
@@ -646,7 +646,7 @@ export default
 		{
 			"name": "业务配置",
 			"word": "config",
-			"imgUrl": "",
+			"imgUrl": "/static/img/navPei.png",
 			"submenu": [
 				{
 					"name": "安防业务配置",
@@ -821,7 +821,7 @@ export default
 		{
 			"name": "数据分析",
 			"word": "data",
-			"imgUrl": "",
+			"imgUrl": "/static/img/navData.png",
 			"submenu": [
 				{
 					"name": "数据概览",
@@ -1147,7 +1147,7 @@ export default
 		{
 			"name": "系统管理",
 			"url": "",
-			"imgUrl": "",
+			"imgUrl": "/static/img/navSet.png",
 			"submenu": [
 				{
 					"name": "组织管理",

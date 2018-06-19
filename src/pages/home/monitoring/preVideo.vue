@@ -3,7 +3,6 @@
      <!--面包导航组件-->
     <Bread :breadData="abc"></Bread>
     <div class="pre_video">
-        <div>{{}}</div>
         <div class="flex_video">
             <object classid="clsid:AC036352-03EB-4399-9DD0-602AB1D8B6B9" class="video_obj" id="PreviewOcx"  name="ocx" >
                 </object>
@@ -134,7 +133,7 @@
         data () {
             return {
                 abc: ['物联监控','视频物联监控','实时预览'],
-                treeFlag: false,
+                treeFlag: true,
                 loading: true,
                 loadFlag: true,
             }
