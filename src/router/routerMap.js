@@ -135,6 +135,16 @@ export default
 					"url": "",
 					"submenu": [
 						{
+							"name": "电梯设备",
+							"word": "elevatorPlatform"
+							// "url": "monit/equip/elevatorPlatform"
+						},
+						// {
+						// 	"name": "机电设备",
+						// 	"word": "elevatorPlatform"
+						// 	// "url": "monit/equip/elevatorPlatform"
+						// },
+						{
 							"name": "电梯系统",
 							"word": "elevator",
 							"url": "monit/equip/elevator"

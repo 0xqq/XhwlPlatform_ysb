@@ -79,6 +79,7 @@ const centrerAirconditioning = r => require.ensure([], () => r(require('@/pages/
 const waterSupply = r => require.ensure([], () => r(require('@/pages/home/monitoring/waterSupply')), 'waterSupply')
 const intelliGent = r => require.ensure([], () => r(require('@/pages/home/monitoring/intelliGent')), 'intelliGent') //智能化设备监控
 const elevator = r => require.ensure([], () => r(require('@/pages/home/monitoring/elevator')), 'elevator') //电梯监控
+// const elevatorPlatform = r => require.ensure([], () => r(require('@/pages/home/monitoring/elevatorPlatform')), 'elevatorPlatform') //电梯子平台
 const electronicMap = r => require.ensure([], () => r(require('@/pages/home/monitoring/electronicMap')), 'electronicMap') //物联电子地图
 const engineeringPosition = r => require.ensure([], () => r(require('@/pages/home/monitoring/engineeringPosition')), 'engineeringPosition')//工程人员位置信息
 const customerLocation = r => require.ensure([], () => r(require('@/pages/home/monitoring/customerLocation')), 'customerLocation')//客服人员位置信息
@@ -231,6 +232,7 @@ export default new Router({
                 { path: '/monit/video/prevideo', component: preVideo, name: 'preVideo' },           //实时预览
                 { path: '/monit/video/patrolcfg', component: cruise, name: 'cruise' },                 //巡检配置
                 //设备物联监控
+                // { path: '/monit/equip/elevatorPlatform', component: elevatorPlatform, name: 'elevatorPlatform' },           //电梯监控
                 { path: '/monit/equip/elevator', component: elevator, name: 'elevator' },           //电梯监控
                 { path: '/monit/equip/electric', component: electric, name: 'electric' },           //供配电页面
                 { path: '/monit/equip/water', component: waterSupply, name: 'waterSupply' },  //给排水页面

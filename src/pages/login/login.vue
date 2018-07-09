@@ -55,6 +55,8 @@ export default {
   },
   methods: {
     toLogin() {
+      console.log('login', this.login)
+      console.log('password', this.password)
       if (this.login && this.password) {
         this.$router.push({ path: '/realHome' })
       } else {

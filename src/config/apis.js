@@ -20,7 +20,7 @@ const apis = {
 		analyze: 'https://yq.xhmind.com:8089',
 		waringURl:'https://seven.xhmind.com:8443',
 		main: 'https://iot.xhmind.com',
-    ysUrl: 'http://192.168.200.117:8082'
+    ysUrl: 'http://202.105.104.105:8082'
 	}
 }
 export default  apis[process.env.API_TYPE]

@@ -124,7 +124,7 @@
 			<transition name="el-zoom-in-center">
 				<div class="nav_side" v-if="navText" :class="{margin_left: navText&&!showNav,_opacity: hasAllSevice||hasStay||showLtd||backHome}">
 					<ul class="ul_nav3" :class="{ only_nav3: null==navText[0].submenu}">
-						<li class="ul_navli3" v-for="(c,index) in navText" :class="{active_nav3: c.url}" @click.stop="golike(c,3)">
+						<li class="ul_navli3" v-for="(c,index) in navText" :class="{active_nav3: c.url || c.name=='电梯设备'}" @click.stop="golike(c,3)">
 							<span class="nav_span3" :class="{ nav_active: c.name == indexThree }">{{c.name}}</span>
 							<ul class="ul_nav4">
 								<li v-for="(d,index) in c.submenu" :class="{ nav_active: d.name == indexFour , active_nav3: d.url}" @click.stop="golike(d,4)">{{d.name}}</li>
@@ -293,7 +293,10 @@ export default {
 		},
 		golike(value, num) {
 			console.log('value', value)
-			console.log('num', num)
+			// console.log('num', num)
+      if(value.name === '电梯设备') {
+        window.location.href = 'http://wcpublic.smec-cn.com:8888/vipcustomers'
+      }
 			if (!value.submenu) {
 				if (num == 3 && value.url) {
 					this.indexFour = null;
